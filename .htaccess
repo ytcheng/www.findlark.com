@@ -1,0 +1,6 @@
+#RewriteEngine On
+#RewriteLogLevel 9
+#RewriteLog "logs/rewrite.log"
+#RewriteRule ^(/assets|/css|/images|/themes|/js|/favicon\.ico|/crossdomain\.xml|/static|/upload).* $0 [L]
+#RewriteCond %{QUERY_STRING} ^(.*)$
+#RewriteRule ^([^\?]*)$  /index-test.php$1?%1 [L]
