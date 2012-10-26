@@ -1,62 +1,35 @@
 <?php
-
-class Image{
-	public $allowPicType = array('image/jpg'=>'jpg', 'image/pjpeg'=>'jpg', 'image/jpeg'=>'jpg', 'image/png'=>'png', 'image/gif'=>'gif');
-	private static $_instance = null;
+class Image extends ExtensionsBase{
+	public $imgList;
+	public $allowExts = array('jpg', 'gif', 'png', 'jpeg');
 	
-	function __construct() {
-		
-	}
-	
-	public static function getInstance() {
-		if(self::$_instance === null){
-			self::$_instance = new self();
-		}
-		return self::$_instance;
-	}
-	
-	public function makeDir() {
-		$arr = array(date('Y'), date('m'), 'thumb');
-		$uploadPath = realpath(Yii::app()->basePath.'/../upload');
-		foreach($arr as $v) {
-			$uploadPath .= '/'.$v;
-			if(!file_exists($uploadPath)) {
-				if(!mkdir($uploadPath)) {
-					throw new Exception('Failed to create directory!');
-				}
-			}
+	public static function model($className = __CLASS__) {
+		if (!class_exists('Imagick')) {
+			throw new Exception('Must load the Imagick extension');
 		}
 		
-		return substr($uploadPath, 0, -5);
+		return parent::model($className);
 	}
 	
-	/**
-	 * 上传文件
-	 * @param $file 客户端提交的文件信息，格式等同于$_FILE['file']
-	 * return 文件路径
+	/*
+	 * 检测文件是否存在
+	 * @param $file 文件完整路径
+	 * return 如果不存在将直接抛出异常，存在 返回 true
 	 */
-	public function uploadFile($file) {
-		if(!isset($this->allowPicType[$file['type']])) {
-			throw new Exception('File type not allowed!');
+	public function fileExists($file) {
+		if(!file_exists($file)) {
+			throw new Exception('File does not exist! '.$file);
 		}
 		
-		$fileExt = $this->allowPicType[$file['type']];
-		$uploadDir = $this->makeDir();
-		$fileName = $this->mkFileName();
-		$filePath = $uploadDir.$fileName.'.'.$fileExt;
-		
-		# 创建文件
-		if(!@ move_uploaded_file($file['tmp_name'], $filePath)) {
-			throw new Exception('File upload failed!');
-		}
-		
-		return array('path'=>$filePath, 'dir'=>$uploadDir, 'name'=>$fileName, 'ext'=>$fileExt);
+		return true;
 	}
 	
 	/**
 	 * 生成文件名
+	 * @param String $ext 扩展名
+	 * return 8个大写因为字符
 	 */
-	public function mkFileName() {
+	public function makeFileName($ext = '') {
 		$n = microtime(true) * 100;
 		$str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$fileName = '';
@@ -67,84 +40,45 @@ class Image{
 			$n = floor($n / 26);
 		}
 		
-		return strrev($fileName);
+		return strrev($fileName).$ext;
 	}
 	
-	/**
-	 * 获取图片信息，直方图、exif等
-	 */
-	public function getImageInfo($file) {
-		if (!class_exists('Imagick')) {
-			throw new Exception('Must load the Imagick extension');
-		}
-		if(!file_exists($file)) {
-			throw new Exception('File does not exist! '.$file);
-		}
-		
-		// 填充数组
-		$arr = array_fill_keys(range(0, 255), 0);
-		$histogram = array('gray'=> $arr, 'r'=> $arr, 'g'=> $arr, 'b'=> $arr, 'rgb'=> $arr);
-		
-		$image = new Imagick($file);
-		$properties = $image->getImageProperties('*', true);
-		unset($properties['exif:MakerNote'], $properties['exif:UserComment']);
-		
-		if($image->getImageWidth() > 1440) {
-			$image->thumbnailImage(1440, 0);
-			$image->writeImage($file);
-			unset($image);
-			$image = new Imagick($file);
-		}
-		$w = $image->getImageWidth();
-		$h = $image->getImageHeight();
-		$count = $w * $h;
-		$pixels = $image->getImageHistogram();
-		foreach($pixels as $p) {
-			$rgb = $p->getColor();
-			$gray = $rgb['r'] * 0.3 + $rgb['g'] * 0.59 + $rgb['b'] * 0.11;
-			$gray = round($gray);
-			
-			$histogram['gray'][$gray]++;
-			$histogram['r'][$rgb['r']]++;
-			$histogram['g'][$rgb['g']]++;
-			$histogram['b'][$rgb['b']]++;
-			$histogram['rgb'][$rgb['r']] += 1 / 3; 
-			$histogram['rgb'][$rgb['g']] += 1 / 3; 
-			$histogram['rgb'][$rgb['b']] += 1 / 3; 
-		}
-		
-		foreach($histogram['rgb'] as $k => $v) {
-			$histogram['rgb'][$k] = round($v);
-		}
-		
-		// 计算
-		foreach($histogram as $k => $arr) {
-			$histogram[$k]['sum'] = array_sum($arr);
-			$histogram[$k]['max'] = max($arr);
-		}
-
-		// 总像素
-		$histogram['width'] = $w;
-		$histogram['height'] = $h;
-		$histogram['count'] = $count;
-		// 阀值，取总像素的 1/64（参考PhotoShop）
-		$histogram['valve'] = $count / 64;
-		
-		return array('histogram'=>$histogram, 'properties'=>$properties);
+	// 创建目录
+	public function makeDir($root = 'upload') {
+		$basePath = realpath(Yii::app()->basePath.'/../').'/'.$root;
+		$dir = $basePath.'/'.date('Y').'/'.date('m').'/'.date('d').'/'.floor(time()/3600).'/thumb';
+		if(!file_exists($dir)) mkdir($dir, 0700, 1);
+		return substr($dir, 0, -5);
 	}
 	
 	// 生成缩略图
-	public function mkImageThumb($imageDir, $imageName) {
-		$img = new Imagick($imageDir.$imageName);
-		$img->thumbnailImage(460, 0);
-		$img->writeImage($imageDir.'thumb/thumb460_'.$imageName);
-		$img->thumbnailImage(0, 90);
-		$img->writeImage($imageDir.'thumb/thumb90_'.$imageName);
-		return $imageDir.'thumb/thumb90_'.$imageName;
+	public function makeThumb($imageDir, $imageName, $width = 0, $height = 0) {
+		$width = max(0, intval($width));
+		$height = max(0, intval($height));
+		if($width == 0 && $height == 0) return false;
+		
+		$file = $imageDir.'/'.$imageName;
+		$this->fileExists($file);
+		
+		$img = new Imagick($file);
+		$img->thumbnailImage($width, $height);
+		
+		$thumbName = sprintf('thumb_%d_%d_%s', $width, $height, $imageName);
+		$img->writeImage($imageDir.'thumb/'.$thumbName);
+		$img->destroy();
 	}
 	
-	public function getImageExif() {
+	public function getExtName($ext) {
+		return '.'.( in_array($ext, $this->allowExts) ? $ext : $this->allowExts[0] );
+	}
+	
+	public function deleteImage($dir, $name) {
+		for($i = 0; $i < 4;$i++) {
+			$thumb = $dir.'/thumb/thumb_'.($i*100 + 100).'_0_'.$name;
+			if(file_exists($thumb)) unlink($thumb);
+		}
 		
-		
+		$file = $dir.$name;
+		if(file_exists($file)) unlink($file);
 	}
 }

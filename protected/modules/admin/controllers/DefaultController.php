@@ -2,16 +2,11 @@
 class DefaultController extends Controller {
 	private $allowType = array('gif', 'png', 'jpg');
 	
-	public function beforeAction() {
-		
-		
-	}
-	
 	public function actionIndex() {
 		$this->render('index');
 	}
 	
-	public function actionAddPicture() {
+	public function actionPicture() {
 		if(isset($_POST, $_POST['submit'])) {
 			if($_POST['id']) {
 				$this->modifyPic($_POST);
@@ -22,13 +17,14 @@ class DefaultController extends Controller {
 				
 				$this->addPic($_POST, $_FILES['file']);
 			}
-			$this->redirect('/admin/default/addPicture');
+			$this->redirect('/admin/default/picture');
 			Yii::app()->end();
 		}
 		
 		$this->render('addPicture');
 	}
 	
+	// 修改图片信息
 	private function modifyPic($info) {
 		$model = LarkPicture::model()->findByPk($info['id']);
 		
@@ -39,10 +35,9 @@ class DefaultController extends Controller {
 			
 			$model->save();
 		}
-		$this->redirect('/admin/default/addPicture');
-		Yii::app()->end();
 	}
 	
+	// 添加 图片
 	private function addPic($info, $file) {
 		$img = Image::getInstance();
 		

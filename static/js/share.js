@@ -3,7 +3,7 @@ var share = {
 
 	init: function () {
 		var _this = this;
-		$(".blog .add-share").bind("mouseover", function() {
+		$(".blog .add-share").live("mouseover", function() {
 			_this.nowShareObj = this;
 			_this.showShare();
 		});
@@ -32,7 +32,7 @@ var share = {
 				surl = originalObj.attr("href"),
 				stitle = "Blog-FX | "+originalObj.attr("alt"),
 				spic = originalObj.attr("imgSrc") || "",
-				bloghome = "http://www.vimyself.com",
+				bloghome = "http://www.findlark.com",
 				u = encodeURIComponent(surl),
 				t = encodeURIComponent(stitle),
 				p = encodeURIComponent(spic),
@@ -47,10 +47,10 @@ var share = {
 			case "qzone":
 				var content = {
 					url:surl,
-					desc:"ÎÒÔÚFXµÄ²©¿Í("+bloghome+")ÔÄ¶ÁÁËÕâÆªÎÄÕÂ£¬¾õµÃ²»´í£¬·ÖÏí¸ø´ó¼Ò .^_^.",
+					desc:"æˆ‘åœ¨FXçš„åšå®¢("+bloghome+")é˜…è¯»äº†è¿™ç¯‡æ–‡ç« ï¼Œè§‰å¾—ä¸é”™ï¼Œåˆ†äº«ç»™å¤§å®¶ .^_^.",
 					title:stitle,
 					summary:$(this.nowShareObj).parent("div").siblings("div[name=summary]").html() || "Blog-FX",
-					site:'FXµÄ²©¿Í '+bloghome,
+					site:'FXçš„åšå®¢ '+bloghome,
 					pics:spic
 				};
 				var s = [];

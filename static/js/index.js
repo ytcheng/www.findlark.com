@@ -55,6 +55,7 @@ indexObject.prototype = {
 		
 		$("#header-bg").css('height', headerH+'px');
 		$("#main").css({"height": mainHeight+"px"});
+		$("#content").css({"height":mainHeight+"px"});
 	},
 	
 	/**
@@ -69,11 +70,12 @@ indexObject.prototype = {
 	},
 	
 	afterLoading:function() {
-		$("#loading-bg").fadeOut(this.longTime);
+		return;
+		// $("#loading-bg").fadeOut(this.longTime);
 		
-		var contentHeight = $(document.getElementById('content').contentWindow.document.body).height();
+		var contentHeight = $(document.getElementById('content').contentWindow.document.body).height()+15;
 		contentHeight = Math.max($("#main").height(), contentHeight);
-		$("#content").css({"height":contentHeight+"px"});
+		$("#content").css({"height":$("#main").height()+"px"});
 	},
 	
 	/**

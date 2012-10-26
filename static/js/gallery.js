@@ -1,278 +1,192 @@
-var baseUrl = "http://www.findlark.com";
-
-// 图片播放
-var ImagePlayer = function () {
-	this.doc = parent.document;
-	this.win = parent.window;
-	
-	this.imgObjectList = {}; // 缓存图片对象列表
-	this.imageInfo = {}; // 缓存图片信息列表
-	this.nowImageId = 0;
-};
-
-ImagePlayer.prototype = {
-	
-	init: function () {
-		//this.turnSize();
-		this.bindEvent();
-	},
-	
-	bindEvent: function() {
-		var _this = this;
-		
-		// 按键事件
-		$(window).keydown(function(event) {
-			// Esc
-			if(event.which == 27) {
-				_this.closePlayer();
-			}
-			
-		});
-		
-		$("#show-image-box").click(function() {
-			_this.openPlayer();
-		});
-		 
-		// 关闭
-		$("#close-bar, #close-bar .close-button").mouseover(function() {
-			$("#close-bar .close-button").addClass("close-button-hover");
-		}).mouseout(function() {
-			$("#close-bar .close-button").removeClass("close-button-hover");
-		}).click(function() {
-			_this.closePlayer();
-		});
-		
-		// 上一张
-		var autoTime;
-		$("#prev-bar, #prev-bar .prev-button").live("mouseover", function() {
-			$("#prev-bar .prev-button").show();
-		}).mouseout(function() {
-			$("#prev-bar .prev-button").hide();
-		}).click(function() {
-			//_this.closePlayer();
-		});
-		
-		// 下一张
-		$("#next-bar, #next-bar .next-button").mouseover(function() {
-			$("#next-bar .next-button").show();
-		}).mouseout(function() {
-			$("#next-bar .next-button").hide();
-		}).click(function() {
-			//_this.closePlayer();
-		});
-		
-		$(window).resize(function() {
-			_this.turnSize();
-		});
-		
-	},
-	
-	/**
-	 * 
-	 */
-	turnSize: function () {
-		mainHeight = $(this.doc).height();
-		mainWidth = $(this.doc).width();
-		$("#show-image").css({"height":mainHeight+"px"});
-		
-		$("#main").css({"margin-left":Math.max(0, (mainWidth - 960 - 5) / 2)+"px"});
-		$("#prev-bar .prev-button, #next-bar .next-button").css("margin-top", mainHeight * 0.38 + "px");
-	},
-	
-	showAllImage: function () {
-		
-	},
-	
-	showComment: function () {
-		
-	},
-	
-	addComment: function () {
-		
-	},
-	
-	hideComment: function () {
-		
-	},
-	
-	closePlayer: function () {
-		window.parent.iObj.showHeader();
-		
-		this.turnSize();
-		$("#show-image").fadeOut(300);
-	},
-	
-	/**
-	 * 打开图片播放器
-	 * @param imgObject 图片对象
-	 */
-	openPlayer: function (imgObject) {
-		this.showImage(imgObject);
-		
-		var sTop = $(this.doc).find("#main").scrollTop();
-		window.parent.iObj.hiddenHeader();
-		this.turnSize();
-		$("#show-image").css({"top":sTop+"px"}).fadeIn(400);
-	},
-	
-	showImage: function(imgObj) {
-		var imgId = $(imgObj).attr("index");
-		this.nowImageId = imgId;
-		
-		if(typeof this.imageInfo[imgId] != "undefined") {
-			this.putImage(imgId);
+// ����
+function prompt(win){
+	var _this = this;
+	this.win = win || window;
+	this.init = function(content, callback){
+		this.callback = callback;
+		var content = content,
+			getTop = this.win.document.body || this.win.documentElement,
+			// ��ȡ����
+			container = typeof content == 'string' ? $(content).appendTo(getTop).hide() :
+				(content instanceof jQuery ? content : $(content)).clone(true).appendTo(getTop).hide();
+		// ��������Ƿ���ڡ�
+		if(!container.length) {
+			throw new Error('Empty object');
 			return;
 		}
-		
-		this.getImage(imgId, 0);
-	},
-	
-	/**
-	 * AJAX 获取图片
-	 * @param imageId 需要获取的图片ID
-	 * @param modus >0 获取ID值大于当前ID 的一张，<0 反之，等于0获取当前ID 图片
-	 */
-	getImage: function(imgId, modus) {
-		var _this = this;
-		
-		$.get("/gallery/image", {id:imgId, modus:modus}, function(data) {
-			if(data == null) return false;
-			
-			_this.imageInfo[data.id] = data;
-			var imgSrc = baseUrl+data.dir+data.name+'.'+data.ext;
-			img = $('<img src="'+imgSrc+'" width="'+data.width+'" height="'+data.height+'">');
-			_this.imgObjectList[data.id] = img;
-			_this.putImage(data.id);
-		}, 'json');
-	},
-	
-	/**
-	 * 输出图片，
-	 * @param imgId 图片ID
-	 */
-	putImage: function (imgId) {
-		var imgObj = this.imgObjectList[imgId],
-				imgHeight = this.imageInfo[imgId].height,
-				imgWidth = this.imageInfo[imgId].width,
-				maxHeight = $(this.win).height() - 120,
-				maxWidth = $(this.win).width();
-		
-		if(imgHeight > maxHeight) {
-			imgWidth = imgWidth * maxHeight / imgHeight;
-			imgHeight = maxHeight;
-		}
-		if(imgWidth > maxWidth) {
-			imgHeight = imgHeight * maxWidth / imgWidth;
-			imgWidth = maxWidth;
-		}
-		$(imgObj).css({"width":imgWidth+"px", "height":imgHeight+"px", "margin-top":(maxHeight-imgHeight)/2+"px", "margin-left":(maxWidth-imgWidth)/2+"px"});
-		
-		$("#image-box").html($(imgObj));
+		// �󶨸�����
+		this.container = container;
+		return this;
 	}
-};
-
-var ImageList = function() {
-	this.oddHieght = 0;	// 统计第一列高度
-	this.evenHieght = 0;	// 统计第二列高度
-	this.imageCount = 0;	// 统计当前页面图片数量
-	this.page = 0; //页码
-	
-	this.doc = parent.document;
-	this.win = parent.window;
-	this.defaultImgSrc = '/static/images/image_bg.gif';
-	this.loadList = [];
-	this.imageListData = [];
-};
-
-ImageList.prototype = {
-	init: function() {
-		var _this = this;
-		
-		//this.mkImageList(imgList);
-		this.bindEvent();
-		this.getImageList();
-	},
-	
-	bindEvent: function() {
-		var _this = this;
-		
-		$(this.doc).find("#main").scroll(function() {
-			
-			
-			_this.loadImage();
-		});
-	},
-	
-	/**
-	 * 生成单个 li 标签HTML代码，每生成一个标签， 照片统计+1
-	 * @param data 列表数据 JSON
-	 * return HTML
-	 */
-	mkLi: function(data) {
-		var imgSrc = baseUrl+data.dir+'thumb/thumb460_'+data.name+'.'+data.ext;
-		var html = '<li><img src="'+this.defaultImgSrc +'" imgSrc="'+imgSrc+'" index="'+data.id+'" width="460"></li>';
-		return html;
-	},
-	
-	/**
-	 * 生成图片列表
-	 * @param list 图片列表数据 JSON
-	 */
-	mkImageList: function(list) {
-		for(var k in list) {
-			var html = this.mkLi(list[k]);
-			
-			if(this.oddHieght < this.evenHieght) {
-				this.oddHieght += list[k].height * 1;
-				$("#image-list .odd").append(html);
-			} else {
-				this.evenHieght += list[k].height * 1;
-				$("#image-list .even").append(html);
-			}
+	this.layout = function(callback) {
+		if(!this.container){
+			throw new Error('Must be init');
+			return;
 		}
+		typeof callback === "function" && callback(this);
+		return this;
+	}
+	this.show = function() {
+		// ������������λ�á�
+		var ofs = this.getOffset();
 		
-		this.mkLoadList();
-		this.loadImage();
-	},
-	
-	// 记录需要 延时加载的图片对象
-	mkLoadList: function() {
-		var _this = this;
-		
-		$("#image-list img[src='"+this.defaultImgSrc+"']").each(function(k) {
-			_this.loadList[k] = $(this);
+		this.container.css({
+			position:'absolute',
+			left: ofs.left,
+			top: ofs.top,
+			display:'block',
+			zIndex:1000000
 		});
-	},
-	
-	/**
-	 * 根据滚动条位置加载图片
-	 */
-	loadImage: function() {
-		var nowTop = $(this.doc).find("#main").scrollTop() + $(this.win).height();
-		
-		for(var k in this.loadList) {
-			if(typeof this.loadList[k] === "undefined") break;
-			
-			var obj = $(this.loadList[k]), ofs = obj.offset();
-			if(ofs.top < nowTop) {
-				obj.attr("src", obj.attr("imgSrc"));
-				delete this.loadList[k];
-			}
-		}
-		this.loadList.sort();
-	},
-	
-	/**
-	 * 获取图片列表，没获取一次，page+1
-	 */
-	getImageList: function() {
-		var _this = this;
-		
-		$.get('/gallery/list', {page:_this.page}, function(data) {
-			_this.mkImageList(data);
-		}, 'json');
-		
-		this.page++;
+		this.backgroundObj = background({opacity:0.5}).show();
+		typeof this.callback === 'function' && this.callback(this);
+	}
+	this.hide = function(){
+		this.container.hide();
+		background().hide();
+	}
+	this.remove = function(){
+		this.container && this.container.remove();
+		this.container = null;
 	}
 	
-};
+	// ��ȡ�������ƫ����
+	this.getOffset = function() {
+		var ofs = {}, doc = $(_this.win);
+		
+		ofs.left = Math.max(0, doc.scrollLeft() + (doc.width() - $(this.container).width()) / 2),
+		ofs.top = Math.max(0, doc.scrollTop() + (doc.height() - $(this.container).height())/2 - 40);
+		return ofs;
+	}
+	
+	// ��� window ����� resize �¼�
+	$(this.win).resize(function() {
+		var ofs = _this.getOffset();
+		$(_this.container).css({"left": ofs.left+"px", "top": ofs.top+"px"});
+	});
+}
+
+function background(o) {
+	var o = o || {},
+		zIndex = o.zindex || 999999,
+		width = Math.max(document.body.clientWidth || document.documentElement.clientWidth) + 'px',
+		height = Math.max(document.body.clientHeight || document.documentElement.clientHeight) + 'px',
+		iframe = !$('#backgroundBoardId').length ? $('<iframe id="backgroundBoardId" scrolling="no" frameborder="0" \
+			style="overflow:hidden; \
+			position:absolute; \
+			background:#000; \
+			z-index:'+zIndex+'; \
+			width:'+width+'; \
+			left:0; \
+			top:0; \
+			height:'+height+'; \
+			display:none" src="http://pic.uuzu.com/one/js/bck.htm"></iframe>').appendTo(document.body || document.documentElement).css('opacity',(o.opacity || .7))
+			: $('#backgroundBoardId').css({width:width,height:height});
+	return iframe;
+}
+
+/**
+ * ͼƬ������
+ */
+var imgPlayer = {
+	control:true,
+	imgLen:0,
+	newImgId:-1,
+	imgObj: new Object,
+
+	// ��ʼ��
+	init:function (obj) {
+		this.imgObj = obj;
+		this.imgLen = this.imgObj.length;
+		var _this = this;
+
+		this.imgObj.unbind("click").bind("click", function () {
+			pop.showPic($(this).attr("title"), $(this).attr("data-imgSrc"));
+			_this.newImgId = $(this).parents("li").index();
+
+			$("#pop_tuku_bar .to-next").unbind("click").bind("click", function () {
+				_this.toNext();
+			});
+			$("#pop_tuku_bar .to-prev").unbind("click").bind("click", function () {
+				_this.toPrev();
+			});
+			$("#pop_tuku_bar .pt_pics img").unbind("click").bind("click", function () {
+				_this.toNext();
+			});
+
+			_this.loading();
+			return false;
+		});
+	},
+
+	// ��һ��
+	toPrev:function () {
+		if(!this.control) {
+			return;
+		}
+		this.control = false;
+
+		var nextId = this.newImgId - 1 >= 0 ? this.newImgId - 1 : this.imgLen - 1;
+		this.newImgId = nextId;
+
+		$("#pop_tuku_bar .pt_pics img:eq(0)").attr("src", this.imgObj.eq(nextId).attr("data-imgSrc"));
+		$("#pop_tuku_bar .pt_nms").html(this.imgObj.eq(nextId).attr("title"));
+		this.loading();
+		this.control = true;
+	},
+
+	// ��һ��
+	toNext:function() {
+		if(!this.control) {
+			return;
+		}
+		this.control = false;
+
+		var nextId = this.newImgId + 1 >= this.imgLen ? 0 : this.newImgId + 1;
+		this.newImgId = nextId;
+		
+
+		$("#pop_tuku_bar .pt_pics img:eq(0)").attr("src", this.imgObj.eq(nextId).attr("data-imgSrc"));
+		$("#pop_tuku_bar .pt_nms a").html(this.imgObj.eq(nextId).attr("title"));
+		this.loading();
+		this.control = true;
+	},
+
+	// ����
+	loading:function() {
+		var popObj = $("#pop_tuku_bar"), h = popObj.height(), w = popObj.width() - Math.ceil((this.newImgId + 1) / 1000000) * 34;
+		popObj.children(".loadingDiv").css({"height":h+"px", "width":w+"px", "top":"0px"}).fadeIn(0);
+		popObj.find(".loadingDiv img").css({"top":(h/2) + "px", "left":(w/2)+"px"});
+
+		$("#pop_tuku_bar .pt_pics img:eq(0)").unbind("load").load(function () {
+			$(this).removeAttr("style");
+			var winH = $(window).height(),
+					winW = $(window).width(),
+					maxH = winH * 0.8,
+					maxW = winW * 0.8,
+					imgH = $(this).height(),
+					imgW = $(this).width();
+
+			if(imgH > maxH) {
+				imgW = imgW * maxH / imgH;
+				imgH = maxH;
+			}
+			if(imgW > maxW) {
+				imgH = imgH * maxW / imgW;
+				imgW = maxW;
+			}
+			var pLeft = $(document).scrollLeft() + (winW - imgW) / 2,
+					pTop = $(document).scrollTop() + (winH - imgH) / 2;
+
+			$(this).css({"width":imgW+"px", "height":imgH+"px"});
+			popObj.find("div.tuku_left").hide();
+			
+			popObj.animate({"top":pTop+"px", "left":pLeft+"px", "width":(imgW+35)+"px", "height":(imgH+35)+"px"}, 500);
+			popObj.find(".loadingDiv img").animate({"top":(imgH/2) + "px", "left":(imgW/2)+"px"}, 500);
+			popObj.children(".loadingDiv").animate({"width":imgW+"px", "height":(imgH+35)+"px"}, 500, function () {
+				//$(this).slideToggle(1000);
+				$(this).animate({"height":"0px", "top":(imgH+35)+"px"}, 900);
+				popObj.find("div.tuku_left").css({"width":imgW+"px", "height":(imgH+35)+"px"}).show();
+			});
+		});
+	}
+}

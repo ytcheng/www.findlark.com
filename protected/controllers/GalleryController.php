@@ -13,20 +13,27 @@ class GalleryController extends Controller {
 		
 		$criteria = new CDbCriteria;
 		
-		$criteria->select = "`id`,`title`,`tag`,`desc`,FROM_UNIXTIME(timeline,'%Y-%d-%m') as timeline,`dir`,`name`,`ext`,`share_times`,`score`";
 		$criteria->offset = $page * $this->pageSize;
 		$criteria->limit = $this->pageSize;
+		$criteria->order = '`id` desc';
 		
 		$list = LarkPicture::model()->findAll($criteria);
-		
 		echo CJSON::encode($list);
 	}
 	
-	public function actionImage($id, $modus = 0) {
-		$str = $modus < 0 ? '<' : ($modus > 0 ? '>' : '');
-		
+	public function actionDetail($id, $modus = 0) {
+		$str = '';
 		$criteria = new CDbCriteria;
 		$criteria->limit = 1;
+		
+		if($modus < 0) {
+			$str = '<';
+			$criteria->order = '`id` desc';
+		} else if($modus > 0) {
+			$str = '>';
+			$criteria->order = '`id` asc';
+		}
+		
 		$criteria->compare('id', $str.$id);
 		
 		$image = LarkPicture::model()->find($criteria);

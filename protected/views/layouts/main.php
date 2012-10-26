@@ -4,9 +4,16 @@
 		<title>FindLark</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="keywords" content="FindLark,BYFX,Lark">
-		<script type="text/javascript" src="<?php echo Yii::app()->params->staticUrl;?>/js/jquery-1.7.1.min.js"></script>
+		
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->params->staticUrl;?>/css/public.css">
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->params->staticUrl;?>/css/<?php echo $this->id;?>.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->params->staticUrl;?>/js/fancybox/jquery.fancybox-1.3.4.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->params->staticUrl;?>/css/colorbox.css">
+		
+		<script type="text/javascript" src="<?php echo Yii::app()->params->staticUrl;?>/js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="<?php echo Yii::app()->params->staticUrl;?>/js/jquery.masonry.js"></script>
+		<script type="text/javascript" src="<?php echo Yii::app()->params->staticUrl;?>/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+			<script type="text/javascript" src="<?php echo Yii::app()->params->staticUrl;?>/js/jquery.colorbox-min.js"></script>
 	</head>
 	<body>
 		<?php echo $content;?>

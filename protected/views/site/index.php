@@ -1,6 +1,6 @@
 <div id="header">
 	<div class="header-middle">
-		<div id="header-logo"><a href="/">FindLark.</a></div>
+		<div id="header-logo"><!--a href="/">FindLark.</a--></div>
 		<div class="header-nav" id="header-nav">
 			<ul>
 				<li class="current"><a href="/home">首页</a></li>
@@ -17,7 +17,7 @@
 <div class="header-bg" id="header-bg"></div>
 
 <!--Main-//-->
-<div class="main" id="main"><iframe src="/home" id="content" class="content" frameborder="no" border="0" scrolling="no" allowTransparency="true"></iframe></div>
+<div class="main" id="main"><iframe src="/home" id="content" class="content" frameborder="no" border="0" scrolling="yes" allowTransparency="true"></iframe></div>
 
 <!--载入中背景-//-->
 <div class="loading-bg" id="loading-bg" style="display:none">

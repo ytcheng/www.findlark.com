@@ -26,7 +26,7 @@ box-shadow: 0 1px 0 rgba(255,255,255,0.4),0 0 10px rgba(0,0,0,0.1);
 
 /*内容部分*/
 body{scroll:none}
-.main{height:500px; width:100%; margin:0px auto; overflow-x:hidden;}
+.main{height:500px; width:100%; margin:0px auto; overflow:hidden;}
 .content{width:100%; height:500px; border:0px solid #fff; }
 
 .footer{height:120px; width:1000px; text-align:center; margin:0px auto;}

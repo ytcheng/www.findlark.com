@@ -8,7 +8,7 @@ textarea {overflow:auto;}
 
 form{display:inline}
 body > div {margin:0 auto}
-body{overflow:hidden; background:url("../images/body_bg.png") repeat fixed top;}
+body{overflow:hidden; background:url("../images/bg.gif") repeat fixed top;}
 .clear{clear:both; height:0px; font-size:0px; line-height:0px; overflow:hidden}
 
 table,td,tr,th{ font-size:12px;}

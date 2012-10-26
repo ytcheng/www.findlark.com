@@ -1,56 +1,51 @@
-<div class="show-image" id="show-image" style="display:none">
-	<div class="close-bar" id="close-bar">
-		<div class="close-button"></div>
-	</div>
-	
-	<div class="center-box">
-		<div class="image-box" id="image-box">
-			
-		</div>
-		
-		<div class="comment-box" style="display:none">
-			<div class="comment">
-				<div class="comment-title">∆¿¬€(12)</div>
-				<div class="comment-content">111</div>
-			</div>
-			<div class="image-info">
-				<div class="info-title">Õº∆¨œÍ«È</div>
-				<div class="info-content">222</div>
-			</div>
-		</div>
-		
-		<div class="prev-bar" id="prev-bar"><div class="prev-button" style="display:none"></div></div>
-		<div class="next-bar" id="next-bar"><div class="next-button" style="display:none"></div></div>
-		<div class="clear"></div>
-	</div>
-	
-	<div class="bottom-bar">
-		
-	</div>
-</div>
-<div class="main" id="main">
+<?php
+$criteria=new CDbCriteria;
+$criteria->limit = 20;
+$list = LarkPicture::model()->findAll($criteria);
+?>
+
+<div class="gallery" id="main">
 	<div class="image-list" id="image-list">
-		<ul class="odd">
-		</ul>
-		
-		<ul class="even">
-		</ul>
-		<div class="clear"></div>
+		<?php
+		foreach($list as $img) {
+			$originalSrc = $img->dir.$img->name.'.'.$img->ext;
+			$src = $img->dir.'/thumb/thumb_200_0_'.$img->name.'.'.$img->ext;
+			$height = $img->height * 200 / $img->width;
+			printf('<div class="img" style="display:none"><a href="%s" class="played"><img data-original="%s" src="/static/images/image_bg.gif" width="200" height="%d"></a><div class="desc"></div></div>',
+				$originalSrc, $src, $height);
+		}
+		?>
 	</div>
+	<div class="clear"></div>
 </div>
 
-<script type="text/javascript" src="/static/js/gallery.js"></script>
+<script type="text/javascript" src="<?php echo Yii::app()->params->staticUrl;?>/js/imageLoader.js"></script>
 <script type="text/javascript">
-	$(function () {
-		
-		var player = new ImagePlayer();
-		player.init();
-		
-		var list = new ImageList();
-		list.init();
-		
-		$("#image-list img").live('click', function() {
-			player.openPlayer(this);
+	$(function() {
+		$("#image-list").masonry({
+			isAnimated: false,
+			singleMode: true,
+			isFitWidth: true,
+			itemSelector: '.img'
 		});
+		
+		var imgObj = new ImageList();
+		imgObj.set({container:$("#image-list")});
+		setTimeout(function(){
+			imgObj.init();
+		}, 200);
+		
+		/*
+		$("div.img a").fancybox({
+			width: '90%',
+			height: '90%',
+			centerOnScroll: true,
+			cyclic: true
+		});
+		$("#fancybox-img").live("click", function() {
+			$.fancybox.next();
+		});
+		*/
+		
 	});
 </script>

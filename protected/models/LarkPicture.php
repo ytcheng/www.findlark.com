@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'lark_picture':
  * @property string $id
  * @property string $title
+ * @property integer $classify
  * @property string $tag
  * @property string $desc
  * @property integer $timeline
@@ -19,6 +20,8 @@
  * @property string $hash
  * @property string $share_times
  * @property string $score
+ * @property integer $display
+ * @property string $original_url
  */
 class LarkPicture extends CActiveRecord
 {
@@ -48,10 +51,9 @@ class LarkPicture extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('title, timeline, dir, name, ext, hash', 'required'),
-			array('timeline, width, height', 'numerical', 'integerOnly'=>true),
+			array('classify, timeline, width, height, display', 'numerical', 'integerOnly'=>true),
 			array('title, tag', 'length', 'max'=>100),
-			array('desc', 'length', 'max'=>300),
-			array('dir', 'length', 'max'=>200),
+			array('desc, dir, original_url', 'length', 'max'=>200),
 			array('name', 'length', 'max'=>8),
 			array('ext', 'length', 'max'=>5),
 			array('hash', 'length', 'max'=>16),
@@ -59,7 +61,7 @@ class LarkPicture extends CActiveRecord
 			array('histogram, properties', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, title, tag, desc, timeline, width, height, dir, name, ext, histogram, properties, hash, share_times, score', 'safe', 'on'=>'search'),
+			array('id, title, classify, tag, desc, timeline, width, height, dir, name, ext, histogram, properties, hash, share_times, score, display, original_url', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -82,6 +84,7 @@ class LarkPicture extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'title' => 'Title',
+			'classify' => 'Classify',
 			'tag' => 'Tag',
 			'desc' => 'Desc',
 			'timeline' => 'Timeline',
@@ -95,6 +98,8 @@ class LarkPicture extends CActiveRecord
 			'hash' => 'Hash',
 			'share_times' => 'Share Times',
 			'score' => 'Score',
+			'display' => 'Display',
+			'original_url' => 'Original Url',
 		);
 	}
 
@@ -111,6 +116,7 @@ class LarkPicture extends CActiveRecord
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('title',$this->title,true);
+		$criteria->compare('classify',$this->classify);
 		$criteria->compare('tag',$this->tag,true);
 		$criteria->compare('desc',$this->desc,true);
 		$criteria->compare('timeline',$this->timeline);
@@ -124,6 +130,8 @@ class LarkPicture extends CActiveRecord
 		$criteria->compare('hash',$this->hash,true);
 		$criteria->compare('share_times',$this->share_times,true);
 		$criteria->compare('score',$this->score,true);
+		$criteria->compare('display',$this->display);
+		$criteria->compare('original_url',$this->original_url,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

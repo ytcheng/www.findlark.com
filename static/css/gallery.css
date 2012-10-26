@@ -1,50 +1,18 @@
-/**
- * ImagePlayer
- */
-.show-image{position:absolute; top:0px; left:0px; background-color:#000; width:100%; margin:0px; padding:0px; z-index:10}
+body{overflow:auto}
 
-.center-box{padding:5px 0;}
-
-.close-bar{cursor:pointer; height:30px; position:relative; top:0px; left:0px}
-.close-button{
-background: no-repeat url('../images/google-icon-traverse.png') -116px -35px; height: 22px; width: 22px;
-position: absolute; top:4px; right: 7px; cursor:pointer;
-}
-.close-button-hover{background-position: -41px -0px;}
-
-.image-box{float:left; width:auto; background-color:#000;}
-.image-box img{ cursor:pointer; border:1px solid #181818}
-.comment-box{position:absolute;  left:100px; height:500px; width:260px;
-	background-color:#f0f0f0;-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
-	display:block;
-	word-wrap:break-word;
+.gallery{margin:10px;}
+.image-list{margin:auto;}
+.image-list .img{
+	margin:5px;
+	padding:10px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-webkit-transition: left .3s ease-in-out,top .3s ease-in-out;
+	
+	box-shadow: 0px 1px 3px rgba(0,0,0,.3);
+	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,.3);
+	*border:1px solid #ccc;
 }
 
-.prev-bar, .next-bar{position:absolute; width: 30px; height:100%; cursor:pointer; }
-.prev-bar{left:0px}
-.next-bar{right:0px}
-
-.prev-button, .next-button{z-index:-1; width:20px; height:25px; background: no-repeat url('../images/google-icon-traverse.png'); margin:200px 0 0 8px; }
-/*
-.prev-button{background-position:-176px -35px;}
-.next-button{background-position:-234px -8px; margin-left:0px}
-*/
-.prev-button{background-position:-103px -0px;}
-.next-button{background-position:-62px -0px; margin-left:0px}
-
-.center-box{}
-
-.bottom-bar{border-top:1px solid #181818; background-color:#0a0a0a; height:70px; width:100%; position:fixed; bottom:0px;}
-
-
-/**
- * ImageList
- */
-.main{width:960px; margin:25px auto;}
-.image-list{position:relative; width:960px;}
-.image-list ul{width:462px; float:left;}
-.image-list ul.odd{margin-right:25px;}
-.image-list ul li{ margin-bottom:25px; border:1px solid #bbb}
-.image-list ul li img{cursor:pointer}
+.image-list .desc{margin:3px; height:30px;}

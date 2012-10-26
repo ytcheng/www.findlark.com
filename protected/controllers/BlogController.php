@@ -3,4 +3,64 @@ class BlogController extends Controller {
 	public function actionIndex() {
 		$this->render('index');
 	}
+	
+	public function actionList() {
+		$page = Yii::app()->request->getParam('page', 1);
+		$page = max($page, 1);
+		$pageSize = $page == 1 ? 20 : 10;
+		
+		$criteria = new CDbCriteria;
+		if(isset($_GET['tag']) && !empty($_GET['tag'])) {
+			$criteria->compare('tag', $_GET['tag'], true);
+		} else if(isset($_GET['classify']) && !empty($_GET['classify'])) {
+			$criteria->compare('classify', $_GET['classify']);
+		} else if(isset($_GET['search']) && !empty($_GET['search'])) {
+			$criteria->compare('title', $_GET['search'], true);
+		}
+		
+		$criteria->offset = ($page - 1) * $pageSize;
+		$criteria->limit = $pageSize;
+		
+		$blogList = LarkBlog::model()->findAll($criteria);
+		if(empty($blogList)) {
+			echo '';
+			Yii::app()->end();
+		}
+		
+		$classifys = LarkClassify::model()->findAll();
+		$list = array();
+		foreach($classifys as $item) {
+			$classifyList[$item['id']] = $item['name'];
+		}
+		
+		$list = array();
+		$i = 0;
+		foreach($blogList as $item) {
+			$list[$i] = array(
+				'id'=> $item->id,
+				'title'=> $item->title,
+				'timeline'=> date('Y-m-d H:i', $item->timeline),
+				'classify_id'=> $item->classify,
+				'classify_name'=> isset($classifyList[$item->classify]) ? $classifyList[$item->classify] : '尚未分类',
+				'summary'=> $item->summary,
+				'pic'=>  $item->title,
+				'comment_count'=> 10,
+				'tag'=> explode(',', $item->tag),
+			);
+			$i++;
+		}
+		
+		echo CJSON::encode($list);
+		Yii::app()->end();
+	}
+	
+	public function actionClassify() {
+		$classifys = LarkClassify::model()->findAll();
+		$list = array();
+		foreach($classifys as $item) {
+			$list[$item['id']] = $item['name'];
+		}
+		
+		echo 'var classifyList = '.CJSON::encode($list);
+	}
 }
