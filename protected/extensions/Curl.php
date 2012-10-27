@@ -78,6 +78,7 @@ class Curl extends ExtensionsBase{
 		if(!Urls::model()->saveUrl($url)) return false;
 		
 		$content = Curl::model()->request($url, array('header'=>0));
+		
 		$match = preg_match_all($regular, $content, $result);
 		return $match ? $result : false;
 	}

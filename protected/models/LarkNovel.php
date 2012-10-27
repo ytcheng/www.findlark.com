@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'lark_novel':
  * @property integer $id
  * @property string $title
+ * @property string $summary
  * @property string $content
  * @property integer $display
  */
@@ -36,12 +37,13 @@ class LarkNovel extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, content', 'required'),
+			array('title, summary, content', 'required'),
 			array('display', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>200),
+			array('summary', 'length', 'max'=>300),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, title, content, display', 'safe', 'on'=>'search'),
+			array('id, title, summary, content, display', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,6 +66,7 @@ class LarkNovel extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'title' => 'Title',
+			'summary' => 'Summary',
 			'content' => 'Content',
 			'display' => 'Display',
 		);
@@ -82,6 +85,7 @@ class LarkNovel extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('title',$this->title,true);
+		$criteria->compare('summary',$this->summary,true);
 		$criteria->compare('content',$this->content,true);
 		$criteria->compare('display',$this->display);
 

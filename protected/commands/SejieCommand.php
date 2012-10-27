@@ -10,9 +10,12 @@ class SejieCommand extends CConsoleCommand {
 			if($i > 1) $url = $url.'page/'.$i;
 			
 			$pages = Curl::model()->matchContent($url, "#http\:\/\/sejie\.wanxun\.org\/post\/(?:\d+)-(?:\d+)-(?:\d+)\/(?:\d+)#");
-			foreach($pages as $page) {
+			
+			if(!$pages) continue;
+			
+			foreach($pages[0] as $page) {
 				$images = Curl::model()->matchContent($page, "#\<img.*?src\=(?:\"|\')(.*?)(?:\"|\')#");
-				foreach($images as $img) {
+				foreach($images[1] as $img) {
 					ImageCrawl::model()->saveImg($img);
 				}
 			}

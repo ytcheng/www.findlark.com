@@ -797,3 +797,153 @@ Stack trace:
 #4 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
 #5 {main} REQUEST_URI=/blog/2.html
 2012/10/25 16:59:11 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'yiiblog.lark_navol' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `lark_navol`.
+2012/10/26 04:46:25 [error] [php] preg_replace(): Delimiter must not be alphanumeric or backslash (E:\apache\htdocs\freephoto\www.findlark.com\protected\commands\NovelCommand.php:17)
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\console\CConsoleCommand.php(135): ReflectionMethod->invokeArgs()
+#1 E:\apache\htdocs\freephoto\framework\console\CConsoleCommandRunner.php(63): NovelCommand->run()
+#2 E:\apache\htdocs\freephoto\framework\console\CConsoleApplication.php(88): CConsoleCommandRunner->run()
+#3 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CConsoleApplication->processRequest()
+#4 E:\apache\htdocs\freephoto\framework\yiic.php(33): CConsoleApplication->run()
+#5 E:\apache\htdocs\freephoto\www.findlark.com\protected\yiic.php(8): require_once()
+
+2012/10/26 04:46:58 [error] [php] Invalid argument supplied for foreach() (E:\apache\htdocs\freephoto\www.findlark.com\protected\commands\NovelCommand.php:15)
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\console\CConsoleCommandRunner.php(63): NovelCommand->run()
+#1 E:\apache\htdocs\freephoto\framework\console\CConsoleApplication.php(88): CConsoleCommandRunner->run()
+#2 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CConsoleApplication->processRequest()
+#3 E:\apache\htdocs\freephoto\framework\yiic.php(33): CConsoleApplication->run()
+#4 E:\apache\htdocs\freephoto\www.findlark.com\protected\yiic.php(8): require_once()
+
+2012/10/26 04:48:29 [error] [php] Invalid argument supplied for foreach() (E:\apache\htdocs\freephoto\www.findlark.com\protected\commands\NovelCommand.php:15)
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\console\CConsoleCommandRunner.php(63): NovelCommand->run()
+#1 E:\apache\htdocs\freephoto\framework\console\CConsoleApplication.php(88): CConsoleCommandRunner->run()
+#2 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CConsoleApplication->processRequest()
+#3 E:\apache\htdocs\freephoto\framework\yiic.php(33): CConsoleApplication->run()
+#4 E:\apache\htdocs\freephoto\www.findlark.com\protected\yiic.php(8): require_once()
+
+2012/10/26 04:48:47 [error] [php] Invalid argument supplied for foreach() (E:\apache\htdocs\freephoto\www.findlark.com\protected\commands\NovelCommand.php:17)
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\console\CConsoleCommandRunner.php(63): NovelCommand->run()
+#1 E:\apache\htdocs\freephoto\framework\console\CConsoleApplication.php(88): CConsoleCommandRunner->run()
+#2 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CConsoleApplication->processRequest()
+#3 E:\apache\htdocs\freephoto\framework\yiic.php(33): CConsoleApplication->run()
+#4 E:\apache\htdocs\freephoto\www.findlark.com\protected\yiic.php(8): require_once()
+
+2012/10/26 04:57:35 [error] [exception.CException] exception 'CException' with message 'Property "LarkNovel.dummary" is not defined.' in E:\apache\htdocs\freephoto\framework\base\CComponent.php:174
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\db\ar\CActiveRecord.php(145): CComponent->__set('dummary', 'Array')
+#1 E:\apache\htdocs\freephoto\www.findlark.com\protected\commands\NovelCommand.php(27): CActiveRecord->__set('dummary', 'Array')
+#2 [internal function]: NovelCommand->actionIndex()
+#3 E:\apache\htdocs\freephoto\framework\console\CConsoleCommand.php(135): ReflectionMethod->invokeArgs(Object(NovelCommand), Array)
+#4 E:\apache\htdocs\freephoto\framework\console\CConsoleCommandRunner.php(63): CConsoleCommand->run(Array)
+#5 E:\apache\htdocs\freephoto\framework\console\CConsoleApplication.php(88): CConsoleCommandRunner->run(Array)
+#6 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CConsoleApplication->processRequest()
+#7 E:\apache\htdocs\freephoto\framework\yiic.php(33): CApplication->run()
+#8 E:\apache\htdocs\freephoto\www.findlark.com\protected\yiic.php(8): require_once('E:\apache\htdoc...')
+#9 {main}
+2012/10/26 05:24:52 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1406 Data too long for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:24:52 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[HY000]: General error: 1406 Data too long for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2)' in E:\apache\htdocs\freephoto\framework\db\CDbCommand.php:336
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\db\ar\CActiveRecord.php(1017): CDbCommand->execute()
+#1 E:\apache\htdocs\freephoto\framework\db\ar\CActiveRecord.php(781): CActiveRecord->insert(NULL)
+#2 E:\apache\htdocs\freephoto\www.findlark.com\protected\commands\NovelCommand.php(30): CActiveRecord->save()
+#3 [internal function]: NovelCommand->actionIndex()
+#4 E:\apache\htdocs\freephoto\framework\console\CConsoleCommand.php(135): ReflectionMethod->invokeArgs(Object(NovelCommand), Array)
+#5 E:\apache\htdocs\freephoto\framework\console\CConsoleCommandRunner.php(63): CConsoleCommand->run(Array)
+#6 E:\apache\htdocs\freephoto\framework\console\CConsoleApplication.php(88): CConsoleCommandRunner->run(Array)
+#7 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CConsoleApplication->processRequest()
+#8 E:\apache\htdocs\freephoto\framework\yiic.php(33): CApplication->run()
+#9 E:\apache\htdocs\freephoto\www.findlark.com\protected\yiic.php(8): require_once('E:\apache\htdoc...')
+#10 {main}
+2012/10/26 05:29:34 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '【性之图吧】【女优，知多少？】第三期【素人' for key 'title'. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:29:34 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '【性之图吧】【女优，知多少？】第三期【素人' for key 'title'. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2)' in E:\apache\htdocs\freephoto\framework\db\CDbCommand.php:336
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\db\ar\CActiveRecord.php(1017): CDbCommand->execute()
+#1 E:\apache\htdocs\freephoto\framework\db\ar\CActiveRecord.php(781): CActiveRecord->insert(NULL)
+#2 E:\apache\htdocs\freephoto\www.findlark.com\protected\commands\NovelCommand.php(30): CActiveRecord->save()
+#3 [internal function]: NovelCommand->actionIndex()
+#4 E:\apache\htdocs\freephoto\framework\console\CConsoleCommand.php(135): ReflectionMethod->invokeArgs(Object(NovelCommand), Array)
+#5 E:\apache\htdocs\freephoto\framework\console\CConsoleCommandRunner.php(63): CConsoleCommand->run(Array)
+#6 E:\apache\htdocs\freephoto\framework\console\CConsoleApplication.php(88): CConsoleCommandRunner->run(Array)
+#7 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CConsoleApplication->processRequest()
+#8 E:\apache\htdocs\freephoto\framework\yiic.php(33): CApplication->run()
+#9 E:\apache\htdocs\freephoto\www.findlark.com\protected\yiic.php(8): require_once('E:\apache\htdoc...')
+#10 {main}
+2012/10/26 05:32:40 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '【性之图吧】【女优，知多少？】第三期【素人' for key 'title'. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:32:40 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '【性之图吧】【女优，知多少？】第三期【素人' for key 'title'. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2)' in E:\apache\htdocs\freephoto\framework\db\CDbCommand.php:336
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\db\ar\CActiveRecord.php(1017): CDbCommand->execute()
+#1 E:\apache\htdocs\freephoto\framework\db\ar\CActiveRecord.php(781): CActiveRecord->insert(NULL)
+#2 E:\apache\htdocs\freephoto\www.findlark.com\protected\commands\NovelCommand.php(30): CActiveRecord->save()
+#3 [internal function]: NovelCommand->actionIndex()
+#4 E:\apache\htdocs\freephoto\framework\console\CConsoleCommand.php(135): ReflectionMethod->invokeArgs(Object(NovelCommand), Array)
+#5 E:\apache\htdocs\freephoto\framework\console\CConsoleCommandRunner.php(63): CConsoleCommand->run(Array)
+#6 E:\apache\htdocs\freephoto\framework\console\CConsoleApplication.php(88): CConsoleCommandRunner->run(Array)
+#7 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CConsoleApplication->processRequest()
+#8 E:\apache\htdocs\freephoto\framework\yiic.php(33): CApplication->run()
+#9 E:\apache\htdocs\freephoto\www.findlark.com\protected\yiic.php(8): require_once('E:\apache\htdoc...')
+#10 {main}
+2012/10/26 05:33:30 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1406 Data too long for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:33:30 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[HY000]: General error: 1406 Data too long for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2)' in E:\apache\htdocs\freephoto\framework\db\CDbCommand.php:336
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\db\ar\CActiveRecord.php(1017): CDbCommand->execute()
+#1 E:\apache\htdocs\freephoto\framework\db\ar\CActiveRecord.php(781): CActiveRecord->insert(NULL)
+#2 E:\apache\htdocs\freephoto\www.findlark.com\protected\commands\NovelCommand.php(30): CActiveRecord->save()
+#3 [internal function]: NovelCommand->actionIndex()
+#4 E:\apache\htdocs\freephoto\framework\console\CConsoleCommand.php(135): ReflectionMethod->invokeArgs(Object(NovelCommand), Array)
+#5 E:\apache\htdocs\freephoto\framework\console\CConsoleCommandRunner.php(63): CConsoleCommand->run(Array)
+#6 E:\apache\htdocs\freephoto\framework\console\CConsoleApplication.php(88): CConsoleCommandRunner->run(Array)
+#7 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CConsoleApplication->processRequest()
+#8 E:\apache\htdocs\freephoto\framework\yiic.php(33): CApplication->run()
+#9 E:\apache\htdocs\freephoto\www.findlark.com\protected\yiic.php(8): require_once('E:\apache\htdoc...')
+#10 {main}
+2012/10/26 05:36:22 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1406 Data too long for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:36:56 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xE5\x99\x97\xE6\xBB\x8B...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:01 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xE8\xAF\xB4\xEF\xBC\x9A...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:03 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1406 Data too long for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:05 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1406 Data too long for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:07 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1406 Data too long for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:09 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xE5\x90\x83\xE4\xB8\xAA...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:11 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xE5\xAF\xB8\xE4\xB8\x80...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:14 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1406 Data too long for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:16 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xE6\xA0\xB9\xE6\x9C\xAC...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:18 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xE4\xB8\x80\xE6\xBC\x8F...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:20 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1406 Data too long for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:22 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xE5\xA7\x90\xE8\xAF\xB4...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:26 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xE3\x80\x80\xE3\x80\x80...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:28 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xE6\x88\x91\xE5\xB0\x84...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:31 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xE6\x89\x8D\xE6\x88\x91...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:33 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xE4\xB9\x88\xE6\xB7\xAB...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:35 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xE4\xBC\xBC\xE7\x9A\x84...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:37 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xE4\xBA\x86\xEF\xBC\x8C...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:39 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xE9\x98\xB4\xE6\x88\xB7...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:41 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xE7\xBA\xA2\xE6\xB9\xBF...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:43 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xE5\xBF\xAB\xE5\xBF\xAB...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:46 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xEF\xBC\x8C\xE7\x9B\xB4...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:48 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xE5\xA3\xB0\xE7\x96\xBC...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 05:37:50 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xE6\x88\x91\xE8\x83\xBD...' for column 'content' at row 1. The SQL statement executed was: INSERT INTO `lark_novel` (`title`, `content`, `summary`) VALUES (:yp0, :yp1, :yp2).
+2012/10/26 15:27:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "44".' in E:\apache\htdocs\freephoto\framework\web\CController.php:477
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CController.php(262): CController->missingAction('44')
+#1 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(277): CController->run('44')
+#2 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('blog/44')
+#3 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#5 {main} REQUEST_URI=/blog/44
+2012/10/26 16:11:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "96".' in E:\apache\htdocs\freephoto\framework\web\CController.php:477
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CController.php(262): CController->missingAction('96')
+#1 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(277): CController->run('96')
+#2 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('blog/96')
+#3 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#5 {main} REQUEST_URI=/blog/96
+2012/10/26 16:11:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "45".' in E:\apache\htdocs\freephoto\framework\web\CController.php:477
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CController.php(262): CController->missingAction('45')
+#1 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(277): CController->run('45')
+#2 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('blog/45')
+#3 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#5 {main} REQUEST_URI=/blog/45

@@ -1,3 +1,31 @@
+body{overflow:auto}
+
+.blog{margin:10px;}
+.blog-list{margin:auto;}
+.blog-list .novel-summary{word-wrap:break-word; word-break:break-all; text-indent:2em; line-height:20px;}
+.blog-list .novel-title{font-size:15px; margin-bottom:5px;}
+.blog-list .novel-operation{margin-top:10px; height:0px; overflow:hidden}
+.blog-list .novel{
+	border-top:1px solid #ddd;
+	width:270px;
+	margin:10px;
+	padding:10px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-webkit-transition: left .3s ease-in-out,top .3s ease-in-out;
+	
+	box-shadow: 0px 1px 3px rgba(0,0,0,.3);
+	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,.3);
+	*border:1px solid #ccc;
+}
+
+.image-list .desc{margin:3px; height:30px;}
+
+
+
+
+/*
 .blog{width:1000px; margin:0 auto; border:0px solid #ff00ff; color:#333; padding-top:20px;}
 .blog-list{width:700px; float: left; padding-bottom: 50px; overflow: hidden; position: relative;}
 
@@ -6,7 +34,6 @@
 .blog-title a{color:#222}
 .blog-title a:hover{color:#4183C4}
 
-/*信息与操作*/
 .blog-info{font-size: 12px; height:32px; line-height:18px;}
 .blog-info span{margin-right:15px; color:#777}
 .blog-info span a{color:#777}
@@ -15,16 +42,12 @@
 
 .blog-summary{font-size:14px; line-height:20px; text-indent:2em; padding:0px 10px 18px 5px;}
 
-/*评论框*/
 .blog-operation{ height:20px; background-color: #F9F9F9; border: 1px solid #d0d0d0; line-height: 20px; padding: 6px 10px; border-radius: 3px;}
 .blog-operation a.add-share{ background: url("../images/share-icon.png") no-repeat -0px -6px; padding-left: 21px;}
 
 .split-line{color:#999; padding:0px 5px;}
 
-/*右侧边栏*/
 .blog-bar{color:#ddd; font-size:12px; margin:5px 0;}
 .blog-sidebar{width:260px;float: right; padding:5px 0px 50px 5px; overflow: hidden; border-left:1px solid #f0f0f0}
-
-
-
+*/
 

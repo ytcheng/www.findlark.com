@@ -1,7 +1,34 @@
 <?php
 class BlogController extends Controller {
 	public function actionIndex() {
-		$this->render('index');
+		$criteria = new CDbCriteria;
+		$criteria->limit = 30;
+		$criteria->order = '`id` desc';
+		$list = LarkNovel::model()->findAll($criteria);
+		
+		$this->render('index', array('list'=>$list));
+	}
+	
+	public function actionAjaxList() {
+		$page = intval( Yii::app()->request->getParam('page', 1) );
+		$page = max($page, 1);
+		$pageSize = $page == 1 ? 20 : 10;
+		
+		$criteria = new CDbCriteria;
+		$criteria->offset = ($page - 1) * $pageSize;
+		$criteria->limit = $pageSize;
+		$criteria->order = '`id` desc';
+		
+		$list = LarkNovel::model()->findAll($criteria);
+		$result = array();
+		if(!empty($list)) {
+			foreach($list as $item) {
+				$item->content = '';
+				$result[$item->id] = $item->attributes;
+			}
+		}
+		echo CJSON::encode($result);
+		Yii::app()->end();
 	}
 	
 	public function actionList() {
