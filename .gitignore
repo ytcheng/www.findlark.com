@@ -16,8 +16,8 @@ local.properties
 .settings/
 .loadpath
 assets/
-upload/
-download/
+upload/*
+download/*
 protected/runtime/*
 
 # External tool builders
