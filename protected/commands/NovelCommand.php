@@ -23,6 +23,7 @@ class NovelCommand extends CConsoleCommand {
 				
 				$matchTitle = preg_match("#【(.*?)】#", $matchUrls[2][$key], $title);
 				$title = $matchTitle && $title[1] ? $title[1] : $matchUrls[2][$key];
+				$title = preg_replace("#\<.*?\>#", '', $title);
 				
 				try{
 					$model = LarkNovel::model();

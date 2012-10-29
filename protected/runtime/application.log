@@ -947,3 +947,89 @@ Stack trace:
 #3 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
 #4 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
 #5 {main} REQUEST_URI=/blog/45
+2012/10/29 09:49:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "fc/dThree".' in E:\apache\htdocs\freephoto\framework\web\CWebApplication.php:281
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('fc/dThree')
+#1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main} REQUEST_URI=/fc/dThree
+2012/10/29 09:50:07 [error] [php] fopen() [<a href='function.fopen'>function.fopen</a>]: Filename cannot be empty (E:\apache\htdocs\freephoto\www.findlark.com\protected\modules\fc\controllers\DThreeController.php:25)
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\actions\CInlineAction.php(50): DThreeController->actionImport()
+#1 E:\apache\htdocs\freephoto\framework\web\CController.php(300): CInlineAction->runWithParams()
+#2 E:\apache\htdocs\freephoto\framework\web\CController.php(278): DThreeController->runAction()
+#3 E:\apache\htdocs\freephoto\framework\web\CController.php(257): DThreeController->runActionWithFilters()
+#4 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(277): DThreeController->run()
+#5 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController()
+#6 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#7 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CWebApplication->run()
+REQUEST_URI=/fc/dThree/import
+2012/10/29 09:50:32 [error] [php] fopen() [<a href='function.fopen'>function.fopen</a>]: Filename cannot be empty (E:\apache\htdocs\freephoto\www.findlark.com\protected\modules\fc\controllers\DThreeController.php:27)
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\actions\CInlineAction.php(50): DThreeController->actionImport()
+#1 E:\apache\htdocs\freephoto\framework\web\CController.php(300): CInlineAction->runWithParams()
+#2 E:\apache\htdocs\freephoto\framework\web\CController.php(278): DThreeController->runAction()
+#3 E:\apache\htdocs\freephoto\framework\web\CController.php(257): DThreeController->runActionWithFilters()
+#4 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(277): DThreeController->run()
+#5 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController()
+#6 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#7 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CWebApplication->run()
+REQUEST_URI=/fc/dThree/import
+2012/10/29 09:50:57 [error] [exception.CException] exception 'CException' with message 'Property "DThreeHistory.timeline" is not defined.' in E:\apache\htdocs\freephoto\framework\base\CComponent.php:174
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\db\ar\CActiveRecord.php(145): CComponent->__set('timeline', 1351353600)
+#1 E:\apache\htdocs\freephoto\www.findlark.com\protected\modules\fc\controllers\DThreeController.php(37): CActiveRecord->__set('timeline', 1351353600)
+#2 E:\apache\htdocs\freephoto\www.findlark.com\protected\modules\fc\controllers\DThreeController.php(16): DThreeController->import(Array)
+#3 E:\apache\htdocs\freephoto\framework\web\actions\CInlineAction.php(50): DThreeController->actionImport()
+#4 E:\apache\htdocs\freephoto\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
+#5 E:\apache\htdocs\freephoto\framework\web\CController.php(278): CController->runAction(Object(CInlineAction))
+#6 E:\apache\htdocs\freephoto\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(277): CController->run('import')
+#8 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('fc/dThree/impor...')
+#9 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#11 {main} REQUEST_URI=/fc/dThree/import
+2012/10/29 09:56:52 [error] [php] include(DThree.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory (E:\apache\htdocs\freephoto\framework\YiiBase.php:422)
+Stack trace:
+#0 E:\apache\htdocs\freephoto\www.findlark.com\protected\modules\fc\views\dThree\index.php(23): spl_autoload_call()
+#1 E:\apache\htdocs\freephoto\framework\web\CBaseController.php(119): require()
+#2 E:\apache\htdocs\freephoto\framework\web\CBaseController.php(88): DThreeController->renderInternal()
+#3 E:\apache\htdocs\freephoto\framework\web\CController.php(866): DThreeController->renderFile()
+#4 E:\apache\htdocs\freephoto\framework\web\CController.php(779): DThreeController->renderPartial()
+#5 E:\apache\htdocs\freephoto\www.findlark.com\protected\modules\fc\controllers\DThreeController.php(11): DThreeController->render()
+#6 E:\apache\htdocs\freephoto\framework\web\actions\CInlineAction.php(50): DThreeController->actionIndex()
+#7 E:\apache\htdocs\freephoto\framework\web\CController.php(300): CInlineAction->runWithParams()
+#8 E:\apache\htdocs\freephoto\framework\web\CController.php(278): DThreeController->runAction()
+#9 E:\apache\htdocs\freephoto\framework\web\CController.php(257): DThreeController->runActionWithFilters()
+#10 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(277): DThreeController->run()
+#11 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController()
+#12 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CWebApplication->run()
+REQUEST_URI=/fc/dThree/index
+2012/10/29 10:13:05 [error] [php] printf() [<a href='function.printf'>function.printf</a>]: Too few arguments (E:\apache\htdocs\freephoto\www.findlark.com\protected\modules\fc\views\dThree\index.php:45)
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CBaseController.php(88): DThreeController->renderInternal()
+#1 E:\apache\htdocs\freephoto\framework\web\CController.php(866): DThreeController->renderFile()
+#2 E:\apache\htdocs\freephoto\framework\web\CController.php(779): DThreeController->renderPartial()
+#3 E:\apache\htdocs\freephoto\www.findlark.com\protected\modules\fc\controllers\DThreeController.php(11): DThreeController->render()
+#4 E:\apache\htdocs\freephoto\framework\web\actions\CInlineAction.php(50): DThreeController->actionIndex()
+#5 E:\apache\htdocs\freephoto\framework\web\CController.php(300): CInlineAction->runWithParams()
+#6 E:\apache\htdocs\freephoto\framework\web\CController.php(278): DThreeController->runAction()
+#7 E:\apache\htdocs\freephoto\framework\web\CController.php(257): DThreeController->runActionWithFilters()
+#8 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(277): DThreeController->run()
+#9 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController()
+#10 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#11 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CWebApplication->run()
+REQUEST_URI=/fc/dThree/index
+2012/10/29 10:20:21 [error] [exception.CException] exception 'CException' with message 'Property "DThreeController.layouts" is not defined.' in E:\apache\htdocs\freephoto\framework\base\CComponent.php:174
+Stack trace:
+#0 E:\apache\htdocs\freephoto\www.findlark.com\protected\modules\fc\controllers\DThreeController.php(5): CComponent->__set('layouts', 'main')
+#1 E:\apache\htdocs\freephoto\framework\web\actions\CInlineAction.php(50): DThreeController->actionIndex()
+#2 E:\apache\htdocs\freephoto\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\apache\htdocs\freephoto\framework\web\CController.php(278): CController->runAction(Object(CInlineAction))
+#4 E:\apache\htdocs\freephoto\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#5 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(277): CController->run('index')
+#6 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('fc/dThree/index')
+#7 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#8 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#9 {main} REQUEST_URI=/fc/dThree/index

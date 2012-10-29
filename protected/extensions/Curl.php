@@ -83,6 +83,7 @@ class Curl extends ExtensionsBase{
 		return $match ? $result : false;
 	}
 	
+	// 批量请求
 	public function multipleRequest($nodes, $params = array()) {
 		$params = array_merge($this->default, $params);
 		$node_count = count($nodes);
