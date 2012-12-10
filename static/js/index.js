@@ -39,6 +39,7 @@ indexObject.prototype = {
 			_this.winHeight = $(window).height();
 			_this.winWidth = $(window).width();
 			_this.turnMainHeight();
+			_this.moveCurrent();
 		})
 		$("#content").load(function () {
 			_this.afterLoading();
@@ -83,15 +84,26 @@ indexObject.prototype = {
 	 */
 	nav:function(obj) {
 		this.currentNav = obj;
-		var topOfs = $(".header-middle").offset();
-		var navOfs = $(this.currentNav).offset();
-		$("#current-nav").animate({"left":(navOfs.left - 5 - topOfs.left) + "px"}, this.shortTime);
+		this.moveCurrent(true);
 		
 		$("#header-nav li.current").removeClass("current");
 		$(this.currentNav).parent("li").addClass("current");
 		
 		var url = $(this.currentNav).attr("href");
 		this.loading(url);
+	},
+	
+	/**
+	 * 移动当前页表示
+	 */
+	moveCurrent: function(showAnimate) {
+		showAnimate = showAnimate || false;
+		
+		var topOfs = $(".header-middle").offset(), navOfs = $(this.currentNav).offset();
+		var ofsLeft = navOfs.left - 5 - topOfs.left;
+		
+		showAnimate ? $("#current-nav").animate({"left":ofsLeft+"px"}, this.shortTime) : 
+		$("#current-nav").css({"left":ofsLeft+"px"});
 	},
 	
 	/**

@@ -1,19 +1,6 @@
 <?php
 class SiteController extends Controller {
 	
-	public function actions() {
-		return array(
-			'proxy'=>array(
-				'class'=>'common.actions.UProxyAction',
-				'allowHost'=>array(
-					'passport.uuzu.com',
-					'api.uuzu.com',
-					'cb.uuzu.com'
-				)
-			),
-		);
-	}
-	
 	public function actionIndex() {
 		
 		$this->render('index');

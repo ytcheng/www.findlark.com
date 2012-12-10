@@ -17,7 +17,7 @@
 <div class="header-bg" id="header-bg"></div>
 
 <!--Main-//-->
-<div class="main" id="main"><iframe src="/home" id="content" class="content" frameborder="no" border="0" scrolling="yes" allowTransparency="true"></iframe></div>
+<div class="main" id="main"><iframe src="" id="content" class="content" frameborder="no" border="0" scrolling="yes" allowTransparency="true"></iframe></div>
 
 <!--载入中背景-//-->
 <div class="loading-bg" id="loading-bg" style="display:none">

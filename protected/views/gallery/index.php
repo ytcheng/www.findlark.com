@@ -34,18 +34,5 @@ $list = LarkPicture::model()->findAll($criteria);
 		setTimeout(function(){
 			imgObj.init();
 		}, 200);
-		
-		/*
-		$("div.img a").fancybox({
-			width: '90%',
-			height: '90%',
-			centerOnScroll: true,
-			cyclic: true
-		});
-		$("#fancybox-img").live("click", function() {
-			$.fancybox.next();
-		});
-		*/
-		
 	});
 </script>

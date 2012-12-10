@@ -49,15 +49,5 @@ class HomeController extends Controller {
 	
 	public function testmatch() {
 		
-		
-		$string = '<a href="" >asas</a>d
-		<br>as<font color="">da
-		asa<b>asas</b>
-		asas
-		';
-		
-		
-		$contents = preg_replace("#\<(?!br).*?\>#", '', $string);
-		var_dump($contents);
 	}
 }

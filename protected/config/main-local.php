@@ -45,6 +45,7 @@ return array(
 				'<action:(login|logout|error|proxy)>' => 'site/<action>',
 				'' => 'site/index',
 				'<controller:site>/<action:\w+>' => 'site/<action>',
+				'<controller:blog>/<id:\d+>' => '<controller>/show/id/<id>',
 				
 			),
 		),

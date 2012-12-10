@@ -9,7 +9,11 @@ class BlogController extends Controller {
 		$this->render('index', array('list'=>$list));
 	}
 	
+	/*
+	 * AJAX 方式获取列表， 输出JSON
+	 */
 	public function actionAjaxList() {
+		
 		$page = intval( Yii::app()->request->getParam('page', 1) );
 		$page = max($page, 1);
 		$pageSize = $page == 1 ? 20 : 10;
@@ -29,6 +33,31 @@ class BlogController extends Controller {
 		}
 		echo CJSON::encode($result);
 		Yii::app()->end();
+	}
+	
+	/*
+	 * 查看文章内容
+	 */
+	public function actionShow($id) {
+		$id = intval($id);
+		$model = 
+		$content = LarkNovel::model()->findByPk($id);
+		if(empty($content)) {
+			echo '文章不存在!';
+			Yii::app()->end();
+		}
+		
+		$criteria = new CDbCriteria;
+		$criteria->compare('`id`', '>'.$id);
+		$criteria->order = '`id` ASC';
+		$prev = LarkNovel::model()->find($criteria);
+		
+		$criteria = new CDbCriteria;
+		$criteria->compare('`id`', '<'.$id);
+		$criteria->order = '`id` DESC';
+		$next = LarkNovel::model()->find($criteria);
+		
+		$this->render('show', array('content'=>$content, 'prev'=>$prev, 'next'=>$next));
 	}
 	
 	public function actionList() {

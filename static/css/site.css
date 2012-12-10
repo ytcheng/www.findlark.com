@@ -10,7 +10,7 @@ box-shadow: 0 1px 0 rgba(255,255,255,0.4),0 0 10px rgba(0,0,0,0.1);
 }
 .clear-header{height:0px; overflow:hidden; clear:both}
 
-.header-middle{position:relative; margin:0 auto; width:1000px;}
+.header-middle{position:relative; margin:0 auto; min-width:660px; max-width:1000px;}
 #header-logo a{color:#222; float:left;height: 46px; line-height: 46px; font-size:24px; font-weight:600}
 
 .header-nav{margin-right:15px; float:right;}
@@ -26,7 +26,7 @@ box-shadow: 0 1px 0 rgba(255,255,255,0.4),0 0 10px rgba(0,0,0,0.1);
 
 /*内容部分*/
 body{scroll:none}
-.main{height:500px; width:100%; margin:0px auto; overflow:hidden;}
+.main{height:500px; width:100%; min-width:660px; margin:0px auto; overflow-y:hidden;}
 .content{width:100%; height:500px; border:0px solid #fff; }
 
 .footer{height:120px; width:1000px; text-align:center; margin:0px auto;}

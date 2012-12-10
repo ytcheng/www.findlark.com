@@ -5,7 +5,7 @@
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
-	'basePath' => dirname(__FILE__).'/../../',
+	'basePath' => realpath(dirname(__FILE__).'/../'),
 	'name'=>'My Web Application',
 
 	// preloading 'log' component
@@ -43,9 +43,6 @@ return array(
 				'<action:(login|logout|error|proxy)>' => 'site/<action>',
 				'' => 'site/index',
 				'<controller:site>/<action:\w+>' => 'site/<action>',
-				array(
-					'class' => 'common.web.CMSUrlRule',
-				),
 			),
 		),
 		// uncomment the following to use a MySQL database
@@ -81,8 +78,8 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
-		'staticUrl'=>'http://www.findlark.com/static',
-		'baseUrl'=>'http://www.findlark.com',
+		'staticUrl'=>'http://www.findlark.tk/static',
+		'baseUrl'=>'http://www.findlark.tk',
 		'adminEmail'=>'webmaster@example.com',
 	),
 );

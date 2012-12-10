@@ -75,7 +75,7 @@ ImageList.prototype = {
 			rel: "played",
 			maxWidth: '95%',
 			maxHeight: '95%',
-			opacity: 0.35,
+			opacity: 0.9,
 			photo: true
 		});
 
