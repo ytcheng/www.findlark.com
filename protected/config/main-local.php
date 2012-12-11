@@ -46,12 +46,11 @@ return array(
 				'' => 'site/index',
 				'<controller:site>/<action:\w+>' => 'site/<action>',
 				'<controller:blog>/<id:\d+>' => '<controller>/show/id/<id>',
-				
 			),
 		),
 		// uncomment the following to use a MySQL database
 		'db'=>array(
-			'connectionString' => 'mysql:host=127.0.0.1;dbname=yiiblog',
+			'connectionString' => 'mysql:host=127.0.0.1;dbname=findlark',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => 'fx1989',

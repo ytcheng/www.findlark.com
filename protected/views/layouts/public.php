@@ -5,13 +5,13 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="keywords" content="FindLark,BYFX,Lark">
 		
-		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->params->staticUrl;?>/css/public.css">
-		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->params->staticUrl;?>/css/<?php echo $this->id;?>.css">
-		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->params->staticUrl;?>/css/colorbox.css">
+		<link rel="stylesheet" type="text/css" href="/static/css/public.css">
+		<link rel="stylesheet" type="text/css" href="/static/css/<?php echo $this->id;?>.css">
+		<link rel="stylesheet" type="text/css" href="/static/css/colorbox.css">
 		
-		<script type="text/javascript" src="<?php echo Yii::app()->params->staticUrl;?>/js/jquery-1.7.1.min.js"></script>
-		<script type="text/javascript" src="<?php echo Yii::app()->params->staticUrl;?>/js/jquery.masonry.js"></script>
-			<script type="text/javascript" src="<?php echo Yii::app()->params->staticUrl;?>/js/jquery.colorbox-min.js"></script>
+		<script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="/static/js/jquery.masonry.js"></script>
+		<script type="text/javascript" src="/static/js/jquery.colorbox-min.js"></script>
 	</head>
 	<body>
 		<?php echo $content;?>

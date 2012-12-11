@@ -89,7 +89,7 @@ indexObject.prototype = {
 	nav:function(obj) {
 		this.currentNav = obj;
 		this.moveCurrent(true);
-		$.cookie("lark_nav_index", $(obj).attr("name"));
+		$.cookie("lark_nav_index", $(obj).parent("li").index());
 		
 		$("#header-nav li.current").removeClass("current");
 		$(this.currentNav).parent("li").addClass("current");
