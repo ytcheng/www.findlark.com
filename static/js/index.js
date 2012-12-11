@@ -16,7 +16,8 @@ indexObject.prototype = {
 		this.bindEvent();
 		
 		if(this.currentNav === null) {
-			this.currentNav = $("#header-nav").find("a:eq(0)");
+			this.currentNav = $("#header-nav").find("a[name="+currentName+"]");
+			if(!this.currentNav.length) this.currentNav = $("#header-nav").find("a:eq(0)");
 		}
 		this.nav(this.currentNav);
 		this.winHeight = $(window).height();
@@ -47,7 +48,7 @@ indexObject.prototype = {
 	},
 	
 	turnMainHeight: function () {
-		var headerH = $("#header").height() + parseInt($("#header").css('top'));
+		//var headerH = $("#header").height() + parseInt($("#header").css('top'));
 		var mainHeight = this.winHeight - headerH;
 		
 		if($.browser.msie && $.browser.version < 9) {

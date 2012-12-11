@@ -1,4 +1,4 @@
-<div class="blog iframe_content">
+<div class="blog">
 	<div class="blog-list" id="blog-list">
 		<?php
 		foreach($list as $item) {

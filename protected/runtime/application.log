@@ -1094,3 +1094,123 @@ Stack trace:
 #4 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
 #5 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CWebApplication->run()
 REQUEST_URI=/tool
+2012/12/11 19:19:06 [error] [exception.CException] exception 'CException' with message 'Property "CWebApplication.isPostRequest" is not defined.' in E:\apache\htdocs\freephoto\framework\base\CComponent.php:131
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\base\CModule.php(88): CComponent->__get('isPostRequest')
+#1 E:\apache\htdocs\freephoto\www.findlark.com\protected\controllers\ToolController.php(18): CModule->__get('isPostRequest')
+#2 E:\apache\htdocs\freephoto\framework\web\actions\CInlineAction.php(50): ToolController->actionIndex()
+#3 E:\apache\htdocs\freephoto\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
+#4 E:\apache\htdocs\freephoto\framework\web\CController.php(278): CController->runAction(Object(CInlineAction))
+#5 E:\apache\htdocs\freephoto\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(277): CController->run('')
+#7 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('tool')
+#8 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#9 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#10 {main} REQUEST_URI=/tool
+2012/12/11 19:19:33 [error] [exception.CException] exception 'CException' with message 'Property "CWebApplication.isPostRequest" is not defined.' in E:\apache\htdocs\freephoto\framework\base\CComponent.php:131
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\base\CModule.php(88): CComponent->__get('isPostRequest')
+#1 E:\apache\htdocs\freephoto\www.findlark.com\protected\controllers\ToolController.php(18): CModule->__get('isPostRequest')
+#2 E:\apache\htdocs\freephoto\framework\web\actions\CInlineAction.php(50): ToolController->actionIndex()
+#3 E:\apache\htdocs\freephoto\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
+#4 E:\apache\htdocs\freephoto\framework\web\CController.php(278): CController->runAction(Object(CInlineAction))
+#5 E:\apache\htdocs\freephoto\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(277): CController->run('')
+#7 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('tool')
+#8 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#9 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#10 {main} REQUEST_URI=/tool
+2012/12/11 19:19:34 [error] [exception.CException] exception 'CException' with message 'Property "CWebApplication.isPostRequest" is not defined.' in E:\apache\htdocs\freephoto\framework\base\CComponent.php:131
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\base\CModule.php(88): CComponent->__get('isPostRequest')
+#1 E:\apache\htdocs\freephoto\www.findlark.com\protected\controllers\ToolController.php(18): CModule->__get('isPostRequest')
+#2 E:\apache\htdocs\freephoto\framework\web\actions\CInlineAction.php(50): ToolController->actionIndex()
+#3 E:\apache\htdocs\freephoto\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
+#4 E:\apache\htdocs\freephoto\framework\web\CController.php(278): CController->runAction(Object(CInlineAction))
+#5 E:\apache\htdocs\freephoto\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(277): CController->run('')
+#7 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('tool')
+#8 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#9 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#10 {main} REQUEST_URI=/tool
+2012/12/11 19:22:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "name/tool".' in E:\apache\htdocs\freephoto\framework\web\CWebApplication.php:281
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('name/tool')
+#1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main} REQUEST_URI=//name/tool
+2012/12/11 19:37:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "add".' in E:\apache\htdocs\freephoto\framework\web\CController.php:477
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CController.php(262): CController->missingAction('add')
+#1 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(277): CController->run('add')
+#2 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('tool/add')
+#3 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#5 {main} REQUEST_URI=/tool/add?file=box.zip&title=test+gallery&control=gallery
+2012/12/11 19:38:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "name/tool".' in E:\apache\htdocs\freephoto\framework\web\CWebApplication.php:281
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('name/tool')
+#1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main} REQUEST_URI=//name/tool
+2012/12/11 19:38:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "add".' in E:\apache\htdocs\freephoto\framework\web\CController.php:477
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CController.php(262): CController->missingAction('add')
+#1 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(277): CController->run('add')
+#2 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('tool/add')
+#3 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#5 {main} REQUEST_URI=/tool/add
+2012/12/11 19:39:26 [error] [php] mkdir() [<a href='function.mkdir'>function.mkdir</a>]: No error (E:\apache\htdocs\freephoto\www.findlark.com\protected\controllers\ToolController.php:32)
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\actions\CInlineAction.php(50): ToolController->actionIndex()
+#1 E:\apache\htdocs\freephoto\framework\web\CController.php(300): CInlineAction->runWithParams()
+#2 E:\apache\htdocs\freephoto\framework\web\CController.php(278): ToolController->runAction()
+#3 E:\apache\htdocs\freephoto\framework\web\CController.php(257): ToolController->runActionWithFilters()
+#4 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(277): ToolController->run()
+#5 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController()
+#6 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#7 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CWebApplication->run()
+REQUEST_URI=/tool
+2012/12/11 19:48:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "extends/1355226417".' in E:\apache\htdocs\freephoto\framework\web\CWebApplication.php:281
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('extends/1355226...')
+#1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main} REQUEST_URI=/extends/1355226417
+2012/12/11 19:48:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "extends/1355226417".' in E:\apache\htdocs\freephoto\framework\web\CWebApplication.php:281
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('extends/1355226...')
+#1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main} REQUEST_URI=/extends/1355226417
+2012/12/11 19:49:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "extends/1355226417".' in E:\apache\htdocs\freephoto\framework\web\CWebApplication.php:281
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('extends/1355226...')
+#1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main} REQUEST_URI=/extends/1355226417
+2012/12/11 19:49:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "extends/1355226417".' in E:\apache\htdocs\freephoto\framework\web\CWebApplication.php:281
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('extends/1355226...')
+#1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main} REQUEST_URI=/extends/1355226417
+2012/12/11 19:49:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "extends/1355226417".' in E:\apache\htdocs\freephoto\framework\web\CWebApplication.php:281
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('extends/1355226...')
+#1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main} REQUEST_URI=/extends/1355226417
+2012/12/11 19:49:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "extends/1355226417".' in E:\apache\htdocs\freephoto\framework\web\CWebApplication.php:281
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('extends/1355226...')
+#1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main} REQUEST_URI=/extends/1355226417
+2012/12/11 19:49:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "extends".' in E:\apache\htdocs\freephoto\framework\web\CWebApplication.php:281
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('extends')
+#1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main} REQUEST_URI=/extends
