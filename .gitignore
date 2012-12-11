@@ -17,6 +17,7 @@ local.properties
 .loadpath
 assets/
 upload/*
+extends/*
 download/*
 protected/runtime/*
 
