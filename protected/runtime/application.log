@@ -1063,3 +1063,34 @@ Stack trace:
 #8 E:\apache\htdocs\freephoto\framework\yiic.php(33): CApplication->run()
 #9 E:\apache\htdocs\freephoto\www.findlark.com\protected\yiic.php(8): require_once('E:\apache\htdoc...')
 #10 {main}
+2012/12/11 13:57:04 [error] [exception.CException] exception 'CException' with message 'ToolController cannot find the requested view "index".' in E:\apache\htdocs\freephoto\framework\web\CController.php:875
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CController.php(779): CController->renderPartial('index', NULL, true)
+#1 E:\apache\htdocs\freephoto\www.findlark.com\protected\controllers\ToolController.php(6): CController->render('index')
+#2 E:\apache\htdocs\freephoto\framework\web\actions\CInlineAction.php(50): ToolController->actionIndex()
+#3 E:\apache\htdocs\freephoto\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
+#4 E:\apache\htdocs\freephoto\framework\web\CController.php(278): CController->runAction(Object(CInlineAction))
+#5 E:\apache\htdocs\freephoto\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(277): CController->run('')
+#7 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('tool')
+#8 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#9 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#10 {main} REQUEST_URI=/tool
+2012/12/11 13:59:20 [error] [php] Missing argument 1 for CController::beforeAction(), called in E:\apache\htdocs\freephoto\www.findlark.com\protected\controllers\ToolController.php on line 6 and defined (E:\apache\htdocs\freephoto\framework\web\CController.php:1092)
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CController.php(278): ToolController->runAction()
+#1 E:\apache\htdocs\freephoto\framework\web\CController.php(257): ToolController->runActionWithFilters()
+#2 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(277): ToolController->run()
+#3 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController()
+#4 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#5 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CWebApplication->run()
+REQUEST_URI=/tool
+2012/12/11 13:59:26 [error] [php] Missing argument 1 for CController::beforeAction(), called in E:\apache\htdocs\freephoto\www.findlark.com\protected\controllers\ToolController.php on line 6 and defined (E:\apache\htdocs\freephoto\framework\web\CController.php:1092)
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CController.php(278): ToolController->runAction()
+#1 E:\apache\htdocs\freephoto\framework\web\CController.php(257): ToolController->runActionWithFilters()
+#2 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(277): ToolController->run()
+#3 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController()
+#4 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#5 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CWebApplication->run()
+REQUEST_URI=/tool

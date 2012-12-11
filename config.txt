@@ -1,0 +1,16 @@
+#### Apache
+
+RewriteEngine On
+RewriteLogLevel 9
+RewriteLog "logs/rewrite.log"
+RewriteRule ^(/assets|/css|/images|/themes|/js|/favicon\.ico|/crossdomain\.xml|/upload).* $0 [L]
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^([^\?]*)$  /index-dev.php$1?%1 [L]
+
+#### Nginx
+if (-d $request_filename) {
+	rewrite ^/(.*)([^/])$ http://$host/$1$2/ permanent;
+}
+if (!-e $request_filename) {
+	rewrite (.*) /index-test.php break;
+}
