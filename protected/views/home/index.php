@@ -1,11 +1,9 @@
-<div class="iframe_content">
-	<h3>HOME PAGE</h3>
+<h3>HOME PAGE</h3>
+
+<div id="box">
+	<span id="content"></span>
 	
-	<div id="box">
-		<span id="content"></span>
-		
-		<span id="cursor">▂</span>
-	</div>
+	<span id="cursor">▂</span>
 </div>
 
 
