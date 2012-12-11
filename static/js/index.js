@@ -54,7 +54,7 @@ indexObject.prototype = {
 			mainHeight -= 2;
 		}
 		
-		$("#header-bg").css('height', headerH+'px');
+		//$("#header-bg").css('height', headerH+'px');
 		$("#main").css({"height": mainHeight+"px"});
 		$("#content").css({"height":mainHeight+"px"});
 	},
@@ -64,7 +64,7 @@ indexObject.prototype = {
 	 * @param url 需要加载的链接
 	 */
 	loading:function(url) {
-		var loadBg = $("#loading-bg");
+		//var loadBg = $("#loading-bg");
 		//loadBg.fadeTo(this.shortTime, 0.8);
 		//loadBg.children(".loading-icon").css({"top":10 + "px", "left":(loadBg.width() - 40) / 2 + "px"});
 		$("#content").attr("src", url);

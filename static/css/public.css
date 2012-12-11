@@ -59,3 +59,5 @@ a:active{}
 ::-webkit-scrollbar-thumb:window-inactive {
 	background: rgba(231,231,231,0.4);
 }
+
+div.iframe_content{margin-top:50px;}

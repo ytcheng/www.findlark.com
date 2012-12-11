@@ -1,7 +1,4 @@
-<script type="text/javascript" src="<?php echo Yii::app()->params->staticUrl;?>/js/share.js">
-</script>
-
-<div class="blog">
+<div class="blog iframe_content">
 	<div class="blog-list" id="blog-list">
 		<?php
 		foreach($list as $item) {
