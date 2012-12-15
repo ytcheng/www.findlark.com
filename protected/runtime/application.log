@@ -1214,3 +1214,173 @@ Stack trace:
 #1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
 #2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
 #3 {main} REQUEST_URI=/extends
+2012/12/16 00:08:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2012/12/16 00:08:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2012/12/16 00:08:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2012/12/16 00:08:30 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'findlark.lark_extends' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `lark_extends`.
+2012/12/16 00:08:30 [error] [exception.CDbException] exception 'CDbException' with message 'The table "lark_extends" for active record class "LarkExtends" cannot be found in the database.' in C:\apache2\htdocs\framework\db\ar\CActiveRecord.php:2264
+Stack trace:
+#0 C:\apache2\htdocs\framework\db\ar\CActiveRecord.php(379): CActiveRecordMetaData->__construct(Object(LarkExtends))
+#1 C:\apache2\htdocs\www.findlark.com\protected\models\LarkExtends.php(19): CActiveRecord::model('LarkExtends')
+#2 C:\apache2\htdocs\www.findlark.com\protected\controllers\ToolController.php(10): LarkExtends::model()
+#3 C:\apache2\htdocs\framework\web\actions\CInlineAction.php(50): ToolController->actionIndex()
+#4 C:\apache2\htdocs\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#5 C:\apache2\htdocs\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#6 C:\apache2\htdocs\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\apache2\htdocs\framework\web\CWebApplication.php(276): CController->run('')
+#8 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('tool')
+#9 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#10 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#11 {main}
+REQUEST_URI=/tool
+HTTP_REFERER=http://www.findlark.net/
+---
+2012/12/16 00:08:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2012/12/16 00:09:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2012/12/16 00:09:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2012/12/16 00:09:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2012/12/16 00:09:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2012/12/16 00:09:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2012/12/16 00:09:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2012/12/16 00:09:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2012/12/16 00:09:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2012/12/16 00:10:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2012/12/16 00:10:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2012/12/16 00:10:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2012/12/16 00:11:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2012/12/16 00:11:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2012/12/16 00:11:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2012/12/16 00:12:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\apache2\htdocs\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\apache2\htdocs\framework\web\CWebApplication.php(135): CWebApplication->runController('favicon.ico')
+#1 C:\apache2\htdocs\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\apache2\htdocs\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
