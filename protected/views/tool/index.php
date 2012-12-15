@@ -10,7 +10,7 @@
 	<?php
 	$list = LarkExtends::model()->findAll();
 	foreach($list as $item) {
-		printf('<a href="%s/extends/%s">%s</a>', Yii::app()->params->baseUrl, $item->path, $item->title);
+		printf('<a href="/extends/%s">%s</a>', $item->path, $item->title);
 	}
 	?>
 </div>
