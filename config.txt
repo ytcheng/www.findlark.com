@@ -3,7 +3,7 @@
 RewriteEngine On
 RewriteLogLevel 9
 RewriteLog "logs/rewrite.log"
-RewriteRule ^(/assets|/css|/images|/themes|/js|/favicon\.ico|/crossdomain\.xml|/upload).* $0 [L]
+RewriteRule ^(/assets|/static|/favicon\.ico|/crossdomain\.xml|/upload|/extends).* $0 [L]
 RewriteCond %{QUERY_STRING} ^(.*)$
 RewriteRule ^([^\?]*)$  /index-dev.php$1?%1 [L]
 

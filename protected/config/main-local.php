@@ -26,8 +26,6 @@ return array(
 		 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
-		'admin',
-		'fc'
 	),
 
 	// application components
@@ -76,8 +74,8 @@ return array(
 			),
 		),
 	),
-	'onBeginRequest'=>create_function('$event', 'return ob_start("ob_gzhandler");'),
-	'onEndRequest'=>create_function('$event', 'return ob_end_flush();'),
+	//'onBeginRequest'=>create_function('$event', 'return ob_start("ob_gzhandler");'),
+	//'onEndRequest'=>create_function('$event', 'return ob_end_flush();'),
 
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
