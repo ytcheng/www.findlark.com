@@ -11,20 +11,24 @@ class ToolController extends Controller {
 		$this->render('index');
 	}
 	
+	public function actionLogin() {
+		$this->render('login');
+	}
+	
 	private function addTool() {
 		$file = $_FILES['file'];
-		
-		$dir = realpath( dirname(__FILE__).'/../../extends').'/'.time();
+		$path = time();
+		$dir = realpath( dirname(__FILE__).'/../../extends').'/'.$path;
 		mkdir($dir);
 		$fullPath = $dir.'/'.$file['name'];
 		if(@ move_uploaded_file($file['tmp_name'], $fullPath)) {
-			shell_exec('unzip '.$fullPath);
-			$command = sprintf('cd %s; chown www:www -R *; chmod +x -R *;', $dir);
+			$command = sprintf('cd %s; unzip %s; chown www:www -R *; chmod +x -R *;', $dir, $file['name']);
 			shell_exec($command);
 			
 			$model = LarkExtends::model();
 			$model->title = Yii::app()->request->getParam('title');
-			$model->isNewRequest = true;
+			$model->path = $path;
+			$model->isNewRecord = true;
 			$model->save();
 		}
 	}

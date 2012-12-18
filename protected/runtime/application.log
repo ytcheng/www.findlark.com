@@ -1214,3 +1214,45 @@ Stack trace:
 #1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
 #2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
 #3 {main} REQUEST_URI=/extends
+2012/12/17 19:58:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "box".' in E:\apache\htdocs\freephoto\framework\web\CWebApplication.php:281
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('box')
+#1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main} REQUEST_URI=/box
+2012/12/17 19:59:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "box".' in E:\apache\htdocs\freephoto\framework\web\CWebApplication.php:281
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('box')
+#1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main} REQUEST_URI=/box
+2012/12/17 19:59:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "box".' in E:\apache\htdocs\freephoto\framework\web\CWebApplication.php:281
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('box')
+#1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main} REQUEST_URI=/box
+2012/12/17 19:59:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "box".' in E:\apache\htdocs\freephoto\framework\web\CWebApplication.php:281
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('box')
+#1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main} REQUEST_URI=/box
+2012/12/18 09:59:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "publish.php".' in E:\apache\htdocs\freephoto\framework\web\CWebApplication.php:281
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('publish.php')
+#1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main} REQUEST_URI=/publish.php
+2012/12/18 09:59:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "publish".' in E:\apache\htdocs\freephoto\framework\web\CWebApplication.php:281
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('publish')
+#1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main} REQUEST_URI=/publish
+2012/12/18 09:59:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "publish.php".' in E:\apache\htdocs\freephoto\framework\web\CWebApplication.php:281
+Stack trace:
+#0 E:\apache\htdocs\freephoto\framework\web\CWebApplication.php(136): CWebApplication->runController('publish.php')
+#1 E:\apache\htdocs\freephoto\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\apache\htdocs\freephoto\www.findlark.com\index-test.php(17): CApplication->run()
+#3 {main} REQUEST_URI=/publish.php

@@ -95,3 +95,4 @@ CREATE TABLE `urls` (
 -- ----------------------------
 -- Records of urls
 -- ----------------------------
+insert into lark_extends (`title`, `path`) VALUES ('JQuery插件-mini提示框', '1355226417');
