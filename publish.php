@@ -21,7 +21,7 @@ if(isset($_POST['publish_code'])) {
 	
 	$fullPath = $dir.$file['name'];
 	if(@ move_uploaded_file($file['tmp_name'], $fullPath)) {
-		$command = sprintf('cd %s; rm -rf protected; rm -rf static; unzip %s; chown www:www -R *; chmod +r -R *; chmod +x -R protected/*;', $dir, $file['name']);
+		$command = sprintf('cd %s; unzip -o %s; rm -rf %s; chown www:www -R *; chmod +r -R *; chmod +x -R protected/*;', $dir, $file['name'], $file['name']);
 		exec($command, $message, $return);
 		echo '</pre>';
 		print_r($message);
