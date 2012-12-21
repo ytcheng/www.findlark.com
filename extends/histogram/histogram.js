@@ -22,7 +22,7 @@ var imageBase = function() {
 	// 将图片绘制到 canvas 画布
 	this.draw = function(img, canvasId) {
 		var canvas = document.getElementById(canvasId),
-				ctx = document.getElementById(canvasId).getContext('2d');
+				ctx = canvas.getContext('2d');
 		
 		canvas.height = img.height;
 		canvas.width = img.width;
