@@ -5,7 +5,7 @@ var extend = function(dest, source) {
 	}
 }
 
-var baseModel = function() {
+var imageBase = function() {
 	this.loadImg = function(params) {
 		var _this = this, img = new Image;
 		img.src = params.src;
@@ -35,8 +35,6 @@ var baseModel = function() {
 }
 
 var histogram = function() {};
-extend(histogram, baseModel);
-
 			
 // 获取图片直方图数据
 histogram.prototype.getHistogramData = function(imgData) {

@@ -78,6 +78,7 @@
     <script src="./jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js"></script>
     <script type="text/javascript" src="./histogram.js"></script>
 		<script type="text/javascript">
+				var img = new imageBase;
 				var obj = new histogram;
 				//obj.imgSrc = './test.png';
 				var params = {};
@@ -131,7 +132,7 @@
 					
 				}
 				
-				obj.loadImg(params);
+				img.loadImg(params);
 				
 				var r = 20, g = 20, b = 20;
 				var avg = Math.pow( (r+g+b)/3/256 , 0.7);
