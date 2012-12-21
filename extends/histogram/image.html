@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<style>
+			body{font-size:12px; line-height:20px}
+			#img_info td{width:60px; text-align:right}
+			
+			#img_info td.val{text-align:left}
+			.histogram{border: 1px solid #777; width:256px;}
+			#histogram{ cursor:crosshair}
+		</style>
+	</head>
+	
+	<body>
+		<canvas id="canvas" width="256" height="120"></canvas>
+		<canvas id="output" width="256" height="120"></canvas>
+		<br>
+		<div>
+			<div class="histogram"><canvas id="histogram" width="256" height="120"></canvas></div>
+			直方图：
+			<select id="histogram_type">
+				<option value="all">颜色</option>
+				<option value="r">红</option>
+				<option value="g">绿</option>
+				<option value="b">蓝</option>
+				<option value="gray">明度</option>
+				<option value="rgb">RGB</option>
+			</select>
+			<table id="img_info">
+				<tr>
+					<td>平均值:</td>
+					<td id="avg" class="val"></td>
+					<td>色阶:</td>
+					<td id="level" class="val"></td>
+				</tr>
+				
+				<tr>
+					<td>标准差:</td>
+					<td id="deviation" class="val"></td>
+					<td>数量:</td>
+					<td id="amount" class="val"></td>
+				</tr>
+				
+				<tr>
+					<td>中间值:</td>
+					<td id="median" class="val"></td>
+					<td>百分位:</td>
+					<td id="ratio" class="val"></td>
+				</tr>
+				<tr>
+					<td>总像素:</td>
+					<td id="count" class="val"></td>
+					<td>缓存等级:</td>
+					<td class="val" id="cache">1</td>
+				</tr>
+			</table>
+		</div>
+	
+		<div id="imgdata">
+			
+		</div>
+		
+		<div id="color-test" style="border:1px solid #333">
+			
+			
+		</div>
+		
+		<p>
+	    <label for="amount">Donation amount ($50 increments):</label>
+	    <input type="text" id="amount1" value="">
+		</p>
+		 
+		<div id="slider"></div>
+		
+		<link rel="stylesheet" href="./jquery-ui-1.9.2.custom/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+    <script src="./jquery-1.7.1.min.js"></script>
+    <script src="./jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js"></script>
+    <script type="text/javascript" src="./histogram.js"></script>
+		<script type="text/javascript">
+				var obj = new histogram;
+				//obj.imgSrc = './test.png';
+				var params = {};
+				params.src = 'test.jpg';
+				params.canvasId = 'canvas';
+				params.callback = function(img, ctx) {
+					var imgData = ctx.getImageData(0, 0, img.width, img.height),
+							histogramData = obj.getHistogramData(imgData.data);
+					
+					$("#count").html(img.height*img.width);
+					
+					$("#histogram_type").change(function() {
+						var val = $(this).val();
+						var k = val == 'all' ? 'rgb' : val;
+						
+						//$("#avg").html( (obj.colorCount[k]/obj.colorCount.total).toFixed(2) );
+						//$("#median").html(histogram[k]['median']);
+						//$("#deviation").html(histogram[k]['deviation']);
+						
+						clearRect = val == 'all' ? false : true;
+						switch(val) {
+							case 'all': ;
+							case 'r': obj.createHistogram(histogramData, 'r', 'red', 'histogram', clearRect); if(val != 'all') break;
+							case 'g': obj.createHistogram(histogramData, 'g', 'green', 'histogram', clearRect); if(val != 'all') break;
+							case 'b': obj.createHistogram(histogramData, 'b', 'blue', 'histogram', clearRect); break;
+							case 'gray': obj.createHistogram(histogramData, 'gray', '#111', 'histogram', clearRect); break;
+							default: obj.createHistogram(histogramData, 'rgb', '#111', 'histogram', clearRect); break;
+						}
+					});
+					
+					$("#histogram_type").trigger("change");
+					
+					var allowCount = true;
+					$("#histogram").mousemove(function(e) {
+						if(!allowCount) return;
+						
+						//获取当前鼠标相对img的x坐标
+						var positionX = e.originalEvent.x - $(this).offset().left || e.originalEvent.layerX - $(this).offset().left || 0;
+						//获取当前鼠标相对img的y坐标
+		    		var positionY = e.originalEvent.y - $(this).offset().top || e.originalEvent.layerY - $(this).offset().top || 0;
+						
+						$("#level").html(positionX);
+						var count = obj.count(histogramData, $("#histogram_type").val(), positionX);
+						$("#amount").html(count.amount);
+						$("#ratio").html(count.ratio+'%');
+						allowCount = false;
+						setTimeout(function() {
+							allowCount = true;
+						}, 100);
+					});
+					
+				}
+				
+				obj.loadImg(params);
+				
+				var r = 20, g = 20, b = 20;
+				var avg = Math.pow( (r+g+b)/3/256 , 0.7);
+				$(function() {
+					
+					
+					$( "#slider" ).slider({
+	            value:100,
+	            min: 0,
+	            max: 200,
+	            step: 10,
+	            slide: function( event, ui ) {
+	                
+	                obj.ConvolutionMatrix();
+	                //obj.turnExposure(ui.value);
+	            }
+	        });
+					
+					for(var i = 0; i < 500; i+=5) {
+						$("#color-test").append('<span style="display:inline-block; height:30px; width:10px; background-color:rgb('+add(r, i)+','+add(g, i)+','+add(b, i)+')">&nbsp;</span>');
+					}
+					$("#color-test").append('<span style="border-left:1px solid #333;"></span>');
+				});
+				
+				function add(c, i) {
+					//if(c==0) return c;
+					return Math.min(Math.round(c+(255-c)*i*avg/100), 255);
+				}
+				
+				var abc = 2;
+				var color = new colorModel;
+				var rgb = {r:10, g:20, b:30};
+				
+				var hsv = color.rgb2hsv(rgb);
+				console.log(rgb);
+				var hsl = color.rgb2hsl(rgb);
+				console.log(rgb);
+				var rgb2 = color.hsv2rgb(hsv);
+				var rgb3 = color.hsl2rgb(hsl);
+			
+		</script>
+	</body>
+</html>
