@@ -67,8 +67,8 @@
 		</div>
 		
 		<p>
-	    <label for="amount">Donation amount ($50 increments):</label>
-	    <input type="text" id="amount1" value="">
+	    <label for="amount"></label>
+	    <input type="text" id="veins-value" value="">
 		</p>
 		 
 		<div id="slider"></div>
@@ -84,9 +84,8 @@
 				var params = {};
 				params.src = 'test.jpg';
 				params.canvasId = 'canvas';
-				params.callback = function(img, ctx) {
-					var imgData = ctx.getImageData(0, 0, img.width, img.height),
-							histogramData = obj.getHistogramData(imgData.data);
+				params.callback = function() {
+					var histogramData = obj.getHistogramData(img.imageData.data);
 					
 					$("#count").html(img.height*img.width);
 					
@@ -140,13 +139,14 @@
 					
 					
 					$( "#slider" ).slider({
-	            value:100,
-	            min: 0,
-	            max: 200,
-	            step: 10,
+	            value:50,
+	            min: 1,
+	            max: 100,
+	            step: 1,
 	            slide: function( event, ui ) {
 	                
-	                obj.ConvolutionMatrix();
+	                obj.veins(img, 'output', ui.value, 128);
+									$("#veins-value").val(ui.value);
 	                //obj.turnExposure(ui.value);
 	            }
 	        });

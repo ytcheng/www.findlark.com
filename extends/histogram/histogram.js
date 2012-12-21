@@ -6,31 +6,40 @@ var extend = function(dest, source) {
 }
 
 var imageBase = function() {
+	this.imageData = [];
+	this.height = 0;
+	this.width = 0;
+	this.img = new Image;
+
 	this.loadImg = function(params) {
-		var _this = this, img = new Image;
-		img.src = params.src;
-		img.onload = function(){
-			_this.onImageLoad(img, params);
+		var _this = this;
+		this.img.src = params.src;
+		this.img.onload = function(){
+			_this.onImageLoad(params);
 		}
 	}
 	
-	this.onImageLoad = function(img, params) {
-		var ctx = this.draw(img, params.canvasId);
-		params.callback(img, ctx);
+	this.onImageLoad = function(params) {
+		this.width = this.img.width;
+		this.height = this.img.height;
+
+		var ctx = this.draw(params.canvasId);
+		params.callback();
 	}
 	
 	// 将图片绘制到 canvas 画布
-	this.draw = function(img, canvasId) {
+	this.draw = function(canvasId) {
 		var canvas = document.getElementById(canvasId),
 				ctx = canvas.getContext('2d');
 		
-		canvas.height = img.height;
-		canvas.width = img.width;
+		canvas.height = this.height;
+		canvas.width = this.width;
 		
-		ctx.drawImage(img, 0, 0);
+		ctx.drawImage(this.img, 0, 0);
 		ctx.stroke();
 		
-		return ctx;
+		this.imageData = ctx.getImageData(0, 0, this.width, this.height);
+		this.ctx = ctx;
 	}
 }
 
@@ -148,42 +157,78 @@ histogram.prototype.turnExposure = function(n) {
 }
 
 // 利用 矩阵卷积 调整图片 RGB
-histogram.prototype.ConvolutionMatrix = function(ctx, outputCanvasId, matrix, divisor, offset) {
+histogram.prototype.ConvolutionMatrix = function(img, outputCanvasId, matrix, divisor, offset) {
 	// 创建一个输出的 imageData 对象
 	var matrix =[
+	1,0,0,
 	0,0,0,
-	0,1,0,
-	0,0,0], divisor = 1, offset = 128;
+	0,0,-1], divisor = 1, offset = 128;
 	
-	var imageData = ctx.getImageData(0, 0, this.img.width, this.img.height);
-	var w = this.img.width, h = this.img.height;
-	var iD = imageData.data, oD = imageData.data;
-	var m = matrix;
+	var w = img.width, h = img.height, m = matrix;
+	
+	var imageData = img.ctx.getImageData(0, 0, img.width, img.height), iD = imageData.data;
 	
 	// 对除了边缘的点之外的内部点的 RGB 进行操作，透明度在最后都设为 255
 	for (var y = 1; y < h-1; y += 1) {
 		for (var x = 1; x < w-1; x += 1) {
 			for (var c = 0; c < 3; c += 1) {
 				var i = (y*w + x)*4 + c;
-				oD[i] = offset
+				iD[i] = offset
 					+(m[0]*iD[i-w*4-4] + m[1]*iD[i-w*4] + m[2]*iD[i-w*4+4]
 					+ m[3]*iD[i-4]     + m[4]*iD[i]     + m[5]*iD[i+4]
 					+ m[6]*iD[i+w*4-4] + m[7]*iD[i+w*4] + m[8]*iD[i+w*4+4])
 					/ divisor;
-				oD[i] = Math.round(oD[i]);
+				iD[i] = Math.round(iD[i]);
 			}
-			oD[(y*w + x)*4 + 3] = 255; // 设置透明度
+			iD[(y*w + x)*4 + 3] = 255; // 设置透明度
 		}
 	}
 	
-	imageData.data = oD;
-	
 	var obj = document.getElementById(outputCanvasId), canvas = obj.getContext('2d');
-	obj.height = this.img.height;
-	obj.width = this.img.width;
+	obj.height = img.height;
+	obj.width = img.width;
 	
 	canvas.clearRect(0, 0, obj.width, obj.height);
-	canvas.putImageData(output, 0, 0);
+	canvas.putImageData(imageData, 0, 0);
+}
+
+// 纹理变幻
+histogram.prototype.veins = function(img, outputCanvasId, n, o) {
+	var w = img.width, h = img.height;
+	var imageData = img.ctx.getImageData(0, 0, img.width, img.height), iD = imageData.data;
+
+	n = Math.max( 1, Math.min(Math.round(n), 100) );
+	o = Math.max( -255, Math.min(Math.round(o), 255) );
+//	b = new ArrayBuffer(666000),
+	//oD = new Uint8ClampedArray(b);
+	//var output = {};
+	
+	//console.log(imageData);
+	//console.log(typeof imageData.data);
+	for(var i = 0; i < iD.length; i+=n) {
+		if((i+1)%4 == 0) ++i;
+		iD[i] = iD[i+4] - iD[i] + o;
+		iD[i] = Math.max( 0, Math.min(iD[i], 255) );
+		
+		//iD[i+1] = iD[i+4] - iD[i+1] + 127;
+		//iD[i+2] = iD[i+5] - iD[i+2] + 127;
+	}
+	
+	
+	//output.height = img.height;
+	//output.width = img.width;
+	//output.data = oD;
+	//output.data.length = iD.length;
+	//output.data.byteLength = iD.byteLength;
+	//output.data.byteOffset = iD.byteOffset;
+	
+	var obj = document.getElementById(outputCanvasId), canvas = obj.getContext('2d');
+	obj.height = img.height;
+	obj.width = img.width;
+	//console.log(output);
+	//console.log(typeof output.data);
+	canvas.clearRect(0, 0, obj.width, obj.height);
+	canvas.putImageData(imageData, 0, 0);
 }
 
 // 颜色
