@@ -9,3 +9,10 @@
 	</ul>
 </div>
 
+
+<?php
+
+echo md5('findlark-publish#');
+
+?>
+

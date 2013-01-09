@@ -1,13 +1,13 @@
 <?php
 session_start();
-if(isset($_POST['auth']) && $_POST['auth'] == '1') {
+if(isset($_POST['auth']) && md5($_POST['auth']) == '1') {
 	$_SESSION['auth'] = true;
 }
 
 if(!isset($_SESSION['auth']) || !$_SESSION['auth']) {
 	echo '
 	<form action="" method="post">
-	password：<input type="text" name="auth" value="">
+	password：<input type="text" name="auth" value="" autocomplate="off">
 	<input type="submit" value="LOGIN">
 	</form>
 	';
