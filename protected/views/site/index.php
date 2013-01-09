@@ -1,12 +1,12 @@
 <div id="header">
 	<div class="header-middle">
-		<div id="header-logo"><!--a href="/">FindLark.</a--></div>
+		<div id="header-logo"><a href="/">FindLark.</a></div>
 		<div class="header-nav" id="header-nav">
 			<ul>
-				<li class="current"><a href="/home" name="home">首页</a></li>
-				<li><a href="/blog" name="blog">博文</a></li>
-				<li><a href="http://hi.baidu.com/findlark/item/97b9dfe6a8b1a4f5fa42ba9c" name="space">空间</a></li>
-				<li><a href="/tool" name="3">工具</a></li>
+				<li class="current"><a href="/home" name="home">Lark</a></li>
+				<li><a href="/blog" name="blog">小记</a></li>
+				<li><a href="http://hi.baidu.com/findlark" name="space">空间</a></li>
+				<li><a href="/tool" name="3">扩展</a></li>
 			</ul>
 		</div>
 		<div class="current-nav" id="current-nav"></div>

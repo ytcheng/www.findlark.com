@@ -17,7 +17,10 @@
 		<canvas id="output" width="256" height="120"></canvas>
 		<br>
 		<div>
-			<div class="histogram"><canvas id="histogram" width="256" height="120"></canvas></div>
+			<div class="histogram">
+				<canvas id="histogram" width="256" height="120"></canvas>
+				<canvas id="output_histogram" width="256" height="120"></canvas>
+			</div>
 			直方图：
 			<select id="histogram_type">
 				<option value="all">颜色</option>
@@ -80,6 +83,7 @@
 		<script type="text/javascript">
 				var img = new imageBase;
 				var obj = new histogram;
+				var imgM = new imageModel;
 				//obj.imgSrc = './test.png';
 				var params = {};
 				params.src = 'test.jpg';
@@ -90,22 +94,11 @@
 					$("#count").html(img.height*img.width);
 					
 					$("#histogram_type").change(function() {
-						var val = $(this).val();
-						var k = val == 'all' ? 'rgb' : val;
-						
 						//$("#avg").html( (obj.colorCount[k]/obj.colorCount.total).toFixed(2) );
 						//$("#median").html(histogram[k]['median']);
 						//$("#deviation").html(histogram[k]['deviation']);
 						
-						clearRect = val == 'all' ? false : true;
-						switch(val) {
-							case 'all': ;
-							case 'r': obj.createHistogram(histogramData, 'r', 'red', 'histogram', clearRect); if(val != 'all') break;
-							case 'g': obj.createHistogram(histogramData, 'g', 'green', 'histogram', clearRect); if(val != 'all') break;
-							case 'b': obj.createHistogram(histogramData, 'b', 'blue', 'histogram', clearRect); break;
-							case 'gray': obj.createHistogram(histogramData, 'gray', '#111', 'histogram', clearRect); break;
-							default: obj.createHistogram(histogramData, 'rgb', '#111', 'histogram', clearRect); break;
-						}
+						obj.createHistogram(histogramData, $(this).val(), 'histogram');
 					});
 					
 					$("#histogram_type").trigger("change");
@@ -144,9 +137,10 @@
 	            max: 100,
 	            step: 1,
 	            slide: function( event, ui ) {
-	                
-	                obj.veins(img, 'output', ui.value, 128);
-									$("#veins-value").val(ui.value);
+	                var val = (ui.value-50)/100;
+	                imgM.turnL(img, 'output', val);
+	                //obj.veins(img, 'output', ui.value, 128);
+									$("#veins-value").val(val);
 	                //obj.turnExposure(ui.value);
 	            }
 	        });
@@ -164,14 +158,16 @@
 				
 				var abc = 2;
 				var color = new colorModel;
-				var rgb = {r:10, g:20, b:30};
+				var rgb = {r:244, g:242, b:231};
 				
-				var hsv = color.rgb2hsv(rgb);
-				console.log(rgb);
+				//var hsv = color.rgb2hsv(rgb);
+				//console.log(rgb);
 				var hsl = color.rgb2hsl(rgb);
 				console.log(rgb);
-				var rgb2 = color.hsv2rgb(hsv);
+				console.log(hsl);
+				//var rgb2 = color.hsv2rgb(hsv);
 				var rgb3 = color.hsl2rgb(hsl);
+				console.log(rgb3);
 			
 		</script>
 	</body>

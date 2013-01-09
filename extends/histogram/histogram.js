@@ -6,7 +6,9 @@ var extend = function(dest, source) {
 }
 
 var imageBase = function() {
-	this.imageData = [];
+	this.imageData = {};
+	this.imageHSL = [];
+	this.imageHSV = [];
 	this.height = 0;
 	this.width = 0;
 	this.img = new Image;
@@ -39,15 +41,35 @@ var imageBase = function() {
 		ctx.stroke();
 		
 		this.imageData = ctx.getImageData(0, 0, this.width, this.height);
+		var cObj = new colorModel;
+		for(var i=0; i < this.imageData.data.length; i+=4) {
+			var rgb = {r:this.imageData.data[i], g:this.imageData.data[i+1], b:this.imageData.data[i+2]};
+			this.imageHSL[i/4] = cObj.rgb2hsl(rgb);
+			this.imageHSV[i/4] = cObj.rgb2hsv(rgb);
+		}
+		//console.log(this.imageHSL);
 		this.ctx = ctx;
 	}
 }
 
-var histogram = function() {};
+var histogram = function() {
+	// 初始化直方图 数据
+	this.initData = function() {
+		var histogramData = {gray:[], r:[], g:[], b:[], rgb:[]};
+		for(var i=0; i < 256; i++) {
+			for(var k in histogramData) {
+				histogramData[k][i] = 0;
+			}
+		}
+		histogramData.count = {gray:0, r:0, g:0, b:0, rgb:0};
+		histogramData.valve = 0;
+		return histogramData;
+	}
+};
 			
 // 获取图片直方图数据
 histogram.prototype.getHistogramData = function(imgData) {
-	var len = imgData.length, histogramData = initData();
+	var len = imgData.length, histogramData = this.initData();
 	histogramData.valve = len/4/64; // 阀值，取总像素的 1/64 (参考PhotoShop)
 
 	var keys = ['gray', 'r', 'g', 'b'], k, rgb = {};
@@ -72,46 +94,53 @@ histogram.prototype.getHistogramData = function(imgData) {
 		}
 	}
 	
-	// 初始化直方图 数据
-	function initData() {
-		var histogramData = {gray:[], r:[], g:[], b:[], rgb:[]};
-		for(var i=0; i < 256; i++) {
-			for(var k in histogramData) {
-				histogramData[k][i] = 0;
-			}
-		}
-		histogramData.count = {gray:0, r:0, g:0, b:0, rgb:0};
-		return histogramData;
-	}
-	
 	return histogramData;
+}
+
+histogram.prototype.createHistogram = function(histogramData, k, canvasId) {
+	var params = {valve:histogramData.valve, color:'#333', 'canvasId':canvasId, clear:true};
+	switch(k) {
+		case 'all':
+		case 'r':
+			params.color = 'red';
+			this.create(histogramData.r, params);
+			if(k != 'all') break;
+		case 'g':
+			if(k == 'all') params.clear = false;
+			params.color = 'green'; this.create(histogramData.g, params);
+			if(k != 'all') break;
+		case 'b':
+			if(k == 'all') params.clear = false;
+			params.color = 'blue'; this.create(histogramData.b, params);
+			break;
+		case 'gray': this.create(histogramData.gray, params); break;
+		default: this.create(histogramData.rgb, params); break;
+	}
 }
 
 /**
  * 绘制直方图
- * @param Object histogramData 直方图数据
- * @param String k 键值
+ * @param Object data 直方图数据
+ * @param String valve 阀值
  * @param String color RGB颜色
  * @param String canvasId 输出画布的ID
  * @param Boolean clearRect 是否清除画布
  */
-histogram.prototype.createHistogram = function(histogramData, k, color, canvasId, clearRect) {
-	var canvas = document.getElementById(canvasId),
+histogram.prototype.create = function(data, params) {
+	var canvas = document.getElementById(params.canvasId),
 			ctx = canvas.getContext('2d'),
-			canvasHeight = canvas.height,
-			data = histogramData[k];
+			canvasHeight = canvas.height;
 	
-	if(clearRect) ctx.clearRect(0, 0, canvas.width, canvasHeight);
+	if(params.clear) ctx.clearRect(0, 0, canvas.width, canvasHeight);
 	
 	ctx.globalCompositeOperation = 'lighter';
 	ctx.beginPath();
-	ctx.strokeStyle = color;
-	ctx.fillStyle = color;
-	var i = 0;
+	ctx.strokeStyle = params.color;
+	ctx.fillStyle = params.color;
 	ctx.moveTo(0, canvasHeight);
 	for(var k in data) {
 		if(data[k] == 0 || !/^\d+$/.test(k)) continue;
-		var to = canvasHeight - Math.min(data[k], histogramData.valve) / histogramData.valve * canvasHeight;
+		var to = canvasHeight - Math.min(data[k], params.valve) / params.valve * canvasHeight;
 		ctx.lineTo(k, Math.round(to));
 	}
 	ctx.lineTo(256, canvasHeight);
@@ -192,44 +221,6 @@ histogram.prototype.ConvolutionMatrix = function(img, outputCanvasId, matrix, di
 	canvas.putImageData(imageData, 0, 0);
 }
 
-// 纹理变幻
-histogram.prototype.veins = function(img, outputCanvasId, n, o) {
-	var w = img.width, h = img.height;
-	var imageData = img.ctx.getImageData(0, 0, img.width, img.height), iD = imageData.data;
-
-	n = Math.max( 1, Math.min(Math.round(n), 100) );
-	o = Math.max( -255, Math.min(Math.round(o), 255) );
-//	b = new ArrayBuffer(666000),
-	//oD = new Uint8ClampedArray(b);
-	//var output = {};
-	
-	//console.log(imageData);
-	//console.log(typeof imageData.data);
-	for(var i = 0; i < iD.length; i+=n) {
-		if((i+1)%4 == 0) ++i;
-		iD[i] = iD[i+4] - iD[i] + o;
-		iD[i] = Math.max( 0, Math.min(iD[i], 255) );
-		
-		//iD[i+1] = iD[i+4] - iD[i+1] + 127;
-		//iD[i+2] = iD[i+5] - iD[i+2] + 127;
-	}
-	
-	
-	//output.height = img.height;
-	//output.width = img.width;
-	//output.data = oD;
-	//output.data.length = iD.length;
-	//output.data.byteLength = iD.byteLength;
-	//output.data.byteOffset = iD.byteOffset;
-	
-	var obj = document.getElementById(outputCanvasId), canvas = obj.getContext('2d');
-	obj.height = img.height;
-	obj.width = img.width;
-	//console.log(output);
-	//console.log(typeof output.data);
-	canvas.clearRect(0, 0, obj.width, obj.height);
-	canvas.putImageData(imageData, 0, 0);
-}
 
 // 颜色
 var colorModel = function() {
@@ -251,7 +242,7 @@ var colorModel = function() {
 		hsl.h = this.calculateH(rgb);
 		hsl.l = (rgb.max+rgb.min)/2;
 		
-		if(hsv.l == 0 || rgb.poor == 0) hsl.s = 0;
+		if(hsl.l == 0 || rgb.poor == 0) hsl.s = 0;
 		else if(hsl.l > 0 && hsl.l <= 0.5) hsl.s = rgb.poor/2/hsl.l;
 		else if(hsl.l > 0.5) hsl.s = rgb.poor/(2-2*hsl.l);
 			
@@ -312,7 +303,7 @@ var colorModel = function() {
 		
 		if(rgb.poor == 0) h = 0;
 		else if(rgb.max == rgb.r) {
-			h = 60*(g-b)/poor;
+			h = 60*(rgb.g-rgb.b)/rgb.poor;
 			if(rgb.g < rgb.b) h += 360;
 		}
 		else if(rgb.max == rgb.g) h = 60*(rgb.b-rgb.r)/rgb.poor + 120;
@@ -343,4 +334,76 @@ var colorModel = function() {
 		}
 		return iRGB;
 	}
+}
+
+var imageModel = function() {
+	
+	this.outputImage = function(imageData, canvasId) {
+		var obj = document.getElementById(canvasId), canvas = obj.getContext('2d');
+		obj.height = imageData.height;
+		obj.width = imageData.width;
+		canvas.clearRect(0, 0, obj.width, obj.height);
+		canvas.putImageData(imageData, 0, 0);
+	}
+	
+	// 纹理变幻
+	this.veins = function(img, outputCanvasId, n, o) {
+		var imageData = img.ctx.getImageData(0, 0, img.width, img.height), iD = imageData.data;
+	
+		n = Math.max( 1, Math.min(Math.round(n), 100) );
+		o = Math.max( -255, Math.min(Math.round(o), 255) );
+		//	b = new ArrayBuffer(666000),
+		//oD = new Uint8ClampedArray(b);
+		//var output = {};
+		
+		//console.log(imageData);
+		//console.log(typeof imageData.data);
+		for(var i = 0; i < iD.length; i+=n) {
+			if((i+1)%4 == 0) ++i;
+			iD[i] = iD[i+4] - iD[i] + o;
+			iD[i] = Math.max( 0, Math.min(iD[i], 255) );
+			
+			//iD[i+1] = iD[i+4] - iD[i+1] + 127;
+			//iD[i+2] = iD[i+5] - iD[i+2] + 127;
+		}
+		
+		//output.height = img.height;
+		//output.width = img.width;
+		//output.data = oD;
+		//output.data.length = iD.length;
+		//output.data.byteLength = iD.byteLength;
+		//output.data.byteOffset = iD.byteOffset;
+		
+		this.outputImage(outputCanvasId, imageData);
+	}
+	
+	this.turnL = function(img, outputCanvasId, o) {
+		var imageData = img.ctx.getImageData(0, 0, img.width, img.height), iD = imageData.data;
+		var cObj = new colorModel;
+		var his = new histogram;
+		
+		var date = new Date;
+		console.log(date.getTime());
+		for(var i = 0; i < iD.length; i+=4) {
+			var hsl = {};
+			hsl.h = img.imageHSL[i/4].h;
+			hsl.s = img.imageHSL[i/4].s;
+			hsl.l = img.imageHSL[i/4].l;
+			
+			hsl.s += o;
+			hsl.s = Math.max(0, Math.min(hsl.s, 1));
+			rgb = cObj.hsl2rgb(hsl);
+			iD[i] = rgb.r;
+			iD[i+1] = rgb.g;
+			iD[i+2] = rgb.b;
+		}
+		var date = new Date;
+		console.log(date.getTime());
+		
+		var histogramData = his.getHistogramData(imageData.data);
+		his.createHistogram(histogramData, 'all', 'output_histogram');
+		this.outputImage(imageData, outputCanvasId);
+	}
+	
+	
 }

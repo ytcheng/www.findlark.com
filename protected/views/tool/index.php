@@ -1,17 +1,11 @@
-<?php if(Yii::app()->session->get('auth')) { ?>
-	<form action="/tool" method="post" enctype="multipart/form-data">
-		文件: <input type="file" name="file"><br>
-		标题：<input type="text" name="title" value="test gallery"><br>
-		
-		<input type="submit" value="提交">
-	</form>
-<?php } ?>
-<div>
+<div class="extends_list">
+	<ul>
 	<?php
 	$list = LarkExtends::model()->findAll();
-	foreach($list as $item) {
-		printf('<a href="/extends/%s">%s</a><br>', $item->path, $item->title);
+	foreach($list as $key => $item) {
+		printf('<li><a href="/extends/%s">%d. %s</a></li>', $item->path, $key+1, $item->title);
 	}
 	?>
+	</ul>
 </div>
 
