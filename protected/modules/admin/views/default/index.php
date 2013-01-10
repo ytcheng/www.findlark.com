@@ -10,6 +10,6 @@
 
 <br>
 <div>
-	<a href="/admin/image/add">增加图片</a>
+	<a href="/admin/image/index">增加图片</a>
 	
 </div>
