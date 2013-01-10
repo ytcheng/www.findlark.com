@@ -70,8 +70,6 @@
 		var winHeight = $(window).height(), winWidth = $(window).width();
 		$("#google_map").css({"height":winHeight+"px"});
 		
-		//var map = new google.maps.Map(document.getElementById("google_map"));
-		
 		try{
 			navigator.geolocation.getCurrentPosition(_location, _error);
 		}catch(e) {
@@ -95,18 +93,17 @@
 				$("#image_list a:eq(0)").trigger("click");
 			}, 'json');
 			
-			//var imgSrc = $(this).find("img").attr("src");
-			//imgSrc = imgSrc.replace("/small/", "/large/");
-			//$(this).attr("href", imgSrc);
-			//$.fancybox(this);
-			//http://static.panoramio.com/photos/large/84519434.jpg
-			//alert($(this).html());
-			
 			return false;
 		});
 	});
 
 </script>
 <div id="image_list" style="display:none"></div>
+<div style="display:none">
+	<script type="text/javascript">
+		var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+		document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F94f327e06e5b39be23fa5d95315a897f' type='text/javascript'%3E%3C/script%3E"));
+	</script><script src=" http://hm.baidu.com/h.js?94f327e06e5b39be23fa5d95315a897f" type="text/javascript"></script><a href="http://tongji.baidu.com/hm-web/welcome/ico?s=94f327e06e5b39be23fa5d95315a897f" target="_blank"><img border="0" src="http://eiv.baidu.com/hmt/icon/21.gif" width="20" height="20"></a>
+</div>
 </body>
 </html>
