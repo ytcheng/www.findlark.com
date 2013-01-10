@@ -15,4 +15,12 @@ class SiteController extends Controller {
 		    	//$this->render('error', $error);
 		}
 	}
+	
+	public function actionImage($pid) {
+		$data = LarkImage::model()->findAll('panoramio_id='.intval($pid));
+		
+		echo CJSON::encode($data);
+		Yii::app()->end();
+		//$this->render('image', array('data'=>$data));
+	}
 }

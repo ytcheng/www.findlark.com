@@ -7,11 +7,9 @@
 		
 		<link rel="stylesheet" type="text/css" href="/static/css/public.css">
 		<link rel="stylesheet" type="text/css" href="/static/css/<?php echo $this->id;?>.css">
-		<link rel="stylesheet" type="text/css" href="/static/css/colorbox.css">
 		
 		<script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="/static/js/jquery.masonry.js"></script>
-		<script type="text/javascript" src="/static/js/jquery.colorbox-min.js"></script>
 	</head>
 	<body>
 		<?php echo $content;?>
