@@ -7,3 +7,9 @@
 		<input type="submit" value="提交">
 	</form>
 </div>
+
+<br>
+<div>
+	<a href="/admin/image/add">增加图片</a>
+	
+</div>
