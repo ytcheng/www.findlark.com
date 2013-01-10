@@ -15,12 +15,16 @@
 
 	function _error(err) {
 		console.log(err);
+		
+		showMap();
 	}
 
 	function _location(p) {
 		console.log(p);
 		position.latitude = p.coords.latitude;
 		position.longitude = p.coords.longitude;
+		
+		showMap();
 	}
 
 	function showMap() {
@@ -73,9 +77,8 @@
 		try{
 			navigator.geolocation.getCurrentPosition(_location, _error);
 		}catch(e) {
-			
+			showMap();
 		}
-		showMap();
 
 		$("#info_window_div a.thumb_image").live("click", function() {
 			$.get($(this).attr("href"), {}, function(data) {
