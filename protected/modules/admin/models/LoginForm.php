@@ -6,7 +6,7 @@ class LoginForm extends CFormModel
 {
 	public $password;
 
-	private $_identity;
+	private $_identity=null;
 
 	public function rules()
 	{
