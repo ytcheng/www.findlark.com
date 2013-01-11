@@ -20,7 +20,12 @@ class SiteController extends Controller {
 		$data = LarkImage::model()->findAll('panoramio_id='.intval($pid));
 		
 		echo CJSON::encode($data);
-		Yii::app()->end();
 		//$this->render('image', array('data'=>$data));
+	}
+	
+	public function actionMark() {
+		$data = LarkMark::model()->findAll("1 limit 100");
+		
+		echo CJSON::encode($data);
 	}
 }

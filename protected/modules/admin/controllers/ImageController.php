@@ -1,14 +1,14 @@
 <?php
-class ImageController extends Controller {
+class ImageController extends AdminController {
 	
 	public function actionIndex() {
-		$data = LarkImage::model()->getList();
+		$data = $this->getList(LarkImage::model());
 		
 		$this->render('index', array('data'=>$data));
 	}
 	
+	// 添加外链图片
 	public function actionAdd() {
-		
 		$request = Yii::app()->request;
 		if($request->isPostRequest) {
 			$model = LarkImage::model();
@@ -23,6 +23,32 @@ class ImageController extends Controller {
 		$this->render('add');
 	}
 	
+	// 上传图片
+	public function actionUpload() {
+		$request = Yii::app()->request;
+		if(!$request->isPostRequest) Yii::app()->end();
+		
+		$image = $_FILES['image'];
+		if($image['error'] == 0) {
+			
+			$panoramio_id = $request->getParam('panoramio_id');
+			$imgModel = ImageGD2_::model();
+			$info = $imgModel->uploadImage($image, $panoramio_id);
+			
+			$model = LarkImage::model();
+			$model->title = $request->getParam('title');
+			$model->panoramio_id = $panoramio_id;
+			$model->src = preg_replace("#^.*?/upload/(.*?)$#", '/upload/$1', $info['path']);
+			$model->id = null;
+			$model->isNewRecord = true;
+			
+			$model->save() ? $this->_end(0, '上传成功!') : $this->_end(1, $this->getModelFirstError($model));
+		} else {
+			$this->_end(1, '文件上传错误!');
+		}
+	}
+	
+	// 删除
 	public function actionDel($id) {
 		LarkImage::model()->deleteByPk($id);
 		$this->redirect('/admin/image/index');

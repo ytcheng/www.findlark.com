@@ -45,4 +45,22 @@ class Controller extends CController
 			default: break;
 		}
 	}
+	
+	// end
+	public function _end($error = 0, $msg = 'success!', $params = array()) {
+		$arr = array('error'=>$error, 'msg'=>$msg, 'params'=>$params);
+		echo CJSON::encode($arr);
+		Yii::app()->end();
+	}
+	
+	// 获取 Model 错误信息中的 第一条， 无错误时 返回 null
+	public function getModelFirstError($model) {
+		$errors = $model->getErrors();
+		if(!is_array($errors)) return '';
+		
+		$firstError = array_shift($errors);
+		if(!is_array($firstError)) return '';
+		
+		return array_shift($firstError);
+	}
 }

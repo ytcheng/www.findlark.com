@@ -16,6 +16,7 @@
 		panoramio:<input type="text" name="panoramio_id" value="<?php echo $data['filter']['panoramio_id'];?>">
 		
 		<input type="submit" value="查询">
+		<a href="/admin/image/add">上传</a>
 	</form>
 </div>
 <table>

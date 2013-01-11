@@ -3,7 +3,7 @@
 		<div id="header-logo"><a href="/">FindLark.</a></div>
 		<div class="header-nav" id="header-nav">
 			<ul>
-				<li class="current"><a href="/extends/google_map/" name="home">Lark</a></li>
+				<li class="current"><a href="/home" name="home">Lark</a></li>
 				<li><a href="/blog" name="blog">小记</a></li>
 				<li><a href="http://hi.baidu.com/findlark" name="space">空间</a></li>
 				<li><a href="/tool" name="3">扩展</a></li>
@@ -18,7 +18,6 @@
 
 <!--Main-//-->
 <div class="main" id="main"><iframe src="" id="content" class="content" frameborder="no" border="0" scrolling="yes" allowTransparency="true"></iframe></div>
-
 
 <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="/static/js/index.js"></script>
