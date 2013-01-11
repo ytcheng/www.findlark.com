@@ -5,4 +5,11 @@
 <div id="google_map" style="height:90%; width:100%"></div>
 
 <div id="image_list" style="display:none"></div>
+<div id="input_speak" class="input_speak">
+	经度：<input type="text" name="longitude" value=""><br>
+	纬度：<input type="text" name="latitude" value=""><br>
+	标题：<input type="text" name="title" value=""><br>
+	内容：<input type="text" name="content" value="">
+	<input type="submit" value="提交" id="submit_speak">
+</div>
 <script type="text/javascript" src="/static/js/home.js"></script>

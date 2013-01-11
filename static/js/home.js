@@ -83,8 +83,9 @@ function createImageHtml(data) {
 
 // 地图加载完成之后
 function afterMapLoad() {
-	
-	loadMark();
+	setTimeout(function() {
+		loadMark();
+	}, 500);
 }
 
 // 加载标记
@@ -100,18 +101,34 @@ function addMark(data) {
 	var myLatlng = new google.maps.LatLng(parseFloat(data.latitude), parseFloat(data.longitude));
 	//var myLatlng = new google.maps.LatLng(31.1, 111.1);
 	
+	var contentString = '<h3>'+data.title+'</h3>'
+		+ data.content
+		+ '<div class="speak"><a href="javascript:;">我也说两句</a></div>';
+		
 	var infowindow = new google.maps.InfoWindow({
-    content: data.content
+    content: contentString
 	});
 	
 	var marker = new google.maps.Marker({
-	    position: myLatlng,
-	    map: map,
-	    title: data.title
+		title: data.title,
+		position: myLatlng,
+		map: map,
+		animation: google.maps.Animation.DROP
 	});
 	
+	// 标记点击事件
 	google.maps.event.addListener(marker, 'click', function() {
-	  infowindow.open(map, marker);
+		infowindow.open(map, marker);
+		setTimeout(function() {
+			infowindow.close();
+		}, 9000);
+	  
+	  if(marker.getAnimation() == null) {
+	    marker.setAnimation(google.maps.Animation.BOUNCE);
+	    setTimeout(function() {
+	    	marker.setAnimation(null);
+	    }, 2000);
+	  }
 	});
 	
 	console.log(data);
@@ -131,5 +148,37 @@ $(function() {
 	$("#info_window_div a.thumb_image").live("click", function() {
 		$("#image_list a:eq(0)").trigger("click");
 		return false;
+	});
+	
+	// 显示我要说
+	$("div.speak a").live("click", function() {
+		var obj = $("#input_speak"), h = obj.height(), w = obj.width(), l = (winWidth-w) / 2;
+		
+		if(obj.is(":hidden")) {
+			obj.css({"top":(h*-1 - 2)+"px", "left":l+"px"}).show().animate({"top":"0px"}, 300);
+			
+			$("input[name=latitude]").val(position.latitude);
+			$("input[name=longitude]").val(position.longitude);
+		}
+		
+		return false;
+	});
+	
+	// 提交我要说
+	$("#submit_speak").click(function() {
+		var speak = {};
+		speak.latitude = $("input[name=latitude]").val();
+		speak.longitude = $("input[name=longitude]").val();
+		speak.content = $.trim( $("input[name=content]").val() ) ;
+		speak.title = $.trim( $("input[name=title]").val() );
+		
+		if(speak.title == '' || speak.content == '') return;
+		
+		addMark(speak);
+		
+		var obj = $("#input_speak"), h = obj.height();
+		obj.animate({"top":(h*-1 - 2)+"px"}, 300, function() {
+			$(this).hide()
+		});
 	});
 });
