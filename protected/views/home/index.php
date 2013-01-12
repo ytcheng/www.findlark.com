@@ -12,5 +12,5 @@
 	内容：<input type="text" name="content" value="">
 	<input type="submit" value="提交" id="submit_speak"> <input type="submit" value="取消" id="cancel_speak">
 </div>
-<script src="/static/js/socket.io/dist/socket.io.js"></script>
+<script src="/static/js/socket.io/socket.io.js"></script>
 <script type="text/javascript" src="/static/js/home.js"></script>
