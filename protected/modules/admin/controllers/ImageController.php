@@ -54,4 +54,23 @@ class ImageController extends AdminController {
 		$this->redirect('/admin/image/index');
 	}
 	
+	public function actionModify($id) {
+		$data = LarkImage::model()->findByPk($id);
+		if(empty($data)) {
+			echo 'error';
+			Yii::app()->end();
+		}
+		$request = Yii::app()->request;
+		if($request->isPostRequest) {
+			$data->title = $request->getPost("title");
+			$data->panoramio_id = $request->getPost("panoramio_id");
+			
+			$data->save();
+			$this->redirect('/admin/image/index');
+		}
+		
+		$this->render('modify', array('data'=>$data));
+		
+	}
+	
 }

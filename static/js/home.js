@@ -1,6 +1,8 @@
-var position = {latitude: 31.1, longitude:104.3}, mapZoom = 5;
-var map; // google map 对象
-var socket;
+var position = {latitude: 31.1, longitude:104.3},
+		mapZoom = 5, // zoom 默认值
+		map, // google map 对象
+		infoWindownLifeTime = 8000, // marker infoWindow 最大显示时间 (ms)
+		socket;
 
 function _error(err) {
 	console.log(err);
@@ -8,10 +10,8 @@ function _error(err) {
 }
 
 function _location(p) {
-	console.log(p);
 	position.latitude = p.coords.latitude;
 	position.longitude = p.coords.longitude;
-	console.log(p);
 	mapZoom = 8;
 	showMap();
 }
@@ -50,8 +50,8 @@ function showMap() {
 	});
 	
 	google.maps.event.addListener(map, 'click', function(event) {
-    console.log(event);
-  });
+		//console.log(event);
+	});
 	
 	createDragMark(markLatlng);
 	afterMapLoad();
@@ -103,6 +103,11 @@ function loadMark() {
 
 // 在地图上 添加一个标记
 function addMark(data) {
+	if(data.latitude==0 || data.longitude==0) {
+		var center = getCenterLatlng();
+		data.latitude = center.Ya;
+		data.longitude= center.Za;
+	}
 	var markLatlng = new google.maps.LatLng(parseFloat(data.latitude), parseFloat(data.longitude));
 	
 	var contentString = '<div class="mark_content"><h3>'+data.title+'</h3>'
@@ -112,7 +117,7 @@ function addMark(data) {
 	var infowindow = new google.maps.InfoWindow({
 		content: contentString
 	});
-	
+
 	var marker = new google.maps.Marker({
 		title: data.title,
 		position: markLatlng,
@@ -125,7 +130,7 @@ function addMark(data) {
 		infowindow.open(map, marker);
 		setTimeout(function() {
 			infowindow.close();
-		}, 9000);
+		}, infoWindownLifeTime);
 	  
 	  if(marker.getAnimation() == null) {
 	    marker.setAnimation(google.maps.Animation.BOUNCE);
@@ -141,7 +146,9 @@ function addMark(data) {
 }
 
 // 添加一个 临时 可拖动的 的标记
-var dragMark = null, dragEndCallback = function(event){}, dragMarkInfoWindow = null;
+var dragMark = null,
+		dragEndCallback = function(event){},
+		dragMarkInfoWindow = null;
 function createDragMark(markLatlng) {
 	dragMark = new google.maps.Marker({
 		title: 'Mark!',
@@ -160,33 +167,40 @@ function createDragMark(markLatlng) {
 
 // 显示 dragMark
 function showDragMark(title, callback) {
-	var center = map.getCenter(),
-			markLatlng = new google.maps.LatLng(parseFloat(center.Ya), parseFloat(center.Za));
-	dragMarkInfoWindow = new google.maps.InfoWindow({
-		content: title
-	});
+	var center = getCenterLatlng();
 			
 	dragEndCallback = callback;
 	dragMark.setOptions({
 		//title: title,
-		position: markLatlng,
+		position: center.latlng,
 		visible: true
 	});
 	
 	$("input[name=latitude]").val(center.Ya);
 	$("input[name=longitude]").val(center.Za);
+	
+	dragMarkInfoWindow = new google.maps.InfoWindow({
+		content: title
+	});
 	dragMarkInfoWindow.open(map, dragMark);
 }
+
+function getCenterLatlng() {
+	var center = map.getCenter(),
+			Latlng = new google.maps.LatLng(parseFloat(center.Ya), parseFloat(center.Za));
+	return {Ya:center.Ya, Za:center.Za, latlng:Latlng};
+}
+
 // 隐藏 dragMark
 function hideDragMark() {
+	if(dragMarkInfoWindow != null) {
+		dragMarkInfoWindow.close();
+		dragMarkInfoWindow = null;
+	}	
+
 	dragMark.setOptions({
 		visible: false
 	});
-	
-	if(dragMarkInfoWindow) {
-		dragMarkInfoWindow.close();
-		dragMarkInfoWindow = null;
-	}
 }
 
 function sendSpeak() {

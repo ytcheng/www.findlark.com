@@ -34,7 +34,10 @@
 			<td><?php echo $item->title;?></td>
 			<td><a href="http://www.panoramio.com/photo/<?php echo $item->panoramio_id;?>" target="_blank"><?php echo $item->panoramio_id;?></a></td>
 			<td><a href="<?php echo $item->src;?>" rel="image"><?php echo $item->src;?></a></td>
-			<td><a href="/admin/image/del/id/<?php echo $item->id;?>">删除</a></td>
+			<td>
+				<a href="/admin/image/modify/id/<?php echo $item->id;?>">编辑</a>
+				<a href="/admin/image/del/id/<?php echo $item->id;?>">删除</a>
+			</td>
 		</tr>
 		<?php } ?>
 	</tbody>
