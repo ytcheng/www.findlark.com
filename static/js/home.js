@@ -82,14 +82,14 @@ function createImageHtml(data) {
 
 // 地图加载完成之后
 function afterMapLoad() {
-	socket = io.connect('http://192.168.137.105');
-  socket.on('news', function (data) {
+	socket = io.connect(socketConnectString);
+	socket.on('news', function (data) {
 		addMark(data);
-  });
+	});
 	
 	socket.on('firstNews', function (data) {
 		
-  });
+	});
 }
 
 // 加载标记（已用 socket.io 代替）
