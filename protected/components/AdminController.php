@@ -67,9 +67,4 @@ class AdminController extends Controller {
 		if(( $a === '' || $a === null) && ($b === '' || $b === null)) return true;
 		return false;
 	}
-	
-	protected function checkAjaxRequest() {
-		if(Yii::app()->request->isAjaxRequest) return true;
-		Yii::app()->end();
-	}
 }

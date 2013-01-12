@@ -63,4 +63,9 @@ class Controller extends CController
 		
 		return array_shift($firstError);
 	}
+	
+	protected function checkAjaxRequest() {
+		if(Yii::app()->request->isAjaxRequest) return true;
+		Yii::app()->end();
+	}
 }

@@ -61,6 +61,13 @@ return array(
 			'password' => 'fx1989',
 			'charset' => 'utf8',
 		),
+		
+		'redis'=>array(
+			'class'=>'URedis',
+			'host'=>'192.168.137.105',
+			'port'=>'6379'
+		),
+		
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
             'errorAction'=>'site/error',

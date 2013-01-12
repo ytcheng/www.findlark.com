@@ -10,6 +10,7 @@
 	纬度：<input type="text" name="latitude" value=""><br>
 	标题：<input type="text" name="title" value=""><br>
 	内容：<input type="text" name="content" value="">
-	<input type="submit" value="提交" id="submit_speak">
+	<input type="submit" value="提交" id="submit_speak"> <input type="submit" value="取消" id="cancel_speak">
 </div>
+<script src="/static/js/socket.io/dist/socket.io.js"></script>
 <script type="text/javascript" src="/static/js/home.js"></script>

@@ -1,5 +1,6 @@
 var position = {latitude: 31.1, longitude:104.3}, mapZoom = 5;
 var map; // google map 对象
+var socket;
 
 function _error(err) {
 	console.log(err);
@@ -10,27 +11,24 @@ function _location(p) {
 	console.log(p);
 	position.latitude = p.coords.latitude;
 	position.longitude = p.coords.longitude;
-	
+	console.log(p);
 	mapZoom = 8;
 	showMap();
 }
 
 function showMap() {
-	var mapTypes = ['ROADMAP', 'SATELLITE', 'HYBRID', 'TERRAIN'];
-	
+	var mapTypes = ['ROADMAP', 'SATELLITE', 'HYBRID', 'TERRAIN'],
+			markLatlng = new google.maps.LatLng(parseFloat(position.latitude), parseFloat(position.longitude));
 	var mapOptions = {
-		center: new google.maps.LatLng(parseFloat(position.latitude), parseFloat(position.longitude)),
+		center: markLatlng,
 		zoom: mapZoom,
-		//mapTypeId: google.maps.MapTypeId.HYBRID
 		mapTypeId: google.maps.MapTypeId[mapTypes[3]]
 	};
 	map = new google.maps.Map(document.getElementById("google_map"), mapOptions);
 	
 	var panoramioLayer = new google.maps.panoramio.PanoramioLayer();
 	panoramioLayer.setUserId('7046414');
-	//panoramioLayer.setUserId(46655109);
 	//panoramioLayer.setTag('摄影');
-	
 	//panoramioLayer.setOptions({suppressInfoWindows:true});
 	panoramioLayer.setMap(map);
 	
@@ -55,6 +53,7 @@ function showMap() {
     console.log(event);
   });
 	
+	createDragMark(markLatlng);
 	afterMapLoad();
 }
 
@@ -83,12 +82,17 @@ function createImageHtml(data) {
 
 // 地图加载完成之后
 function afterMapLoad() {
-	setTimeout(function() {
-		loadMark();
-	}, 500);
+	socket = io.connect('http://192.168.137.105');
+  socket.on('news', function (data) {
+		addMark(data);
+  });
+	
+	socket.on('firstNews', function (data) {
+		
+  });
 }
 
-// 加载标记
+// 加载标记（已用 socket.io 代替）
 function loadMark() {
 	$.get('/site/mark', {}, function(data) {
 		for(var i in data) {
@@ -97,21 +101,21 @@ function loadMark() {
 	}, 'json');
 }
 
+// 在地图上 添加一个标记
 function addMark(data) {
-	var myLatlng = new google.maps.LatLng(parseFloat(data.latitude), parseFloat(data.longitude));
-	//var myLatlng = new google.maps.LatLng(31.1, 111.1);
+	var markLatlng = new google.maps.LatLng(parseFloat(data.latitude), parseFloat(data.longitude));
 	
-	var contentString = '<h3>'+data.title+'</h3>'
+	var contentString = '<div class="mark_content"><h3>'+data.title+'</h3>'
 		+ data.content
-		+ '<div class="speak"><a href="javascript:;">我也说两句</a></div>';
+		+ '</div><div class="speak"><a href="javascript:;">我也说两句</a></div>';
 		
 	var infowindow = new google.maps.InfoWindow({
-    content: contentString
+		content: contentString
 	});
 	
 	var marker = new google.maps.Marker({
 		title: data.title,
-		position: myLatlng,
+		position: markLatlng,
 		map: map,
 		animation: google.maps.Animation.DROP
 	});
@@ -131,7 +135,76 @@ function addMark(data) {
 	  }
 	});
 	
-	console.log(data);
+	setTimeout(function() {
+		google.maps.event.trigger(marker, 'click');
+	}, 500);
+}
+
+// 添加一个 临时 可拖动的 的标记
+var dragMark = null, dragEndCallback = function(event){}, dragMarkInfoWindow = null;
+function createDragMark(markLatlng) {
+	dragMark = new google.maps.Marker({
+		title: 'Mark!',
+		position: markLatlng,
+		map: map,
+		draggable: true,
+		visible: false,
+		animation: google.maps.Animation.DROP
+	});
+		
+	google.maps.event.addListener(dragMark, 'dragend', function(event) {
+		console.log(event)
+		dragEndCallback(event);
+	});
+}
+
+// 显示 dragMark
+function showDragMark(title, callback) {
+	var center = map.getCenter(),
+			markLatlng = new google.maps.LatLng(parseFloat(center.Ya), parseFloat(center.Za));
+	dragMarkInfoWindow = new google.maps.InfoWindow({
+		content: title
+	});
+			
+	dragEndCallback = callback;
+	dragMark.setOptions({
+		//title: title,
+		position: markLatlng,
+		visible: true
+	});
+	
+	$("input[name=latitude]").val(center.Ya);
+	$("input[name=longitude]").val(center.Za);
+	dragMarkInfoWindow.open(map, dragMark);
+}
+// 隐藏 dragMark
+function hideDragMark() {
+	dragMark.setOptions({
+		visible: false
+	});
+	
+	if(dragMarkInfoWindow) {
+		dragMarkInfoWindow.close();
+		dragMarkInfoWindow = null;
+	}
+}
+
+function sendSpeak() {
+	var speak = {};
+	speak.latitude = $("input[name=latitude]").val();
+	speak.longitude = $("input[name=longitude]").val();
+	speak.content = $.trim( $("input[name=content]").val() ) ;
+	speak.title = $.trim( $("input[name=title]").val() );
+
+	if(speak.title == '' || speak.content == '') return;
+	
+	$.post("/site/speak", speak, function(data) {
+		if(data.error == 0) {
+			$("#cancel_speak").trigger("click");
+		} else {
+			alert(data.msg);
+		}
+	}, 'json');
 }
 
 $(function() {
@@ -139,9 +212,10 @@ $(function() {
 	$("#google_map").css({"height":winHeight+"px"});
 	
 	try{
-		var r = navigator.geolocation.getCurrentPosition(_location, _error);
-		console.log(r);
+		navigator.geolocation.getCurrentPosition(_location, _error);
 	}catch(e) {
+		console.log('position exception:');
+		console.log(e);
 		showMap();
 	}
 
@@ -152,13 +226,15 @@ $(function() {
 	
 	// 显示我要说
 	$("div.speak a").live("click", function() {
-		var obj = $("#input_speak"), h = obj.height(), w = obj.width(), l = (winWidth-w) / 2;
+		var obj = $("#input_speak"), h = obj.height(), w = obj.width(), l = (winWidth-w-2) / 1;
 		
 		if(obj.is(":hidden")) {
 			obj.css({"top":(h*-1 - 2)+"px", "left":l+"px"}).show().animate({"top":"0px"}, 300);
 			
-			$("input[name=latitude]").val(position.latitude);
-			$("input[name=longitude]").val(position.longitude);
+			showDragMark('<div style="color:#E93D12; margin-top:10px;">你将在这里说话，<br>想改变位置吗？只需要托我过去~</div>', function(e){
+				$("input[name=latitude]").val(e.latLng.Ya);
+				$("input[name=longitude]").val(e.latLng.Za);
+			});
 		}
 		
 		return false;
@@ -166,19 +242,22 @@ $(function() {
 	
 	// 提交我要说
 	$("#submit_speak").click(function() {
-		var speak = {};
-		speak.latitude = $("input[name=latitude]").val();
-		speak.longitude = $("input[name=longitude]").val();
-		speak.content = $.trim( $("input[name=content]").val() ) ;
-		speak.title = $.trim( $("input[name=title]").val() );
-		
-		if(speak.title == '' || speak.content == '') return;
-		
-		addMark(speak);
+		sendSpeak();
+		return false;
+	});
+	
+	// 取消
+	$("#cancel_speak").click(function() {
+		hideDragMark();
 		
 		var obj = $("#input_speak"), h = obj.height();
 		obj.animate({"top":(h*-1 - 2)+"px"}, 300, function() {
-			$(this).hide()
+			$(this).hide();
 		});
+	});
+	
+	$("div.mark_content a").live("click", function() {
+		$(this).attr("target", "_blank");
+		return true;
 	});
 });
