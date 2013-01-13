@@ -27,13 +27,21 @@ class SiteController extends Controller {
 		$this->checkAjaxRequest();
 		$request = Yii::app()->request;
 		$params = array(
-			'title'=> $request->getParam('title'),
+			'author'=> mb_substr( $request->getParam('author'), 0, 20, 'utf-8' ),
+			'title'=> mb_substr( $request->getParam('title'), 0, 100, 'utf-8' ),
 			'content'=> $request->getParam('content'),
 			'latitude'=> $request->getParam('latitude'),
-			'longitude'=> $request->getParam('longitude')
+			'longitude'=> $request->getParam('longitude'),
+			'timeline'=> time()
 		);
 		
 		$params = array_map(array($this, 'filter'), $params);
+		
+		$model = LarkMark::model();
+		$model->attributes = $params;
+		$model->id = null;
+		$model->isNewRecord = true;
+		$model->save();
 		
 		$redisKey = 'findlark_msg';
 		$r = Yii::app()->redis->lpush($redisKey, CJSON::encode($params));
@@ -41,7 +49,7 @@ class SiteController extends Controller {
 	}
 	
 	public function actionMark() {
-		$data = LarkMark::model()->findAll("1 limit 100");
+		$data = LarkMark::model()->getDayMarks();
 		
 		echo CJSON::encode($data);
 	}

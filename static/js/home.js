@@ -2,23 +2,27 @@ var position = {latitude: 31.1, longitude:104.3},
 		mapZoom = 5, // zoom 默认值
 		map, // google map 对象
 		infoWindownLifeTime = 8000, // marker infoWindow 最大显示时间 (ms)
-		socket;
+		socket,
+		getPositionSuccess = false,
+		helloIsSay = false;
 
 function _error(err) {
 	console.log(err);
+	getPositionSuccess = false;
 	showMap();
 }
 
 function _location(p) {
 	position.latitude = p.coords.latitude;
 	position.longitude = p.coords.longitude;
+	getPositionSuccess = true;
 	mapZoom = 8;
 	showMap();
 }
 
 function showMap() {
-	var mapTypes = ['ROADMAP', 'SATELLITE', 'HYBRID', 'TERRAIN'],
-			markLatlng = new google.maps.LatLng(parseFloat(position.latitude), parseFloat(position.longitude));
+	var mapTypes = ['ROADMAP', 'SATELLITE', 'HYBRID', 'TERRAIN'];
+	var markLatlng = new google.maps.LatLng(parseFloat(position.latitude), parseFloat(position.longitude));
 	var mapOptions = {
 		center: markLatlng,
 		zoom: mapZoom,
@@ -84,19 +88,27 @@ function createImageHtml(data) {
 function afterMapLoad() {
 	socket = io.connect(socketConnectString);
 	socket.on('news', function (data) {
-		addMark(data);
+		if(helloIsSay == false) {
+			addMark(data);
+			helloIsSay = true;
+		}
 	});
 	
 	socket.on('firstNews', function (data) {
 		
 	});
+	
+	loadMark();
 }
 
-// 加载标记（已用 socket.io 代替）
+// 加载标记
 function loadMark() {
 	$.get('/site/mark', {}, function(data) {
+		var c = 0;
 		for(var i in data) {
-			addMark(data[i]);
+			setTimeout(function() {
+				addMark(data[i]);
+			}, Math.floor(c/30)*200);
 		}
 	}, 'json');
 }
@@ -141,7 +153,7 @@ function addMark(data) {
 	});
 	
 	setTimeout(function() {
-		google.maps.event.trigger(marker, 'click');
+		// google.maps.event.trigger(marker, 'click');
 	}, 500);
 }
 
@@ -186,8 +198,13 @@ function showDragMark(title, callback) {
 }
 
 function getCenterLatlng() {
-	var center = map.getCenter(),
-			Latlng = new google.maps.LatLng(parseFloat(center.Ya), parseFloat(center.Za));
+	var center = map.getCenter();
+	if(getPositionSuccess == true) {
+		center.Ya = position.latitude;
+		center.Za = position.longitude;
+	}
+
+	var Latlng = new google.maps.LatLng(parseFloat(center.Ya), parseFloat(center.Za));
 	return {Ya:center.Ya, Za:center.Za, latlng:Latlng};
 }
 
@@ -214,11 +231,15 @@ function sendSpeak() {
 	
 	$.post("/site/speak", speak, function(data) {
 		if(data.error == 0) {
+			$("input[name=content]").val('');
+			$("input[name=title]").val('');
 			$("#cancel_speak").trigger("click");
 		} else {
 			alert(data.msg);
 		}
 	}, 'json');
+	
+	
 }
 
 $(function() {

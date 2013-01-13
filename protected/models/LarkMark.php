@@ -10,11 +10,14 @@
  * @property double $latitude
  * @property double $longitude
  * @property integer $display
+ * @property integer $timeline
+ * @property string $author
  */
 class LarkMark extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
+	 * @param string $className active record class name.
 	 * @return LarkMark the static model class
 	 */
 	public static function model($className=__CLASS__)
@@ -38,14 +41,15 @@ class LarkMark extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, latitude, longitude', 'required'),
-			array('display', 'numerical', 'integerOnly'=>true),
+			array('title, latitude, longitude, timeline', 'required'),
+			array('display, timeline', 'numerical', 'integerOnly'=>true),
 			array('latitude, longitude', 'numerical'),
-			array('title', 'length', 'max'=>200),
+			array('title', 'length', 'max'=>100),
+			array('author', 'length', 'max'=>20),
 			array('content', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, title, content, latitude, longitude, display', 'safe', 'on'=>'search'),
+			array('id, title, content, latitude, longitude, display, timeline, author', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -72,6 +76,8 @@ class LarkMark extends CActiveRecord
 			'latitude' => 'Latitude',
 			'longitude' => 'Longitude',
 			'display' => 'Display',
+			'timeline' => 'Timeline',
+			'author' => 'Author',
 		);
 	}
 
@@ -92,13 +98,16 @@ class LarkMark extends CActiveRecord
 		$criteria->compare('latitude',$this->latitude);
 		$criteria->compare('longitude',$this->longitude);
 		$criteria->compare('display',$this->display);
+		$criteria->compare('timeline',$this->timeline);
+		$criteria->compare('author',$this->author,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
 	
-	// 过滤器
+	
+	// 
 	public function getFilter($attributes = null, $isAll = false) {
 		$request = Yii::app()->request;
 		$filter = $this->attributes;
@@ -109,7 +118,7 @@ class LarkMark extends CActiveRecord
 		return $filter;
 	}
 	
-	// 筛选器
+	// 
 	public function getCriteria($filter) {
 		$criteria=new CDbCriteria;
 		
@@ -119,5 +128,17 @@ class LarkMark extends CActiveRecord
 		}
 		$criteria->order = "`id` DESC";
 		return $criteria;
+	}
+	
+	// 
+	public function getDayMarks() {
+		$time = time() - 86400;
+		$criteria = new CDbCriteria;
+		$criteria->compare('timeline', '>'.$time);
+		$criteria->compare('display', 1);
+		$criteria->limit = 400;
+		$criteria->order = "`id` DESC";
+		
+		return $this->findAll($criteria);
 	}
 }
