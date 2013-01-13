@@ -32,6 +32,7 @@ class SiteController extends Controller {
 			'content'=> $request->getParam('content'),
 			'latitude'=> $request->getParam('latitude'),
 			'longitude'=> $request->getParam('longitude'),
+			'icon'=>'speak',
 			'timeline'=> time()
 		);
 		

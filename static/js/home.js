@@ -131,7 +131,7 @@ function addMark(data, showWindow) {
 		content: contentString
 	});
 	
-	var marker = createSayMark(data.title, markLatlng);
+	var marker = createSayMark(data, markLatlng);
 
 	// 标记点击事件
 	google.maps.event.addListener(marker, 'click', function() {
@@ -154,8 +154,8 @@ function addMark(data, showWindow) {
 }
 
 // 创建自定义标记
-function createSayMark(title, LatLng) {
-	var image = new google.maps.MarkerImage('/static/images/say.png',
+function createSayMark(data, LatLng) {
+	var image = new google.maps.MarkerImage('/static/images/'+data.icon+'.png',
 		// This marker is 20 pixels wide by 32 pixels tall.
 		new google.maps.Size(45, 28),
 		// The origin for this image is 0,0.
@@ -185,7 +185,7 @@ function createSayMark(title, LatLng) {
 		//shadow: shadow,
 		icon: image,
 		//shape: shape,
-		title: title
+		title: data.title
 	});
 		
 	return marker;
