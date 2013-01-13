@@ -11,20 +11,26 @@
 <table>
 	<thead>
 		<tr>
+			<th>作者</th>
 			<th>标题</th>
 			<th>经度</th>
 			<th>纬度</th>
 			<th width="60%">内容</th>
+			<th>显示</th>
+			<th>时间</th>
 			<th>操作</th>
 		</tr>
 	</thead>
 	<tbody>
 		<?php foreach($data['list'] as $item) { ?>
 		<tr>
+			<td><?php echo $item->author;?></td>
 			<td><?php echo $item->title;?></td>
 			<td><?php echo $item->longitude;?></td>
 			<td><?php echo $item->latitude;?></td>
 			<td><?php echo $item->content;?></td>
+			<td><?php echo $item->display;?></td>
+			<td><?php echo date('Y-m-d H:i', $item->timeline);?></td>
 			<td>
 				<a href="/admin/mark/modify/id/<?php echo $item->id;?>">编辑</a>
 				<a href="/admin/mark/del/id/<?php echo $item->id;?>">删除</a>

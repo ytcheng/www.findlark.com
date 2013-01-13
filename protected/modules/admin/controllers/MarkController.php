@@ -13,6 +13,7 @@ class MarkController extends AdminController {
 		if($request->isPostRequest) {
 			$model = LarkMark::model();
 			$model->attributes = $request->getParam('Form');
+			$model->timeline = time();
 			$model->id = null;
 			$model->isNewRecord = true;
 			$model->save();
@@ -30,6 +31,7 @@ class MarkController extends AdminController {
 		if($request->isPostRequest) {
 			if(!empty($data)) {
 				$data->attributes = $request->getParam('Form');
+				$model->timeline = time();
 				$data->id = $id;
 				$data->save();
 			}

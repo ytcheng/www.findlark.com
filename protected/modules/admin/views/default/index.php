@@ -1,15 +1,6 @@
 <div>
-	<div>添加扩展</div>
-	<form action="/admin/defalut/tool" method="post" enctype="multipart/form-data">
-		文件: <input type="file" name="file"><br>
-		标题：<input type="text" name="title" value="test gallery"><br>
-		
-		<input type="submit" value="提交">
-	</form>
-</div>
-
-<br>
-<div>
-	<a href="/admin/image/index">增加图片</a>
+	<a href="/admin/tool/index">扩展</a>
+	<a href="/admin/image/index">图片</a>
+	<a href="/admin/mark/index">标记</a>
 	
 </div>
