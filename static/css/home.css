@@ -14,3 +14,5 @@
 .speak{height:22px; line-height:22px; margin:3px; text-align:right}
 .input_speak .ibox{width:200px;}
 .speak_alert{margin:5px 0px;; color:red}
+
+.baidu_share{position:absolute; top:0px; left:0px; z-index:9009;}

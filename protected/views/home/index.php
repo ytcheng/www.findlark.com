@@ -14,8 +14,9 @@
 	<input type="submit" value="提交" id="submit_speak"> <input type="submit" value="取消" id="cancel_speak">
 </div>
 
-<div id="share" style="position:absolute; top:0px; left:0px; z-index:9009;">
 
+<div id="baidu_share">
+<!--百度分享代码-->
 	<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
 		<a class="bds_qzone"></a>
 		<a class="bds_tsina"></a>
@@ -25,7 +26,6 @@
 		<span class="bds_more"></span>
 		<a class="shareCount"></a>
 	</div>
-
 </div>
 
 <script type="text/javascript">
