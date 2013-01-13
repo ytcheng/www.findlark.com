@@ -20,6 +20,7 @@ function _location(p) {
 	showMap();
 }
 
+// 显示地图
 function showMap() {
 	var mapTypes = ['ROADMAP', 'SATELLITE', 'HYBRID', 'TERRAIN'];
 	var markLatlng = new google.maps.LatLng(parseFloat(position.latitude), parseFloat(position.longitude));
@@ -89,7 +90,7 @@ function afterMapLoad() {
 	socket = io.connect(socketConnectString);
 	socket.on('news', function (data) {
 		if(helloIsSay == false) {
-			addMark(data);
+			addMark(data, true);
 			helloIsSay = true;
 		}
 	});
@@ -114,7 +115,7 @@ function loadMark() {
 }
 
 // 在地图上 添加一个标记
-function addMark(data) {
+function addMark(data, showWindow) {
 	if(data.latitude==0 || data.longitude==0) {
 		var center = getCenterLatlng();
 		data.latitude = center.Ya;
@@ -129,14 +130,9 @@ function addMark(data) {
 	var infowindow = new google.maps.InfoWindow({
 		content: contentString
 	});
-
-	var marker = new google.maps.Marker({
-		title: data.title,
-		position: markLatlng,
-		map: map,
-		animation: google.maps.Animation.DROP
-	});
 	
+	var marker = createSayMark(data.title, markLatlng);
+
 	// 标记点击事件
 	google.maps.event.addListener(marker, 'click', function() {
 		infowindow.open(map, marker);
@@ -153,8 +149,46 @@ function addMark(data) {
 	});
 	
 	setTimeout(function() {
-		// google.maps.event.trigger(marker, 'click');
+		if(showWindow) google.maps.event.trigger(marker, 'click');
 	}, 500);
+}
+
+// 创建自定义标记
+function createSayMark(title, LatLng) {
+	var image = new google.maps.MarkerImage('/static/images/say.png',
+		// This marker is 20 pixels wide by 32 pixels tall.
+		new google.maps.Size(45, 28),
+		// The origin for this image is 0,0.
+		new google.maps.Point(0,0),
+		// The anchor for this image is the base of the flagpole at 0,32.
+		new google.maps.Point(0, 28));
+	var shadow = new google.maps.MarkerImage('/static/images/shadow.png',
+		// The shadow image is larger in the horizontal dimension
+		// while the position and offset are the same as for the main image.
+		new google.maps.Size(74, 28),
+		new google.maps.Point(0, 0),
+		new google.maps.Point(0, 28)
+	);
+	// Shapes define the clickable region of the icon.
+	// The type defines an HTML <area> element 'poly' which
+	// traces out a polygon as a series of X,Y points. The final
+	// coordinate closes the poly by connecting to the first
+	// coordinate.
+	var shape = {
+		coord: [1, 1, 1, 20, 18, 20, 18 , 1],
+		type: 'poly'
+  };
+	
+	var marker = new google.maps.Marker({
+		position: LatLng,
+		map: map,
+		//shadow: shadow,
+		icon: image,
+		//shape: shape,
+		title: title
+	});
+		
+	return marker;
 }
 
 // 添加一个 临时 可拖动的 的标记
@@ -162,6 +196,8 @@ var dragMark = null,
 		dragEndCallback = function(event){},
 		dragMarkInfoWindow = null;
 function createDragMark(markLatlng) {
+	var SymbolPathList = ['BACKWARD_CLOSED_ARROW', 'BACKWARD_OPEN_ARROW', 'CIRCLE', 'FORWARD_CLOSED_ARROW', 'FORWARD_OPEN_ARROW'];
+
 	dragMark = new google.maps.Marker({
 		title: 'Mark!',
 		position: markLatlng,
@@ -238,8 +274,6 @@ function sendSpeak() {
 			alert(data.msg);
 		}
 	}, 'json');
-	
-	
 }
 
 $(function() {
@@ -249,8 +283,6 @@ $(function() {
 	try{
 		navigator.geolocation.getCurrentPosition(_location, _error);
 	}catch(e) {
-		console.log('position exception:');
-		console.log(e);
 		showMap();
 	}
 

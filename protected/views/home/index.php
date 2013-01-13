@@ -5,7 +5,10 @@
 	<input type="hidden" name="longitude" value="">
 	<input type="hidden" name="latitude" value="">
 
-	<div class="speak_alert">温馨提示：您说的话只会在地图上保留24小时～</div>
+	<div class="speak_alert">
+		温馨提示：您说的话只会在地图上保留24小时, <br>
+		拖动红色标记可改变说话位置
+	</div>
 	标题：<input type="text" name="title" value="" class="ibox"><br>
 	内容：<input type="text" name="content" value="" class="ibox"><br>
 	<input type="submit" value="提交" id="submit_speak"> <input type="submit" value="取消" id="cancel_speak">
@@ -25,16 +28,15 @@
 
 </div>
 
-<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=1843748" ></script>
-<script type="text/javascript" id="bdshell_js"></script>
 <script type="text/javascript">
 	var socketConnectString = "<?php printf("http://%s:%s", Yii::app()->params->socketHost, Yii::app()->params->socketPort);?>";
 	$(function() {
 		document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?" + Math.ceil(new Date()/3600000);
-		
-		
-	})
+	});
 </script>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=1843748" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+
 <link rel="stylesheet" type="text/css" href="/static/js/fancybox/jquery.fancybox-1.3.4.css">
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeTbbaUbaoslV0OY-Jyoex6kfMBXRRIZk&sensor=false&libraries=panoramio"></script>
 <script type="text/javascript" src="/static/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
