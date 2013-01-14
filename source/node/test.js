@@ -1,9 +1,10 @@
+//var io = require('socket.io').listen(9091, '64.34.253.111'),
 var io = require('socket.io').listen(80),
 		redis = require("redis"),
 		client = redis.createClient(6379, '127.0.0.1'),
-		socketList = {}; // Á¬½ÓµÄÓÃ»§ÁĞ±í
-		connectCount = 0, // µ±Ç°Á¬½ÓÊı
-		maxConnect = 100; // ÔÊĞí×î´óÁ¬½ÓÊı
+		socketList = {}; // è¿æ¥çš„ç”¨æˆ·åˆ—è¡¨
+		connectCount = 0, // å½“å‰è¿æ¥æ•°
+		maxConnect = 100; // å…è®¸æœ€å¤§è¿æ¥æ•°
 
 io.sockets.on('connection', function (socket) {
 	if(connectCount > maxConnect) return false;
@@ -21,14 +22,14 @@ io.sockets.on('connection', function (socket) {
 	firstConnectMsg();
 });
 
-// ¸øµÚÒ»´ÎÁ¬½Ó µÄÓÃ»§·¢ËÍÏûÏ¢
+// ç»™ç¬¬ä¸€æ¬¡è¿æ¥ çš„ç”¨æˆ·å‘é€æ¶ˆæ¯
 function firstConnectMsg() {
 	var msg = '{"title":"Hello. Click me!", "content":"Hello, Do you want to say something?"}';
 
 	send(msg);
 }
 
-// ¹ã²¥£¬¸øÃ¿¸öÁ¬½ÓÉÏµÄ¿Í»§¶Ë ·¢ËÍÏûÏ¢
+// å¹¿æ’­ï¼Œç»™æ¯ä¸ªè¿æ¥ä¸Šçš„å®¢æˆ·ç«¯ å‘é€æ¶ˆæ¯
 function send(msg) {
 	msg = formatMsg(msg);
 	if(!msg) return run();
@@ -41,8 +42,8 @@ function send(msg) {
 }
 
 /*
- * ½«×Ö·û´®ÏûÏ¢ ¸ñÊ½»¯ Îª JSON ÏûÏ¢£¬Ê§°ÜÊ±·µ»Ø false
- * @param String msg JSON ¸ñÊ½×Ö·û´®
+ * å°†å­—ç¬¦ä¸²æ¶ˆæ¯ æ ¼å¼åŒ– ä¸º JSON æ¶ˆæ¯ï¼Œå¤±è´¥æ—¶è¿”å› false
+ * @param String msg JSON æ ¼å¼å­—ç¬¦ä¸²
  * @return JSON Object OR false
  */
 function formatMsg(msg) {
@@ -72,10 +73,10 @@ function formatMsg(msg) {
 }
 
 /*
- * ´Ó redis ¶ÓÁĞÖĞÈ¡ÏûÏ¢½øĞĞ·¢ËÍ£¬
- * ÀûÓÃ redis µÄ×èÈû¶ÓÁĞ
+ * ä» redis é˜Ÿåˆ—ä¸­å–æ¶ˆæ¯è¿›è¡Œå‘é€ï¼Œ
+ * åˆ©ç”¨ redis çš„é˜»å¡é˜Ÿåˆ—
  */
-var maxBlockTime = 15; // ×î³¤×èÈûÊ±¼ä (s)
+var maxBlockTime = 15; // æœ€é•¿é˜»å¡æ—¶é—´ (s)
 function run() {
 	console.log("run");
 	client.brpop("findlark_msg", maxBlockTime, function(err, msg) {

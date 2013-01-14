@@ -1,18 +1,37 @@
 #cursor{font-weight:700;}
+.share, .friend, .message, .say, .input_speak, #nav{
+	background-color:#fff;
+	border-radius: 3px;
+	position:absolute;
+	top:0px;
+	left:0px;
+	z-index:9001;
+	width:320px;
+	text-transform:uppercase;
+	box-shadow: 2px 2px 3px #aaa;
+	display:none;
+}
 
 .input_speak{
-	position:absolute;
-	top:-82px;
 	width:320px;
 	height:130px;
-	background-color:#f5f5f5;
-	border:1px solid #999;
-	border-top:0px;
-	display:none;
 	padding-left:5px;
 }
 .speak{height:22px; line-height:22px; margin:3px; text-align:right}
 .input_speak .ibox{width:200px;}
-.speak_alert{margin:5px 0px;; color:red}
+.speak_alert{margin:5px 0px;; color:#FF335B}
 
-.baidu_share{position:absolute; top:0px; left:0px; z-index:9009;}
+.share{display:none;}
+
+#nav{
+	display:block; z-index:9009; left:80px; height:35px; line-height:35px;
+}
+#nav .operators{margin-left:37px;}
+#nav ul li{float:left; width:60px; text-align:center; height:34px; color:#111; font-size:14px; cursor:pointer}
+#nav ul li:hover, #nav ul li.current{
+	border-bottom:2px solid #B9D5FF; background-color:#F9FCF3; color:#333;
+}
+#nav ul li:hover{text-shadow: 0px 1px 1px #aaa; }
+#nav ul li.current{border-bottom-color:#09f}
+
+#nav .num{font-size:10px; color:#FF335B}
