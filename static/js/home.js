@@ -84,4 +84,20 @@ $(function() {
 		$("#image_list a:eq(0)").trigger("click");
 		return false;
 	});
+	
+	// 用户相关
+	$("#user_reg_button").click(function() {
+		$.ajax({
+			url: "/site/reg",
+			data: $('#user_reg_form').serialize(),
+			type: "post",
+			dataType: "json",
+			success: function(data) {
+				console.log(data);
+			},
+			error: function() {
+				
+			}
+		});
+	})
 });

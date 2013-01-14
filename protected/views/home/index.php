@@ -54,36 +54,36 @@
 	<!--消息-->
 	<div id="message" class="message">
 		<div id="reg" class="reg">
-			<form action="/site/reg" method="post">
+			<form action="/site/reg" method="post" id="user_reg_form">
 				<table>
 					<tr>
 						<td class="reg_item">邮箱地址：</td>
-						<td class="reg_detail"><input type="text" name="Form[email]" value=""></td>
+						<td class="reg_detail"><input type="text" name="RegForm[email]" value="" class="RegForm_email"></td>
 						<td class="reg_info"></td>
 					</tr>
 					<tr>
 						<td class="reg_item">登录密码：</td>
-						<td class="reg_detail"><input type="password" name="Form[password]" value=""></td>
+						<td class="reg_detail"><input type="password" name="RegForm[password]" value="" class="RegForm_password"></td>
 						<td class="reg_info"></td>
 					</tr>
 					<tr>
 						<td class="reg_item">再次输入：</td>
-						<td class="reg_detail"><input type="password" name="Form[repeat]" value=""></td>
+						<td class="reg_detail"><input type="password" name="RegForm[repeat]" value="" class="RegForm_repeat"></td>
 						<td class="reg_info"></td>
 					</tr>
 					<tr>
 						<td class="reg_item">昵称：</td>
-						<td class="reg_detail"><input type="text" name="Form[nickname]" value=""></td>
+						<td class="reg_detail"><input type="text" name="RegForm[nickname]" value="" class="RegForm_nickname"></td>
 						<td class="reg_info"></td>
 					</tr>
 					<tr>
 						<td class="reg_item">验证码：</td>
-						<td class="reg_detail"><input type="text" name="Form[code]" value=""></td>
-						<td class="reg_info"></td>
+						<td class="reg_detail"><input type="text" name="RegForm[verifycode]" value="" class="RegForm_verifycode"></td>
+						<td class="reg_info"><img src="/site/captcha" style="height:24px;"></td>
 					</tr>
 					<tr>
 						<td colspan="3">
-							<input type="button" value="注册">
+							<input type="button" value="注册" id="user_reg_button">
 							<a href="javascript:;" class="user_login">登录</a>
 						</td>
 					</tr>
