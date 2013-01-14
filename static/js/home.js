@@ -28,6 +28,7 @@ $(function() {
 		map.showGoogleMap();
 	}
 	
+	// 导航切换
 	$("#nav .operators li").click(function() {
 		if($(this).attr("class") == "current") {
 			$(this).removeClass();
@@ -37,7 +38,11 @@ $(function() {
 		}
 		nav.show($(this).attr("name"));
 	});
-
+	
+	$("#friend .friend_group_name").live("click", function() {
+		$(this).siblings("ul").slideToggle(300);
+	});
+	
 	// 显示我要说
 	$("div.speak a").live("click", function() {
 		var obj = $("#input_speak"), h = obj.height(), w = obj.width(), l = (winWidth-w-2) / 1;

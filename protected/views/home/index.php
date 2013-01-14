@@ -29,7 +29,7 @@
 	<!--好友-->
 	<div id="friend" class="friend">
 		<div class="friend_group">
-			<div class="friend_group_name">分组1</div>
+			<div class="friend_group_name">分组1 <span>[7/15]</span></div>
 			<ul>
 				<li>11</li>
 				<li>22</li>
@@ -37,14 +37,14 @@
 			</ul>
 		</div>
 		<div class="friend_group">
-			<div class="friend_group_name">分组2</div>
+			<div class="friend_group_name">分组2 <span>[6/13]</span></div>
 			<ul>
 				<li>44</li>
 				<li>55</li>
 			</ul>
 		</div>
 		<div class="friend_group">
-			<div class="friend_group_name">分组3</div>
+			<div class="friend_group_name">分组3 <span>[1/22]</span></div>
 			<ul>
 				<li>66</li>
 			</ul>
@@ -52,11 +52,73 @@
 	</div>
 	
 	<!--消息-->
-	<div id="message" class="message"></div>
+	<div id="message" class="message">
+		<div id="reg" class="reg">
+			<form action="/site/reg" method="post">
+				<table>
+					<tr>
+						<td class="reg_item">邮箱地址：</td>
+						<td class="reg_detail"><input type="text" name="Form[email]" value=""></td>
+						<td class="reg_info"></td>
+					</tr>
+					<tr>
+						<td class="reg_item">登录密码：</td>
+						<td class="reg_detail"><input type="password" name="Form[password]" value=""></td>
+						<td class="reg_info"></td>
+					</tr>
+					<tr>
+						<td class="reg_item">再次输入：</td>
+						<td class="reg_detail"><input type="password" name="Form[repeat]" value=""></td>
+						<td class="reg_info"></td>
+					</tr>
+					<tr>
+						<td class="reg_item">昵称：</td>
+						<td class="reg_detail"><input type="text" name="Form[nickname]" value=""></td>
+						<td class="reg_info"></td>
+					</tr>
+					<tr>
+						<td class="reg_item">验证码：</td>
+						<td class="reg_detail"><input type="text" name="Form[code]" value=""></td>
+						<td class="reg_info"></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<input type="button" value="注册">
+							<a href="javascript:;" class="user_login">登录</a>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		
+	</div>
 	
 	<!--说点-->
-	<div id="say" class="say"></div>
+	<div id="say" class="say">
+		<div id="login" class="login">
+			<form action="/site/login" method="post">
+				<table>
+					<tr>
+						<td>邮箱：</td>
+						<td><input type="text" name="email" value=""></td>
+					</tr>
+					<tr>
+						<td>密码：</td>
+						<td><input type="password" name="password" value=""></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input type="button" value="登录">
+							<a href="javascript:;" class="user_reg">注册</a>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
 </div>
+
+
 
 <div id="input_speak" class="input_speak">
 	<input type="hidden" name="longitude" value="">
