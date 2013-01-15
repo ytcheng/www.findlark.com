@@ -16,6 +16,33 @@ var larkMap = function() {
 }
 
 larkMap.prototype = {
+	init: function() {
+		var _this = this;
+		var winHeight = $(window).height(), winWidth = $(window).width();
+		$("#google_map").css({"height":winHeight+"px"});
+		
+		try{
+			var geolocationError = function(err) { // 定位失败
+				console.log(err);
+				_this.getPositionSuccess = false;
+				_this.showGoogleMap();
+			},
+			geolocationSuccess = function(data) { // 定位成功
+				_this.position.latitude = data.coords.latitude;
+				_this.position.longitude = data.coords.longitude;
+				_this.getPositionSuccess = true;
+				_this.defaultZoom = 8;
+				_this.showGoogleMap();
+			};
+			
+			navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError);
+		}catch(e) {
+			_this.showGoogleMap();
+		}
+		
+		this.bindEvent();
+	},
+	
 	showGoogleMap: function() {
 		var mapTypes = ['ROADMAP', 'SATELLITE', 'HYBRID', 'TERRAIN'];
 		var markLatlng = new google.maps.LatLng(parseFloat(this.position.latitude), parseFloat(this.position.longitude));
@@ -228,4 +255,16 @@ larkMap.prototype = {
 			visible: false
 		});
 	}
+};
+
+larkMap.prototype.bindEvent = function() {
+	$("div.mark_content a").live("click", function() {
+		$(this).attr("target", "_blank");
+		return true;
+	});
+	
+	$(".info_window_div a.thumb_image").live("click", function() {
+		$("#image_list a:eq(0)").trigger("click");
+		return false;
+	});
 }

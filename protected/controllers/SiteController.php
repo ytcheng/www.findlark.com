@@ -15,7 +15,6 @@ class SiteController extends Controller {
 	}
 	
 	public function actionIndex() {
-		
 		$this->layout = 'public';
 		$this->render('index');
 	}
@@ -27,6 +26,65 @@ class SiteController extends Controller {
 			else
 				$this->render('error', $error);
 		}
+	}
+	
+	// 注册
+	public function actionReg() {
+		$this->checkAjaxRequest();
+		
+		$model = new RegForm();
+		$check = CJSON::decode( CActiveForm::validate($model) );
+		
+		if(!empty($check)) {
+			echo CJSON::encode($check);
+			Yii::app()->end();
+		}
+		
+		$model->unsetAttributes();
+		$model->attributes = $_POST['RegForm'];
+		if($model->validate()) {
+			$regResult = LarkUser::model()->register($model);			
+			
+			if($regResult) {
+				$identity = new UserIdentity($model->email, $model->password);
+				$identity->authenticate();
+				$login = Yii::app()->user->login($identity);
+				
+				$this->_end(0, '注册成功!', array('login'=>$login));
+			}
+		}
+		$this->_end(1, '注册失败!');
+	}
+	
+	// 登录
+	public function actionLogin() {
+		$this->checkAjaxRequest();
+		
+		// 已经登录了
+		if(!empty(Yii::app()->user->id)) {
+			$this->_end(0, '登录成功!', $this->getUserInfo());
+		}
+		
+		if(isset($_POST['LoginForm']) && empty(Yii::app()->user->id)) {
+			$model=new LoginForm;
+			$model->attributes = $_POST['LoginForm'];
+			$model->email = strtolower($model->email);
+			
+			if($model->validate() && $model->login()) {
+				$this->_end(0, '登录成功!', $this->getUserInfo());
+			}
+			
+			if($model->hasErrors()) {
+				$this->_end(1, $this->getModelFirstError($model));
+			}
+		}
+		
+		$this->_end(1, '登录失败!');
+	}
+	
+	private function getUserInfo() {
+		$user = Yii::app()->user;
+		return array('uid'=> $user->uid, 'email'=> $user->id, 'nickname'=> $user->nickname);
 	}
 	
 	public function actionImage($pid) {
@@ -62,22 +120,7 @@ class SiteController extends Controller {
 		$this->_end(0, 'success!'.var_export($r, true));
 	}
 	
-	// 注册
-	public function actionReg() {
-		$this->checkAjaxRequest();
-		
-		$model = new RegForm();
-		$check = CActiveForm::validate($model);
-		
-		if(!empty($check)) {
-			echo $check;
-			Yii::app()->end();
-		}
-		
-		
-		
-	}
-	
+	// 标记
 	public function actionMark() {
 		$data = LarkMark::model()->getDayMarks();
 		
@@ -89,5 +132,7 @@ class SiteController extends Controller {
 		$value = preg_replace("#\<\/?(?!img|br|a).*?\/?\>#", '', $value);
 		return $value;
 	}
+	
+	
 }
 

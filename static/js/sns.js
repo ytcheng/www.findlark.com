@@ -2,7 +2,18 @@ var larkSns = function() {
 	this.loginUserId = 0;
 	this.firendList = {};
 	
+	this.init = function() {
+		
+		
+	};
 	
+	this.loginSuccess = function() {
+		$("#friend .myself").html('<strong>'+user.userInfo.nickname+'</strong>').show();
+		
+		
+		this.bindEvent();
+		
+	};
 }
 
 larkSns.prototype = {
@@ -27,4 +38,12 @@ larkSns.prototype.sendSpeak = function () {
 			alert(data.msg);
 		}
 	}, 'json');
+}
+
+larkSns.prototype.bindEvent = function() {
+	
+	$("#friend .friend_group_name").live("click", function() {
+		$(this).siblings("ul").slideToggle(300);
+	});
+	
 }

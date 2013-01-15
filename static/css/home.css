@@ -1,5 +1,5 @@
 #cursor{font-weight:700;}
-.share, .friend, .message, .say, .input_speak, #nav{
+.share, .friend, .message, .say, .input_speak, .reg, .login, #nav{
 	background-color:#fff;
 	border-radius: 3px;
 	position:absolute;
@@ -35,12 +35,17 @@
 
 /*friend list*/
 .friend{height:360px; overflow-x:hidden; overflow-y:scroll; padding-top:5px}
+
+.friend_list, .myself, .please_login, .setting{display:none}
+
+.myself, .friend_group_name, .friend_group ul li{padding-left:8px;}
+
 .friend_group{}
-.friend_group_name{padding-left:8px; height:22px; line-height:22px; cursor:pointer}
+.friend_group_name{height:22px; line-height:22px; cursor:pointer}
 .friend_group_name:hover{background-color:#f1f1f1; text-shadow: 0px 1px 1px #aaa;}
 
 .friend_group ul{display:none; margin-bottom:10px;}
-.friend_group ul li{padding-left:8px; height:55px; line-height:55px; cursor:pointer}
+.friend_group ul li{height:55px; line-height:55px; cursor:pointer}
 .friend_group ul li:hover{background-color:#81C6FE}
 
 .reg table, .login table{margin:5px;}

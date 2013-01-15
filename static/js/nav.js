@@ -1,17 +1,35 @@
 var larkNav = function() {
+	this.lastName = null;
 	
 	
 	this.nav = {};
 	this.init = function() {
 		var obj = $("#nav");
-		
 		this.nav.ofs = obj.offset();
 		this.nav.width = obj.width();
 		this.nav.height = obj.height();
 		
+		this.bindEvent();
 	};
 	
-	this.init();
+	this.shareOpened = function() {
+		
+	};
+	this.friendOpened = function() {
+		
+	};
+	this.messageOpened = function() {
+		
+	};
+	this.sayOpened = function() {
+		
+	};
+	this.regOpened = function() {
+		
+	};
+	this.loginOpened = function() {
+		
+	};
 }
 
 larkNav.prototype = {
@@ -19,17 +37,22 @@ larkNav.prototype = {
 		var obj = $("#"+myName);
 		if(!obj.length) return false;
 		
-		obj.is(":visible") ? this.close(obj) : this.open(obj);
+		if(myName != 'reg' && myName != 'login') {
+			this.lastName = myName;
+		}
+		
+		obj.is(":visible") ? this.close(obj) : this.open(obj, myName+'Opened');
 	},
 	
 	open: function(obj, callback) {
+		var _this = this;
 		this.closeOther($(obj).attr("class"));
 		
 		$(obj).css({"top":"0px", "left":this.nav.ofs.left+"px"})
 		.show()
 		.animate({"top":(this.nav.ofs.top+this.nav.height+4)+"px"}, 200, function() {
 			
-			if(callback) callback();
+			if(callback && typeof(_this[callback] == "function")) _this[callback]();
 		});
 	},
 	
@@ -47,4 +70,25 @@ larkNav.prototype = {
 			}
 		});
 	}
+}
+
+larkNav.prototype.bindEvent = function() {
+	var _this = this;
+	
+	// 导航切换
+	$("#nav .operators li").click(function() {
+		if($(this).attr("class") == "current") {
+			$(this).removeClass();
+		} else {
+			$("#nav .operators li.current").removeClass();
+			$(this).addClass("current");
+		}
+		_this.show($(this).attr("name"));
+	});
+	
+	$("a.user_reg, a.user_login").click(function() {
+		$("#nav .operators li.current").removeClass();
+		_this.show($(this).attr("name"));
+		return false;
+	});
 }

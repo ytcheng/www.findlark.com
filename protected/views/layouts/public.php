@@ -9,7 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="/static/css/<?php echo $this->id;?>.css">
 		
 		<script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
-		<script type="text/javascript" src="/static/js/jquery.masonry.js"></script>
+		<script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
 	</head>
 	<body>
 		<?php echo $content;?>
