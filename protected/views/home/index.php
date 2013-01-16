@@ -9,6 +9,7 @@
 			<li name="say">说点</li>
 		</ul>
 	</div>
+	<div class="avator"><img src="/static/images/default_avator.gif"></div>
 </div>
 
 <div id="content">
@@ -146,7 +147,8 @@
 
 <div id="image_list" style="display:none"></div>
 <script type="text/javascript">
-	var socketConnectString = "<?php printf("http://%s:%s", Yii::app()->params->socketHost, Yii::app()->params->socketPort);?>";
+	var mapSocketConnectString = "<?php printf("http://%s:%s", Yii::app()->params->socketHost, Yii::app()->params->socketPort);?>";
+	var userSocketConnectString = "<?php printf("http://%s/user:%s", Yii::app()->params->socketHost, Yii::app()->params->socketPort);?>";
 	$(function() {
 		document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?" + Math.ceil(new Date()/3600000);
 	});

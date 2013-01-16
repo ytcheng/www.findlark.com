@@ -8,7 +8,7 @@ var larkMap = function() {
 	this.helloIsSay = false;
 	this.mapId = 'google_map';
 	
-	this.markerList = {}; // 用于保存标记
+	this.markerList = []; // 用于保存标记
 	
 	this.dragMark = null;
 	this.dragEndCallback = function(event){};
@@ -84,9 +84,12 @@ larkMap.prototype = {
 	
 	// 地图加载完成之后
 	afterMapLoad: function() {
-		var socket = io.connect(socketConnectString),
+		var socket = io.connect(mapSocketConnectString),
 				_this = this;
 		socket.on('news', function (data) {
+			
+			console.log(data);
+			
 			if(_this.helloIsSay == false) {
 				_this.addMark(data, true);
 				_this.helloIsSay = true;
@@ -138,14 +141,14 @@ larkMap.prototype = {
 	// 在地图上 添加一个标记
 	addMark: function(data, showInfoWindow) {
 		if(data.latitude==0 || data.longitude==0) {
-			var center = this.getCenterLatlng();
+			var center = this.createLatlng();
 			data.latitude = center.Ya;
 			data.longitude= center.Za;
 		}
 		var markLatlng = new google.maps.LatLng(parseFloat(data.latitude), parseFloat(data.longitude));
 		
 		var marker = this.createSayMark(data, markLatlng);
-		var infoWindow = null;
+		var infoWindow = null, _this = this;
 	
 		// 标记点击事件
 		google.maps.event.addListener(marker, 'click', function() {
@@ -154,15 +157,15 @@ larkMap.prototype = {
 				+ data.content
 				+ '</div><div class="speak"><a href="javascript:;">我也说两句</a></div>';
 				
-				infowindow = new google.maps.InfoWindow({
+				infoWindow = new google.maps.InfoWindow({
 					content: contentString
 				});
 			}
 			
-			infowindow.open(map, marker);
+			infoWindow.open(_this.map, marker);
 			setTimeout(function() {
-				infowindow.close();
-			}, this.infoWindownLifeTime);
+				infoWindow.close();
+			}, _this.infoWindownLifeTime);
 		  
 		  if(marker.getAnimation() == null) {
 		    marker.setAnimation(google.maps.Animation.BOUNCE);
@@ -175,6 +178,8 @@ larkMap.prototype = {
 		setTimeout(function() {
 			if(showInfoWindow) google.maps.event.trigger(marker, 'click');
 		}, 500);
+		
+		this.markerList.push(marker);
 	},
 	
 	// 创建说点标记
@@ -191,7 +196,7 @@ larkMap.prototype = {
 			icon: image,
 			title: data.title
 		});
-			
+
 		return marker;
 	},
 

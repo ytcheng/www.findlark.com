@@ -1,12 +1,12 @@
 var larkUser = function() {
 	this.userInfo = null;
-	
+	this.socket = null;
 	
 	this.init = function() {
 		var _this = this;
 		
 		$.get('/site/login', {}, function(data) {
-			//map.init();
+			map.init();
 			nav.init();
 			sns.init();
 			
@@ -54,7 +54,24 @@ larkUser.prototype = {
 		this.userInfo = data.params;
 		if($.trim(this.userInfo.nickname) == '') this.userInfo.nickname = this.userInfo.email;
 		
-		$.cookie('uid', this.userInfo.uid);
+		var option = {};
+		if(document.domain) {
+			option.domain = document.domain.replace(/^.*?\./, '.');
+		}
+		$.cookie('uid', this.userInfo.uid, option);
+		$.cookie('email', this.userInfo.email, option);
+		$.cookie('nickname', this.userInfo.nickname, option);
+		
+		var socket = io.connect(userSocketConnectString),
+				_this = this;
+		socket.on('news', function (data) {
+			if(_this.helloIsSay == false) {
+				_this.addMark(data, true);
+				_this.helloIsSay = true;
+			}
+		});
+		
+		this.socket = socket;
 		
 		if(nav.lastName != null) $("#nav .operators li[name="+nav.lastName+"]").trigger("click");
 		sns.loginSuccess();

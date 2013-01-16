@@ -7,6 +7,7 @@ $(function() {
 	user = new larkUser();
 	user.init();
 	
+	var winWidth=$(window).width();
 	// 显示我要说
 	$("div.speak a").live("click", function() {
 		var obj = $("#input_speak"), h = obj.height(), w = obj.width(), l = (winWidth-w-2) / 1;

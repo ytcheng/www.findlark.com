@@ -98,7 +98,7 @@ return array(
 		'staticUrl'=>'/static',
 		'baseUrl'=>'http://www.findlark.com',
 		'adminEmail'=>'webmaster@example.com',
-		'socketHost'=>'192.168.137.105',
-		'socketPort'=>'80'
+		'socketHost'=>'socket.findlark.tk',
+		'socketPort'=>'9091'
 	),
 );
