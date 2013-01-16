@@ -84,7 +84,12 @@ class SiteController extends Controller {
 	
 	private function getUserInfo() {
 		$user = Yii::app()->user;
-		return array('uid'=> $user->uid, 'email'=> $user->id, 'nickname'=> $user->nickname);
+		return array(
+			'uid'=> $user->uid,
+			'email'=> $user->id,
+			'nickname'=> $user->nickname,
+			'avatar'=> $user->avatar
+		);
 	}
 	
 	public function actionImage($pid) {

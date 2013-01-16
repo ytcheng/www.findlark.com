@@ -30,6 +30,9 @@ var larkNav = function() {
 	this.loginOpened = function() {
 		
 	};
+	this.infoOpened = function() {
+		
+	};
 }
 
 larkNav.prototype = {
@@ -90,5 +93,10 @@ larkNav.prototype.bindEvent = function() {
 		$("#nav .operators li.current").removeClass();
 		_this.show($(this).attr("name"));
 		return false;
+	});
+	
+	$("#nav .avatar").click(function() {
+		$("#nav .operators li.current").removeClass();
+		_this.show("info");
 	});
 }

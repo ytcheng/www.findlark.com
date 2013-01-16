@@ -6,7 +6,7 @@ var larkUser = function() {
 		var _this = this;
 		
 		$.get('/site/login', {}, function(data) {
-			map.init();
+			//map.init();
 			nav.init();
 			sns.init();
 			
@@ -60,7 +60,7 @@ larkUser.prototype = {
 		}
 		$.cookie('uid', this.userInfo.uid, option);
 		$.cookie('email', this.userInfo.email, option);
-		$.cookie('nickname', this.userInfo.nickname, option);
+		//$.cookie('nickname', this.userInfo.nickname, option);
 		
 		var socket = io.connect(userSocketConnectString),
 				_this = this;

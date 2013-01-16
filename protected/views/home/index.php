@@ -9,7 +9,7 @@
 			<li name="say">说点</li>
 		</ul>
 	</div>
-	<div class="avator"><img src="/static/images/default_avator.gif"></div>
+	<div class="avatar"><img src="/static/images/default_avator.gif" title=""></div>
 </div>
 
 <div id="content">
@@ -29,8 +29,6 @@
 	
 	<!--好友-->
 	<div id="friend" class="friend">
-		<div class="myself"></div>
-		
 		<div class="friend_list">
 			<div class="friend_group">
 				<div class="friend_group_name">分组1 <span>[7/15]</span></div>
@@ -56,7 +54,6 @@
 		</div>
 		
 		<div class="please_login">请先<a href="javascript:;" class="user_login" name="login">登录</a></div>
-		<div class="setting">设置</div>
 	</div>
 	
 	<!--消息-->
@@ -128,6 +125,17 @@
 				</tr>
 			</table>
 		</form>
+	</div>
+	
+	<div id="info" class="info">
+		<div class="myself"></div>
+		
+		<div class="profile"></div>
+		
+		<div class="options">
+			<a href="javacript:;">更新资料</a>
+			<a href="javacript:;">系统设置</a>
+		</div>
 	</div>
 </div>
 

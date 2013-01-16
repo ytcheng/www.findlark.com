@@ -8,7 +8,7 @@
 class UserIdentity extends CUserIdentity {
 	public $uid;
 	public $email;
-	public $nickname;
+	//public $nickname;
 	/**
 	 * Authenticates a user.
 	 * The example implementation makes sure if the username and password
@@ -34,13 +34,14 @@ class UserIdentity extends CUserIdentity {
 		}
 		$this->errorCode=self::ERROR_NONE;
 		$this->uid = $model->uid;
-		$this->nickname = $model->nickname;
+		//$this->nickname = $model->nickname;
 		$this->email = $model->email;
 		
 		$this->setState('uid', $model->uid);
 		$this->setState('nickname', $model->nickname);
 		$this->setState('email', $model->email);
 		$this->setState('password', $model->password);
+		$this->setState('avatar', $model->avatar);
 		return !$this->errorCode;
 	}
 

@@ -1,5 +1,5 @@
 #cursor{font-weight:700;}
-.share, .friend, .message, .say, .input_speak, .reg, .login, #nav{
+.share, .friend, .message, .say, .input_speak, .reg, .login, .info, #nav{
 	background-color:#fff;
 	border-radius: 3px;
 	position:absolute;
@@ -24,8 +24,9 @@
 #nav ul li.current{border-bottom-color:#09f;}
 #nav .num{font-size:10px; color:#FF335B}
 
-#nav .avator, #nav .avator img{height:30px; width:30px;}
-#nav .avator{position:absolute; right:3px; top:3px; box-shadow: -1px -1px 2px #aaa;}
+#nav .avatar, #nav .avatar img{height:30px; width:30px;}
+#nav .avatar{position:absolute; right:3px; top:3px; box-shadow: -1px -1px 2px #aaa;}
+#nav .avatar img{border:0px; cursor:pointer}
 
 .input_speak{
 	width:320px;

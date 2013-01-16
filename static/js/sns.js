@@ -8,11 +8,10 @@ var larkSns = function() {
 	};
 	
 	this.loginSuccess = function() {
-		$("#friend .myself").html('<strong>'+user.userInfo.nickname+'</strong>').show();
-		
+		$("#info .myself").html('<strong>'+user.userInfo.nickname+'</strong>').show();
+		if(user.userInfo.avatar) $("#nav .avatar img").attr("src", user.userInfo.avatar);
 		
 		this.bindEvent();
-		
 	};
 }
 
