@@ -32,7 +32,7 @@ io.of("/user")
 	console.log(uid);
 	
 	socket.emit("loginResult", {error:0, msg:'success!'}); // 返回用户登录结果
-	listenEvent(socket);
+	user.listenEvent(socket);
 });
 
 var broadcast = require("./broadcast");
