@@ -61,16 +61,28 @@
 		</div>
 		
 		<div class="please_login">请先<a href="javascript:;" class="user_login" name="login">登录</a></div>
+		<div class="friend_config"></div>
 	</div>
 	
 	<!--消息-->
 	<div id="message" class="message">
-		
+		<div class="tab">
+			<a href="javascript:;">我的消息</a>
+			<a href="javascript:;">好友动态</a>
+			<a href="javascript:;">广播大厅</a>
+		</div>
 	</div>
 	
 	<!--说点-->
 	<div id="say" class="say">
-		<div>请先<a href="javascript:;" class="user_login" name="login">登录</a></div>
+		<div class="tab">
+			<a href="javascript:;">说点事儿</a>
+			<a href="javascript:;">说点广播</a>
+		</div>
+		
+		
+		
+		<div class="please_login">请先<a href="javascript:;" class="user_login" name="login">登录</a></div>
 	</div>
 	
 	<!--登录-->
@@ -134,6 +146,7 @@
 		</form>
 	</div>
 	
+	<!--用户信息-->
 	<div id="info" class="info">
 		<div class="myself"></div>
 		

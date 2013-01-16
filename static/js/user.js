@@ -31,7 +31,7 @@ larkUser.prototype = {
 				_this.loginSuccess(data);
 				$.fn.closePublicBox(0);
 			},
-			showSuccessMsg: false,
+			showSuccessMsg: false
 		});
 	},
 	
@@ -44,6 +44,7 @@ larkUser.prototype = {
 			formId:'user_reg_form',
 			successCall: function(data) {
 				_this.loginSuccess(data);
+				$.fn.closePublicBox(0);
 			},
 			showSuccessMsg: false
 		});

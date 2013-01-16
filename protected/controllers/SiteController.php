@@ -36,7 +36,8 @@ class SiteController extends Controller {
 		$check = CJSON::decode( CActiveForm::validate($model) );
 		
 		if(!empty($check)) {
-			echo CJSON::encode($check);
+			$this->_end(1, array_shift($check));
+			//echo CJSON::encode( $check );
 			Yii::app()->end();
 		}
 		
