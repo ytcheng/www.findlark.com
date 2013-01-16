@@ -33,7 +33,14 @@
 			<div class="friend_group">
 				<div class="friend_group_name">分组1 <span>[7/15]</span></div>
 				<ul>
-					<li>11</li>
+					<li>
+						<img src="/static/images/default_avator.gif">
+						<div class="friend_detail">
+							<div><span class="remark">老陈</span><span class="nickname">(秋天树叶)</span></div>
+							<div class="sign">我是秋天树叶</div>
+						</div>
+						<div class="clear"></div>
+					</li>
 					<li>22</li>
 					<li>33</li>
 				</ul>

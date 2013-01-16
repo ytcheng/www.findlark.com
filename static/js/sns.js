@@ -40,9 +40,17 @@ larkSns.prototype.sendSpeak = function () {
 }
 
 larkSns.prototype.bindEvent = function() {
-	
 	$("#friend .friend_group_name").live("click", function() {
 		$(this).siblings("ul").slideToggle(300);
+	});
+	
+	$("#friend .friend_group ul li").live("click", function() {
+		if($(this).attr("class") == "current") {
+			
+		} else {
+			$("#friend li.current").removeClass("current");
+			$(this).addClass("current");
+		}
 	});
 	
 }

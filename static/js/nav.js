@@ -16,7 +16,7 @@ var larkNav = function() {
 		
 	};
 	this.friendOpened = function() {
-		
+		$("#friend .friend_list").show();
 	};
 	this.messageOpened = function() {
 		
