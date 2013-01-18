@@ -11,6 +11,10 @@ var larkSns = function() {
 		$("#info .myself").html('<strong>'+user.userInfo.nickname+'</strong>').show();
 		if(user.userInfo.avatar) $("#nav .avatar img").attr("src", user.userInfo.avatar);
 		
+		$("#friend .friend_list, #friend .friend_config").show();
+		$("#message .tab a[name=my], #message .tab a[name=friend]").show();
+		
+		
 		this.bindEvent();
 	};
 }

@@ -67,8 +67,8 @@
 	<!--消息-->
 	<div id="message" class="message">
 		<div class="tab">
-			<a href="javascript:;">我的消息</a>
-			<a href="javascript:;">好友动态</a>
+			<a href="javascript:;" name="my">我的消息</a>
+			<a href="javascript:;" name="friend">好友动态</a>
 			<a href="javascript:;">广播大厅</a>
 		</div>
 	</div>
